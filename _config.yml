@@ -1,3 +1,28 @@
+# Site settings
+title: "Welcome @jiendravjh"
 theme: jekyll-theme-minimal
-title: Welcome! @jitendravjh
 description: Bookmark this to keep an eye on my work updates!
+email: "jitendravjh@gmail.com"
+description: "Welcome to my personal portfolio. Here you can find information about my work and skills."
+baseurl: "" # The subpath of your site (e.g., /blog), leave empty for root
+url: "https://jitendravjh.github.io" # The base hostname & protocol for your site
+
+# Social media profiles
+social_profiles:
+  twitter: "https://twitter.com/jitendravjh"
+  linkedin: "https://linkedin.com/in/jitendravjh"
+  github: "https://github.com/jitendravjh"
+  instagram: "https://instagram.com/jitendravjh"
+
+# Navigation links
+nav:
+  - title: "Home"
+    url: "/"
+  - title: "About"
+    url: "/about"
+  - title: "Contact"
+    url: "/contact"
+
+# Build settings
+markdown: kramdown
+theme: minima
