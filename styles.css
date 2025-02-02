@@ -212,12 +212,13 @@ body.dark-mode .theme-btn {
   color: #FFD523;
 }
 
-body.dark-mode #footer-link {
-  color: #ffffff;
+body.dark-mode footer {
+  color: #000000;
+  background-color:#FFD523;
 }
 
 body.dark-mode #footer-link:hover {
-  color: #ffcc00;
+  color: #ffffff;
 }
 
 body.dark-mode #social li a {
@@ -252,8 +253,7 @@ body.dark-mode #resume a:hover {
   border-color: #FFD523;
 }
 
-/*MOBILE RESPONSIVE STYLES*/
-
+/* MOBILE RESPONSIVE STYLES */
 @media (max-width: 768px) {
   #resume-controls {
     width: 100%;
@@ -263,6 +263,19 @@ body.dark-mode #resume a:hover {
   .btn {
     padding: 5px 10px;
     font-size: 14px;
+  }
+
+  header {
+    padding: 10px;
+  }
+
+  header h1 {
+    font-size: 25px;
+  }
+
+  .theme-btn {
+    right: 10px;
+    top: 50%;
   }
 
   #resume-section iframe {
