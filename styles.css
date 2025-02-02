@@ -210,6 +210,7 @@ body.dark-mode header h1 a:hover {
 
 body.dark-mode .theme-btn {
   color: #FFD523;
+  border-color: #FFD523;
 }
 
 body.dark-mode footer {
@@ -286,6 +287,11 @@ body.dark-mode #resume a:hover {
   .theme-btn {
     right: 4px;
     top: 50%;
+    display: inline-block;
+    padding: 2px 2px;
+    border: 1px solid #000;
+    color: #000;
+    border-radius: 4.5px;
   }
 
   #resume-section iframe {
