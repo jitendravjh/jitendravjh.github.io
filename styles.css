@@ -147,3 +147,20 @@ footer {
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
 }
+
+/* Mobile-Specific */
+@media (max-width: 768px) {
+  #resume-controls {
+    width: 100%;
+    gap: 5px;
+  }
+  
+  .btn {
+    padding: 5px 10px;
+    font-size: 14px;
+  }
+
+  #resume-section iframe {
+    width: 95%;
+    height: 900px;
+}
