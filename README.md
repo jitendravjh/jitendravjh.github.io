@@ -7,7 +7,7 @@ This is my Portfolio Webpage, built using **HTML & CSS**.
 ---
 
 ## 📄 Live Preview
-Check out the live version here: [@jitendravjh](https://jitendravjh.github.io/).
+Check out the live version here: [jitendravjh.github.io](https://jitendravjh.github.io/).
 
 ---
 
