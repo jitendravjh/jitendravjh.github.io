@@ -2,7 +2,7 @@
 
 ## Personal Website
 
-This is my Portfolio Webpage, built using **HTML & CSS**.
+This is my Portfolio Webpage, built using **HTML, CSS & JavaScript**.
 
 ---
 
