@@ -2,15 +2,15 @@
 
 ## Personal Website
 
-This is my Portfolio Webpage, built using **HTML, CSS & JavaScript**.
+This is my Portfolio website, built using **HTML, CSS, and JavaScript,** and hosted on GitHub Pages.
 
 ---
 
-## 📄 Live Preview
-Check out the live version here: [jitendravjh.github.io](https://jitendravjh.github.io/).
+## Live Site
 
+https://jitendravjh.github.io/
 ---
 
-## 💬 Contact Me
-For any queries, reach out via email:  
-📧 [jitendravjh@gmail.com](mailto:jitendravjh@gmail.com)
+## Contact
+
+Email: [jitendravjh@gmail.com](mailto:jitendravjh@gmail.com)
