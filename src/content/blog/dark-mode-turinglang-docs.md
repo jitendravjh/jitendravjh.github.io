@@ -4,7 +4,6 @@ description: 'Adding a theme switcher with auto-detection to TuringLang''s docum
 pubDate: '2025-04-08'
 authors:
   - jitendra-verma
-heroImage: '../../assets/blog-placeholder-3.jpg'
 toc: true
 tags:
   - open-source

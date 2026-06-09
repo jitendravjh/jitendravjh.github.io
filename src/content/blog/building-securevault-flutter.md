@@ -4,7 +4,6 @@ description: 'How I built a privacy vault that disguises itself as ordinary util
 pubDate: '2025-02-12'
 authors:
   - jitendra-verma
-heroImage: '../../assets/blog-placeholder-1.jpg'
 toc: true
 tags:
   - flutter

@@ -4,7 +4,6 @@ description: 'Contributing SoftAdapt and ReLoBRaLo adaptive loss weighting to Sc
 pubDate: '2024-11-18'
 authors:
   - jitendra-verma
-heroImage: '../../assets/blog-placeholder-2.jpg'
 toc: true
 tags:
   - open-source
