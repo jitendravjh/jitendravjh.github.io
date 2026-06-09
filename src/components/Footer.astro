@@ -98,6 +98,9 @@ const cvHref = CV_URL ? url(CV_URL) : null;
             <a href={FOOTER_CREDIT.designerUrl} target="_blank" rel="noopener noreferrer">{FOOTER_CREDIT.designerName}</a>
             &middot; <a href={FOOTER_CREDIT.sourceUrl} target="_blank" rel="noopener noreferrer">{FOOTER_CREDIT.sourceLabel}</a>
         </p>
+        <p class="footer-attribution">
+            Based on <a href="https://github.com/shravanngoswamii/astro-scholar" target="_blank" rel="noopener noreferrer">Shravan Goswami &mdash; Astro Scholar</a> design
+        </p>
     </div>
 </footer>
 
@@ -482,11 +485,16 @@ const cvHref = CV_URL ? url(CV_URL) : null;
         font-weight: bold;
     }
     .footer-credit a:hover {
-        color: var(--color-accent-text);
+        color: var(--color-accent);
         text-decoration: underline;
     }
     [data-theme='dark'] .footer-credit a:hover {
         color: #ffffff;
+    }
+    .footer-attribution {
+        margin-top: 0.35rem !important;
+        font-size: 0.8rem;
+        opacity: 0.75;
     }
     
     .author-link.author-modal-trigger {
