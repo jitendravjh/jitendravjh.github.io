@@ -488,8 +488,13 @@ const cvHref = CV_URL ? url(CV_URL) : null;
         color: var(--color-accent);
         text-decoration: underline;
     }
+    /* Dark mode: the credit bar is yellow, so a light hover is invisible.
+       Darken the link instead and keep the underline. */
+    [data-theme='dark'] .footer-credit a {
+        color: rgba(0, 0, 0, 0.78);
+    }
     [data-theme='dark'] .footer-credit a:hover {
-        color: #ffffff;
+        color: #000000;
     }
     .footer-attribution {
         margin-top: 0.35rem !important;
