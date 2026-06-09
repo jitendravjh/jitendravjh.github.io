@@ -10,12 +10,12 @@ export const SITE_URL = 'https://jitendravjh.github.io';
 // Resume / CV — points to the in-site resume viewer page.
 export const CV_URL = '/resume';
 
-// GitHub repository for this website (shown in the header).
-export const REPO_URL = 'https://github.com/jitendravjh/jitendravjh.github.io';
+// GitHub profile (shown in the header).
+export const GITHUB_PROFILE = 'https://github.com/jitendravjh';
 
 // Home page intro (old-site content).
 export const INTRO = {
-  heading: 'So you reached here while roaming this beautiful green earth.',
+  heading: 'You wandered this green earth and found me.',
   name: 'Jitendra Verma',
   greeting: "Hi! I'm Jitendra Verma.",
   image: '/me.jpeg',
