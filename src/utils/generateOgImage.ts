@@ -19,36 +19,31 @@ export async function generateOgImage(title: string, subtitle: string) {
     const fontDataBold = await loadGoogleFont("Comfortaa:wght@700", textToLoad);
 
     const markup = html`
-        <div style="background-color: #1a1a1a; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; position: relative; font-family: 'Comfortaa';">
-
-            <div style="display: flex; position: absolute; top: -150px; right: -50px; width: 600px; height: 600px; background-image: linear-gradient(135deg, rgba(255, 213, 35, 0.35), rgba(255, 213, 35, 0)); border-radius: 50%;"></div>
-            <div style="display: flex; position: absolute; bottom: -150px; left: -50px; width: 600px; height: 600px; background-image: linear-gradient(45deg, rgba(255, 213, 35, 0.25), rgba(255, 213, 35, 0)); border-radius: 50%;"></div>
-
-            <div style="display: flex; flex-direction: column; justify-content: space-between; padding: 80px; width: 100%; height: 100%;">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%;">
-                    <div style="display: flex; align-items: center; padding: 12px 24px; background-color: rgba(255, 213, 35, 0.15); border-radius: 999px; border: 1px solid rgba(255, 213, 35, 0.4);">
-                        <span style="color: #ffd523; font-size: 24px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em;">
+        <div style="background-color: #1a1a1a; width: 100%; height: 100%; display: flex; flex-direction: column; font-family: 'Comfortaa';">
+            <div style="display: flex; flex-direction: column; justify-content: space-between; padding: 80px; flex: 1;">
+                <div style="display: flex;">
+                    <div style="display: flex; align-items: center; padding: 12px 28px; background-color: rgba(255, 213, 35, 0.14); border-radius: 999px; border: 2px solid #ffd523;">
+                        <span style="color: #ffd523; font-size: 26px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;">
                             ${subtitle}
                         </span>
                     </div>
                 </div>
 
-                <div style="display: flex; flex-direction: column; gap: 24px; margin-bottom: 20px;">
-                    <div style="display: flex; color: #ffffff; font-size: 84px; font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; margin: 0; max-width: 900px; overflow: hidden; max-height: 280px;">
-                        ${title}
-                    </div>
+                <div style="display: flex; color: #ffffff; font-size: 88px; font-weight: 700; line-height: 1.12; letter-spacing: -0.02em; max-width: 1040px; max-height: 320px; overflow: hidden;">
+                    ${title}
                 </div>
 
-                <div style="display: flex; justify-content: space-between; align-items: flex-end; width: 100%;">
-                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-end;">
+                    <div style="display: flex; flex-direction: column;">
                         <span style="color: #b3b3b3; font-size: 28px; font-weight: 400;">Portfolio</span>
-                        <span style="color: #ffffff; font-size: 32px; font-weight: 700;">Jitendra Verma</span>
+                        <span style="color: #ffffff; font-size: 34px; font-weight: 700;">Jitendra Verma</span>
                     </div>
-                    <div style="display: flex; align-items: center; justify-content: center; width: 80px; height: 80px; background-color: #ffd523; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.35);">
-                        <span style="color: #000000; font-size: 44px; font-weight: 700;">@</span>
+                    <div style="display: flex; align-items: center; justify-content: center; width: 84px; height: 84px; background-color: #ffd523; border-radius: 22px;">
+                        <span style="color: #000000; font-size: 46px; font-weight: 700;">@</span>
                     </div>
                 </div>
             </div>
+            <div style="display: flex; height: 16px; background-color: #ffd523; width: 100%;"></div>
         </div>
     `;
 
