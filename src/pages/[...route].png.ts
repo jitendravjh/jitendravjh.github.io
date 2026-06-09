@@ -1,7 +1,7 @@
 import type { APIRoute } from "astro";
 import { getCollection } from "astro:content";
 import { generateOgImage } from "../utils/generateOgImage";
-import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import { SITE_TITLE } from "../consts";
 import projectsData from "../data/projects.json";
 
 export async function getStaticPaths() {
@@ -9,7 +9,7 @@ export async function getStaticPaths() {
 
     // Base static pages
     const staticPages = [
-        { params: { route: 'og' }, props: { title: SITE_TITLE, subtitle: SITE_DESCRIPTION } },
+        { params: { route: 'og' }, props: { title: SITE_TITLE, subtitle: 'Software Developer' } },
         { params: { route: 'about' }, props: { title: 'About', subtitle: SITE_TITLE } },
         { params: { route: 'projects' }, props: { title: 'Projects', subtitle: SITE_TITLE } },
         { params: { route: 'blog' }, props: { title: 'Blog', subtitle: SITE_TITLE } },

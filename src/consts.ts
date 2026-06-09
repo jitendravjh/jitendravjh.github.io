@@ -2,7 +2,8 @@
 // You can import this data from anywhere in your site by using the `import` keyword.
 
 export const SITE_TITLE = '@jitendravjh';
-export const SITE_DESCRIPTION = 'The personal portfolio of Jitendra Verma.';
+export const SITE_DESCRIPTION =
+  'Jitendra Verma — a software developer building mobile and web apps with Flutter, Swift, and modern web tech.';
 
 export const SITE_URL = 'https://jitendravjh.github.io';
 
@@ -14,7 +15,7 @@ export const REPO_URL = 'https://github.com/jitendravjh/jitendravjh.github.io';
 
 // Home page intro (old-site content).
 export const INTRO = {
-  heading: 'Welcome to My Portfolio Webpage',
+  heading: 'I design and build apps for mobile and the web.',
   name: 'Jitendra Verma',
   greeting: "Hi! I'm Jitendra Verma.",
   image: '/me.jpeg',
