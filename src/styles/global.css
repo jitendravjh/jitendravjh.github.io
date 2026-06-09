@@ -415,10 +415,11 @@ a:hover {
 	margin-top: 1rem;
 }
 
-#intro h2 {
+#intro h1 {
 	border-bottom: none;
 	display: block;
 	font-size: 2rem;
+	margin-bottom: 0.75rem;
 }
 
 #profile-pic {
