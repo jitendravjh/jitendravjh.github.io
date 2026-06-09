@@ -1,0 +1,72 @@
+[
+  {
+    "id": "securevault",
+    "title": "SecureVault — Privacy Vault App",
+    "description": "A privacy vault disguised as four utility apps, with AES-256 encryption, a multi-vault system, panic password, auto-lock, and screenshot prevention. Uses native Platform Channels for dynamic app-icon switching and the iOS Screen Time API.",
+    "year": 2025,
+    "status": "Maintained",
+    "authors": ["jitendra-verma"],
+    "tech": "Flutter, Dart, AES-256, Kotlin, Swift, Platform Channels",
+    "link": "https://play.google.com/store/apps/details?id=com.shravangoswami.securevault"
+  },
+  {
+    "id": "chain-reaction-max",
+    "title": "Chain Reaction MAX — Multiplayer Strategy Game",
+    "description": "A multiplayer strategy game supporting 2–6 players across multiple board sizes, with dramatic chain-burst animations and real-time game-state management built on Riverpod.",
+    "year": 2025,
+    "status": "Released",
+    "authors": ["jitendra-verma"],
+    "tech": "Flutter, Dart, Riverpod, Custom Animations",
+    "link": "https://thecodechaos.github.io/ChainReactionMax/"
+  },
+  {
+    "id": "2ndthought",
+    "title": "2ndThought — Cognitive App Blocker",
+    "description": "An app-blocker grounded in System 1 vs System 2 psychology, with brain challenges (Stroop, Schulte, Mental Math), a Time Wallet screen-time tracker, and native MethodChannel/EventChannel integration for the Android Accessibility Service and iOS Screen Time API.",
+    "year": 2025,
+    "status": "In Progress",
+    "authors": ["jitendra-verma"],
+    "tech": "Flutter, Dart, Riverpod, SQLite, Platform Channels",
+    "link": "https://github.com/TheCodeChaos/2ndThought"
+  },
+  {
+    "id": "shiv-shakti-textile",
+    "title": "Shiv Shakti Textile — E-Commerce Website",
+    "description": "A responsive textile e-commerce platform with product browsing, EmailJS-powered order notifications, and streamlined customer communication.",
+    "year": 2025,
+    "status": "Live",
+    "authors": ["jitendra-verma"],
+    "tech": "Next.js, React, TypeScript, Tailwind CSS, EmailJS",
+    "link": "https://www.shivshaktitextile.online"
+  },
+  {
+    "id": "tvflix",
+    "title": "TvFlix — Discover Movies & TV Shows",
+    "description": "An iOS app to discover movies and TV series with trending and top-rated sections, TMDB-powered search, wishlist support, trailers, and TV season episode details.",
+    "year": 2024,
+    "status": "Released",
+    "authors": ["jitendra-verma"],
+    "tech": "Swift 5, SwiftUI, MVVM, TMDB REST API, Async/Await",
+    "link": "https://github.com/jitendravjh/TvFlixApp"
+  },
+  {
+    "id": "neuralpde-contrib",
+    "title": "Adaptive Loss Functions — NeuralPDE.jl",
+    "description": "Open-source contributions to SciML / NeuralPDE.jl: implemented new adaptive loss functions (SoftAdaptAdaptiveLoss and ReLOBRaLoAdaptiveLoss) and improved documentation for PINNRepresentation and PhysicsInformedNN.",
+    "year": 2024,
+    "status": "Open Source",
+    "authors": ["jitendra-verma"],
+    "tech": "Julia, SciML, Physics-Informed Neural Networks",
+    "link": "https://github.com/SciML/NeuralPDE.jl/pulls?q=is:pr+is:closed+author:jitendravjh"
+  },
+  {
+    "id": "turinglang-theme",
+    "title": "Theme System & Dark Mode — TuringLang",
+    "description": "Open-source contributions to TuringLang's documentation sites: implemented theme switching with customizable options and a dark theme with auto-detection, improving readability and performance.",
+    "year": 2024,
+    "status": "Open Source",
+    "authors": ["jitendra-verma"],
+    "tech": "JavaScript, CSS, Quarto",
+    "link": "https://github.com/TuringLang/docs/pulls?q=is:pr+is:closed+author:jitendravjh"
+  }
+]
