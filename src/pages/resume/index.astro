@@ -1,0 +1,18 @@
+---
+import Base from '../../layouts/Base.astro';
+import { SITE_TITLE } from '../../consts';
+import { url } from '../../utils/paths';
+
+const pdf = url('/resume/resume.pdf');
+---
+
+<Base title={`Resume - ${SITE_TITLE}`} description="Resume of Jitendra Verma.">
+	<section id="resume-controls">
+		<a href={url('/')} class="btn back-btn">← Back to Home</a>
+		<a href={pdf} target="_blank" rel="noopener noreferrer" class="btn download-btn">Download Resume (PDF)</a>
+	</section>
+
+	<section id="resume-section">
+		<iframe src={pdf} width="65%" height="1250px" title="Resume PDF"></iframe>
+	</section>
+</Base>

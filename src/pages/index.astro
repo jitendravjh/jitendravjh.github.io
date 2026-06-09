@@ -1,0 +1,49 @@
+---
+import Base from '../layouts/Base.astro';
+import { CONTACT, CV_URL, INTRO, SOCIAL_LINKS } from '../consts';
+import { url } from '../utils/paths';
+
+const faIcon: Record<string, string> = {
+	linkedin: 'fab fa-linkedin',
+	github: 'fab fa-github',
+	twitter: 'fab fa-x-twitter',
+	instagram: 'fab fa-instagram',
+	email: 'fas fa-envelope',
+	website: 'fas fa-globe',
+	scholar: 'fas fa-graduation-cap',
+};
+
+const email = CONTACT.emails[0];
+const socialIcons = SOCIAL_LINKS.filter((l) => l.icon !== 'email');
+---
+
+<Base>
+	<section id="intro">
+		<h2>{INTRO.heading}</h2>
+		<img src={url(INTRO.image)} alt={INTRO.name} id="profile-pic" />
+		<p>{INTRO.greeting}</p>
+	</section>
+
+	<section id="social">
+		<h3 class="highlight">Connect with Me</h3>
+		<ul>
+			{socialIcons.map((link) => (
+				<li>
+					<a href={link.href} target="_blank" rel="noopener noreferrer" aria-label={link.label}>
+						<i class={faIcon[link.icon]}></i>
+					</a>
+				</li>
+			))}
+		</ul>
+	</section>
+
+	<section id="contact">
+		<h3 class="highlight">Contact Me</h3>
+		<p>You can also reach me at <a href={`mailto:${email}`}>{email}</a>.</p>
+	</section>
+
+	<section id="resume">
+		<h3 class="highlight">My Resume</h3>
+		<p>To view my resume, <a class="resume-link" href={url(CV_URL)}>click here</a>.</p>
+	</section>
+</Base>
