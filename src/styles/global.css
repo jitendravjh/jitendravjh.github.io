@@ -1,0 +1,535 @@
+/* @jitendravjh portfolio theme — old-site look (Comfortaa, #FFD523) over astro-scholar structure */
+
+:root {
+	/* Typography — old-site used Comfortaa everywhere */
+	--font-sans: 'Comfortaa', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+	--font-serif: 'Comfortaa', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+	/* --- LIGHT THEME (Default) --- */
+	--color-bg: #ffffff;
+	--color-bg-offset: #f7f7f4;
+	--color-bg-header: rgba(255, 255, 255, 0.85);
+	--color-text-main: #000000;
+	--color-text-muted: #747474;
+	--color-accent: #ffd523;
+	--color-accent-light: #fff6cc;
+	--color-border: #e5e5e5;
+	--color-header-border: rgba(0, 0, 0, 0.08);
+	--color-bg-mobile-menu: rgba(255, 255, 255, 0.97);
+
+	/* Footer keeps the old-site identity: black bar in light mode */
+	--color-footer-bg: #000000;
+	--color-footer-text: #ffffff;
+
+	/* Buttons — old-site: dark base, yellow hover */
+	--color-btn-bg: #000000;
+	--color-btn-text: #ffffff;
+
+	/* Spacing & UI */
+	--max-width: 960px;
+	--radius: 8px;
+	--shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+	--shadow-md: 0 4px 6px rgba(0, 0, 0, 0.08);
+	--shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* --- DARK THEME --- */
+[data-theme='dark'] {
+	--color-bg: #1a1a1a;
+	--color-bg-offset: #242424;
+	--color-bg-header: rgba(26, 26, 26, 0.85);
+	--color-text-main: #f1f1f1;
+	--color-text-muted: #b3b3b3;
+	--color-accent: #ffd523;
+	--color-accent-light: #3a3320;
+	--color-border: #333333;
+	--color-header-border: rgba(255, 255, 255, 0.1);
+	--color-bg-mobile-menu: rgba(26, 26, 26, 0.97);
+
+	/* Footer keeps the old-site identity: yellow bar in dark mode */
+	--color-footer-bg: #ffd523;
+	--color-footer-text: #000000;
+
+	--color-btn-bg: #222222;
+	--color-btn-text: #ffffff;
+
+	--shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.5);
+	--shadow-md: 0 4px 6px rgba(0, 0, 0, 0.5);
+	--shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5);
+}
+
+html {
+	box-sizing: border-box;
+	scroll-behavior: smooth;
+}
+
+/* Minimal Scrollbar for Browser and Modals */
+::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background: var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: var(--color-border);
+	border-radius: 10px;
+	border: 2px solid var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background-color: var(--color-text-muted);
+}
+
+*,
+*:before,
+*:after {
+	box-sizing: inherit;
+}
+
+body {
+	font-family: var(--font-sans);
+	background-color: var(--color-bg);
+	color: var(--color-text-main);
+	line-height: 1.6;
+	margin: 0;
+	font-size: 18px;
+	transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+main {
+	width: 100%;
+	max-width: var(--max-width);
+	margin: 0 auto;
+	padding: 3rem 1rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+	font-family: var(--font-serif);
+	color: var(--color-text-main);
+	line-height: 1.2;
+	margin-bottom: 0.75rem;
+}
+
+h1 {
+	font-size: 2.5rem;
+	margin-top: 0;
+}
+
+h2 {
+	font-size: 2rem;
+	margin-top: 2rem;
+	border-bottom: 2px solid var(--color-accent);
+	padding-bottom: 0.5rem;
+	display: inline-block;
+}
+
+h3 {
+	font-size: 1.5rem;
+	color: var(--color-text-main);
+	margin-top: 1.5rem;
+}
+
+p {
+	margin-bottom: 1.5rem;
+	color: var(--color-text-muted);
+}
+
+/* Links — old-site behavior: text-colored, yellow on hover */
+a {
+	color: var(--color-text-main);
+	text-decoration: none;
+	transition: 0.2s;
+}
+
+a:hover {
+	color: var(--color-accent);
+	text-decoration: underline;
+}
+
+/* Buttons — old-site: dark base, yellow hover */
+.btn {
+	display: inline-block;
+	background-color: var(--color-btn-bg);
+	color: var(--color-btn-text);
+	font-weight: 700;
+	padding: 0.5rem 1rem;
+	border-radius: 5px;
+	text-decoration: none !important;
+	border: 1px solid var(--color-btn-bg);
+}
+
+.btn:hover {
+	background-color: var(--color-accent);
+	color: #000000;
+	border-color: var(--color-accent);
+}
+
+.btn-outline {
+	display: inline-block;
+	background: transparent;
+	border: 1px solid var(--color-text-main);
+	color: var(--color-text-main);
+	font-weight: 700;
+	padding: 0.5rem 1rem;
+	border-radius: 5px;
+	text-decoration: none !important;
+}
+
+.btn-outline:hover {
+	background-color: var(--color-accent);
+	color: #000000;
+	border-color: var(--color-accent);
+}
+
+/* Grids */
+.grid-2 {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	gap: 2rem;
+	margin-top: 2rem;
+}
+
+.grid-3 {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	gap: 2rem;
+	margin-top: 2rem;
+}
+
+/* Tooltip / Author Hover */
+.author-link {
+	position: relative;
+	display: inline-block;
+	cursor: pointer;
+	border-bottom: 1px dotted var(--color-accent);
+	color: var(--color-text-main);
+}
+
+.author-link:hover .author-tooltip {
+	opacity: 1;
+	visibility: visible;
+	transform: translateX(-50%) translateY(-10px);
+}
+
+.author-tooltip {
+	position: absolute;
+	bottom: 100%;
+	left: 50%;
+	transform: translateX(-50%) translateY(0);
+	background-color: var(--color-bg);
+	color: var(--color-text-main);
+	border: 1px solid var(--color-border);
+	box-shadow: var(--shadow-lg);
+	padding: 1rem;
+	width: max-content;
+	max-width: 320px;
+	border-radius: 8px;
+	opacity: 0;
+	visibility: hidden;
+	transition: all 0.2s ease-in-out;
+	z-index: 1000;
+	text-align: left;
+	pointer-events: none;
+}
+
+.author-tooltip img {
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+	float: left;
+	margin-right: 1rem;
+	object-fit: cover;
+}
+
+.author-tooltip h4 {
+	margin: 0;
+	font-size: 1rem;
+	font-family: var(--font-sans);
+	color: var(--color-text-main);
+}
+
+.author-tooltip p {
+	margin: 0;
+	font-size: 0.85rem;
+	line-height: 1.4;
+	color: var(--color-text-muted);
+}
+
+.author-tooltip .role {
+	font-size: 0.8rem;
+	color: var(--color-accent);
+	display: block;
+	margin-bottom: 0.25rem;
+}
+
+/* Minimal Scrollbar for BibTeX panel */
+.bibtex-panel::-webkit-scrollbar {
+	height: 6px;
+}
+
+.bibtex-panel::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+.bibtex-panel::-webkit-scrollbar-thumb {
+	background-color: var(--color-border);
+	border-radius: 10px;
+}
+
+/* Blog Row Listing */
+.blog-row {
+	display: flex;
+	gap: 1.5rem;
+	border-bottom: 1px solid var(--color-border);
+	padding: 1.5rem 0;
+	align-items: flex-start;
+}
+
+.blog-row:first-child {
+	padding-top: 0;
+}
+
+.blog-row:last-child {
+	border-bottom: none;
+}
+
+.blog-row img {
+	width: 200px;
+	height: 120px;
+	object-fit: cover;
+	border-radius: 6px;
+	flex-shrink: 0;
+}
+
+.blog-content {
+	flex: 1;
+}
+
+.blog-title {
+	margin: 0 0 0.5rem 0;
+	font-size: 1.4rem;
+	font-family: var(--font-serif);
+	color: var(--color-text-main);
+}
+
+.blog-meta {
+	font-size: 0.9rem;
+	color: var(--color-text-muted);
+	margin-bottom: 0.5rem;
+}
+
+.blog-desc {
+	margin: 0;
+	font-size: 1rem;
+	color: var(--color-text-muted);
+}
+
+/* Publication List */
+.publication-item {
+	margin-bottom: 1.5rem;
+	padding-bottom: 1.5rem;
+	border-bottom: 1px solid var(--color-border);
+}
+
+.pub-title {
+	font-weight: 700;
+	font-size: 1.1rem;
+	color: var(--color-text-main);
+	display: block;
+}
+
+.pub-authors {
+	margin: 0.25rem 0;
+	color: var(--color-text-muted);
+}
+
+.pub-venue {
+	font-style: italic;
+	color: var(--color-text-muted);
+}
+
+/* Team Card */
+.team-card {
+	text-align: center;
+}
+
+.team-avatar {
+	width: 140px;
+	height: 140px;
+	border-radius: 50%;
+	object-fit: cover;
+	margin-bottom: 1rem;
+	border: 3px solid var(--color-accent);
+}
+
+.team-name {
+	font-weight: 700;
+	font-size: 1.1rem;
+	display: block;
+	color: var(--color-text-main);
+}
+
+.team-role {
+	font-size: 0.9rem;
+	color: var(--color-text-muted);
+	display: block;
+	margin-bottom: 0.5rem;
+}
+
+/* Project Card Override */
+.project-card {
+	background-color: var(--color-bg-offset);
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius);
+}
+
+/* Dark mode optimization for images */
+[data-theme='dark'] img {
+	filter: brightness(0.9);
+}
+
+@media (max-width: 720px) {
+	.blog-row {
+		flex-direction: column;
+	}
+
+	.blog-row img {
+		width: 100%;
+		height: auto;
+	}
+}
+
+/* ============================================================
+   OLD-SITE HOME PAGE + RESUME PAGE STYLES
+   ============================================================ */
+
+#intro {
+	text-align: center;
+	margin-top: 1rem;
+}
+
+#intro h2 {
+	border-bottom: none;
+	display: block;
+	font-size: 2rem;
+}
+
+#profile-pic {
+	border-radius: 50%;
+	margin-top: 15px;
+	width: 150px;
+	height: 150px;
+	object-fit: cover;
+}
+
+#social {
+	text-align: center;
+}
+
+#social ul {
+	list-style: none;
+	padding: 0;
+}
+
+#social ul li {
+	display: inline;
+	margin: 0 10px;
+}
+
+#social li a {
+	color: var(--color-text-main);
+	font-size: 24px;
+	text-decoration: none;
+}
+
+#social li a:hover {
+	color: var(--color-accent);
+}
+
+#contact {
+	text-align: center;
+}
+
+#contact p a {
+	color: var(--color-text-main);
+	text-decoration: none;
+	font-weight: bold;
+}
+
+#contact p a:hover {
+	text-decoration: underline;
+	color: var(--color-accent);
+}
+
+.highlight {
+	color: var(--color-text-muted);
+	font-weight: bold;
+}
+
+/* RESUME LINK ON HOME */
+#resume {
+	margin-top: 20px;
+	text-align: center;
+}
+
+#resume .resume-link {
+	display: inline-block;
+	padding: 2px 6px;
+	border: 1px solid var(--color-text-main);
+	color: var(--color-text-main);
+	text-decoration: none;
+	font-weight: bold;
+	border-radius: 4.5px;
+	transition: 0.3s ease;
+}
+
+#resume .resume-link:hover {
+	background-color: var(--color-accent);
+	color: #000000;
+	border-color: var(--color-accent);
+}
+
+/* RESUME PAGE */
+#resume-controls {
+	display: flex;
+	justify-content: space-between;
+	width: 80%;
+	margin: 20px auto;
+}
+
+#resume-section {
+	text-align: center;
+}
+
+#resume-section iframe {
+	border: 1px solid #ccc;
+	box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+	border-radius: 5px;
+}
+
+.back-btn {
+	align-self: flex-start;
+}
+
+.download-btn {
+	align-self: flex-end;
+}
+
+@media (max-width: 768px) {
+	#resume-controls {
+		width: 100%;
+		gap: 5px;
+	}
+
+	#resume-section iframe {
+		width: 95%;
+		height: 900px;
+	}
+}
