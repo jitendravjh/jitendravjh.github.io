@@ -129,6 +129,7 @@ const cvHref = CV_URL ? url(CV_URL) : null;
 
 	.internal-links {
         display: flex;
+        align-items: center;
         gap: 0.25rem;
     }
 	.internal-links :global(a) {
@@ -141,12 +142,12 @@ const cvHref = CV_URL ? url(CV_URL) : null;
         transition: all 0.2s ease;
 	}
 	.internal-links :global(a:hover) {
-        color: var(--color-accent);
+        color: var(--color-accent-text);
     }
 	.internal-links :global(a.active) {
 		text-decoration: none;
 		border-bottom-color: var(--color-accent);
-		color: var(--color-accent);
+		color: var(--color-accent-text);
 	}
 
     .dropdown {
@@ -159,6 +160,7 @@ const cvHref = CV_URL ? url(CV_URL) : null;
         padding: 0.5em 0.75em;
         font-size: 0.95rem;
         font-weight: 500;
+        line-height: inherit;
         border: none;
         cursor: pointer;
         font-family: inherit;
@@ -166,7 +168,7 @@ const cvHref = CV_URL ? url(CV_URL) : null;
         border-bottom: 2px solid transparent;
     }
     .dropdown:hover .dropbtn {
-        color: var(--color-accent);
+        color: var(--color-accent-text);
     }
     .dropdown-content {
         display: none;
@@ -222,7 +224,7 @@ const cvHref = CV_URL ? url(CV_URL) : null;
     .search-toggle:hover,
     #theme-toggle:hover {
         background-color: var(--color-bg-offset);
-        color: var(--color-accent);
+        color: var(--color-accent-text);
     }
 
     .github-link {
@@ -241,7 +243,7 @@ const cvHref = CV_URL ? url(CV_URL) : null;
 
     .github-link:hover {
         background-color: var(--color-bg-offset);
-        color: var(--color-accent);
+        color: var(--color-accent-text);
     }
 
     .mobile-menu-header {
@@ -308,7 +310,7 @@ const cvHref = CV_URL ? url(CV_URL) : null;
     }
     .mobile-menu a:hover {
         background-color: var(--color-bg-offset);
-        color: var(--color-accent);
+        color: var(--color-accent-text);
     }
     .mobile-menu-section {
         padding: 0.5rem 0.875rem;
