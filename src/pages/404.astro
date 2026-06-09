@@ -177,7 +177,7 @@ import { url } from '../utils/paths';
         <div class="not-found-grid">
           <div>
             <p class="code">404</p>
-            <h1 class="title">You have wandered off the syllabus.</h1>
+            <h1 class="title">This page wandered off.</h1>
             <p class="desc">
               The page you requested does not exist, may have been moved, or the link is outdated.
               Use one of the shortcuts below to continue exploring.
@@ -192,11 +192,11 @@ import { url } from '../utils/paths';
           <aside class="suggest">
             <h3>Quick Destinations</h3>
             <ul>
-              <li><a href={url('/publications')}>Publications</a></li>
+              <li><a href={url('/')}>Home</a></li>
+              <li><a href={url('/blog')}>Blog</a></li>
               <li><a href={url('/projects')}>Projects</a></li>
-              <li><a href={url('/team')}>Team</a></li>
-              <li><a href={url('/blog')}>News</a></li>
-              <li><a href={url('https://shravangoswami.com/resume.pdf')}>CV</a></li>
+              <li><a href={url('/about')}>About</a></li>
+              <li><a href={url('/resume')}>Resume</a></li>
             </ul>
           </aside>
         </div>
