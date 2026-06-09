@@ -15,7 +15,8 @@ export const GITHUB_PROFILE = 'https://github.com/jitendravjh';
 
 // Home page intro (old-site content).
 export const INTRO = {
-  heading: 'You wandered this green earth and found me.',
+  heading: 'You wandered this green earth and came here.',
+  thanks: 'Thank you',
   name: 'Jitendra Verma',
   greeting: "Hi! I'm Jitendra Verma.",
   image: '/me.jpeg',

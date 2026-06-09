@@ -423,7 +423,13 @@ a:hover {
 	border-bottom: none;
 	display: block;
 	font-size: 2rem;
-	margin-bottom: 0.75rem;
+	margin-bottom: 0.5rem;
+}
+
+#intro .intro-thanks {
+	margin: 0 0 1rem;
+	font-size: 1.15rem;
+	color: var(--color-text-muted);
 }
 
 #profile-pic {
