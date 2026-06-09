@@ -15,7 +15,7 @@ export const REPO_URL = 'https://github.com/jitendravjh/jitendravjh.github.io';
 
 // Home page intro (old-site content).
 export const INTRO = {
-  heading: 'I design and build apps for mobile and the web.',
+  heading: 'So you reached here while roaming this beautiful green earth.',
   name: 'Jitendra Verma',
   greeting: "Hi! I'm Jitendra Verma.",
   image: '/me.jpeg',
