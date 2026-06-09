@@ -1,5 +1,6 @@
-import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
+import { z } from 'astro/zod';
+import { defineCollection } from 'astro:content';
 
 type SchemaContext = { image: () => any };
 
@@ -19,7 +20,7 @@ const blog = defineCollection({
 			toc: z.boolean().optional(),
 			tags: z.array(z.string()).optional(),
 			// External post: when set, listings link to this URL (new tab) instead of a local page.
-			externalUrl: z.string().url().optional(),
+			externalUrl: z.url().optional(),
 			// Where an external post is published (e.g. "GeeksforGeeks", "Medium").
 			source: z.string().optional(),
 		}),

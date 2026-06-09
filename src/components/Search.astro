@@ -29,7 +29,7 @@ import "@pagefind/default-ui/css/ui.css";
 </div>
 
 <script>
-  let searchAbort;
+  let searchAbort: AbortController | undefined;
 
   function setupSearch() {
     if (searchAbort) searchAbort.abort();
@@ -39,11 +39,12 @@ import "@pagefind/default-ui/css/ui.css";
     const overlay = document.getElementById("search-overlay");
     const backdrop = document.getElementById("search-backdrop");
     const closeBtn = document.getElementById("search-close-btn");
-    
+
     if (!overlay) return;
+    const overlayEl = overlay;
 
     function openSearch() {
-      overlay.classList.remove("hidden");
+      overlayEl.classList.remove("hidden");
       document.body.style.overflow = "hidden";
 
       const searchContainer = document.getElementById("pagefind__search");
@@ -60,14 +61,14 @@ import "@pagefind/default-ui/css/ui.css";
             showImages: false,
             showSubResults: true,
           });
-          const searchInput = overlay.querySelector(".pagefind-ui__search-input");
+          const searchInput = overlayEl.querySelector<HTMLElement>(".pagefind-ui__search-input");
           if (searchInput) {
             searchInput.focus();
           }
         });
       } else {
         requestAnimationFrame(() => {
-          const searchInput = overlay.querySelector(".pagefind-ui__search-input");
+          const searchInput = overlayEl.querySelector<HTMLElement>(".pagefind-ui__search-input");
           if (searchInput) {
             searchInput.focus();
           }
@@ -76,7 +77,7 @@ import "@pagefind/default-ui/css/ui.css";
     }
 
     function closeSearch() {
-      overlay.classList.add("hidden");
+      overlayEl.classList.add("hidden");
       document.body.style.overflow = "";
     }
 
@@ -88,11 +89,11 @@ import "@pagefind/default-ui/css/ui.css";
     window.addEventListener(
       "keydown",
       (e) => {
-        if (e.key === "Escape" && !overlay.classList.contains("hidden")) {
+        if (e.key === "Escape" && !overlayEl.classList.contains("hidden")) {
           closeSearch();
           e.preventDefault();
         }
-        if (e.key === "/" && overlay.classList.contains("hidden")) {
+        if (e.key === "/" && overlayEl.classList.contains("hidden")) {
           const active = document.activeElement;
           const isInput = active instanceof HTMLInputElement || active instanceof HTMLTextAreaElement;
           if (!isInput) {
