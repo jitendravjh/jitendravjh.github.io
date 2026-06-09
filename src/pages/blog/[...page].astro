@@ -99,7 +99,7 @@ const { posts, currentPage, totalPages, nextPage, prevPage } = Astro.props;
                 transition: color 0.2s;
             }
             .blog-title a:hover {
-                color: var(--color-accent);
+                color: var(--color-accent-text);
             }
             .blog-meta {
                 font-size: 0.85rem;
@@ -117,7 +117,7 @@ const { posts, currentPage, totalPages, nextPage, prevPage } = Astro.props;
                 color: var(--color-border);
             }
             .external-badge {
-                color: var(--color-accent);
+                color: var(--color-accent-text);
                 font-weight: 700;
             }
             .blog-desc {
@@ -129,7 +129,7 @@ const { posts, currentPage, totalPages, nextPage, prevPage } = Astro.props;
             .read-more {
                 font-size: 0.9rem;
                 font-weight: 700;
-                color: var(--color-accent);
+                color: var(--color-accent-text);
                 display: inline-flex;
                 align-items: center;
                 text-decoration: none;
@@ -203,7 +203,7 @@ const { posts, currentPage, totalPages, nextPage, prevPage } = Astro.props;
                                             <span class="meta-divider">&bull;</span>
                                             <span class="blog-tags" style="display: inline-flex; gap: 0.25rem;">
                                                 {post.data.tags.map((tag) => (
-                                                    <a href={url(`/tags/${tag}`)} style="text-decoration: none; color: var(--color-accent); font-weight: 600;">#{tag}</a>
+                                                    <a href={url(`/tags/${tag}`)} style="text-decoration: none; color: var(--color-accent-text); font-weight: 600;">#{tag}</a>
                                                 ))}
                                             </span>
                                         </>

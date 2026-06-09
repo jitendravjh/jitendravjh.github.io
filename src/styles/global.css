@@ -12,6 +12,8 @@
 	--color-text-main: #000000;
 	--color-text-muted: #747474;
 	--color-accent: #ffd523;
+	/* Legible "accent" for text on light surfaces (bright yellow is unreadable on white). */
+	--color-accent-text: #8a6d00;
 	--color-accent-light: #fff6cc;
 	--color-border: #e5e5e5;
 	--color-header-border: rgba(0, 0, 0, 0.08);
@@ -41,6 +43,8 @@
 	--color-text-main: #f1f1f1;
 	--color-text-muted: #b3b3b3;
 	--color-accent: #ffd523;
+	/* On dark surfaces the bright yellow is perfectly readable. */
+	--color-accent-text: #ffd523;
 	--color-accent-light: #3a3320;
 	--color-border: #333333;
 	--color-header-border: rgba(255, 255, 255, 0.1);
@@ -149,7 +153,7 @@ a {
 }
 
 a:hover {
-	color: var(--color-accent);
+	color: var(--color-accent-text);
 	text-decoration: underline;
 }
 
@@ -264,7 +268,7 @@ a:hover {
 
 .author-tooltip .role {
 	font-size: 0.8rem;
-	color: var(--color-accent);
+	color: var(--color-accent-text);
 	display: block;
 	margin-bottom: 0.25rem;
 }
@@ -451,7 +455,7 @@ a:hover {
 }
 
 #social li a:hover {
-	color: var(--color-accent);
+	color: var(--color-accent-text);
 }
 
 #contact {
@@ -466,7 +470,7 @@ a:hover {
 
 #contact p a:hover {
 	text-decoration: underline;
-	color: var(--color-accent);
+	color: var(--color-accent-text);
 }
 
 .highlight {

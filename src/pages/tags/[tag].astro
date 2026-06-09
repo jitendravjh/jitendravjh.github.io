@@ -89,7 +89,7 @@ const { posts } = Astro.props;
                 transition: color 0.2s;
             }
             .blog-title a:hover {
-                color: var(--color-accent);
+                color: var(--color-accent-text);
             }
             .blog-meta {
                 font-size: 0.85rem;
@@ -107,7 +107,7 @@ const { posts } = Astro.props;
                 color: var(--color-border);
             }
             .external-badge {
-                color: var(--color-accent);
+                color: var(--color-accent-text);
                 font-weight: 700;
             }
             .blog-desc {
@@ -119,7 +119,7 @@ const { posts } = Astro.props;
             .read-more {
                 font-size: 0.9rem;
                 font-weight: 700;
-                color: var(--color-accent);
+                color: var(--color-accent-text);
                 display: inline-flex;
                 align-items: center;
                 text-decoration: none;
@@ -156,7 +156,7 @@ const { posts } = Astro.props;
 		<main>
 			<h1>Posts tagged "{tag}"</h1>
             <p style="margin-bottom: 2rem; max-width: 700px; color: var(--color-text-muted);">
-                <a href={url('/tags')} style="color: var(--color-accent); text-decoration: none;">&larr; Back to all tags</a>
+                <a href={url('/tags')} style="color: var(--color-accent-text); text-decoration: none;">&larr; Back to all tags</a>
             </p>
 
             <div class="blog-list">
@@ -193,7 +193,7 @@ const { posts } = Astro.props;
                                             <span class="meta-divider">&bull;</span>
                                             <span class="blog-tags" style="display: inline-flex; gap: 0.25rem;">
                                                 {post.data.tags.map((t) => (
-                                                    <a href={url(`/tags/${t}`)} style="text-decoration: none; color: var(--color-accent); font-weight: 600;">#{t}</a>
+                                                    <a href={url(`/tags/${t}`)} style="text-decoration: none; color: var(--color-accent-text); font-weight: 600;">#{t}</a>
                                                 ))}
                                             </span>
                                         </>
