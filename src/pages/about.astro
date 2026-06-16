@@ -1,34 +1,372 @@
 ---
-import AboutHeroImage from '../assets/profile.jpg';
-import Layout from '../layouts/BlogPost.astro';
+import { Image } from 'astro:assets';
+import profileImg from '../assets/profile.jpg';
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, CV_URL, GITHUB_PROFILE } from '../consts';
+import { url } from '../utils/paths';
+
+const description =
+	'Jitendra Verma — a Computer Science engineer and developer building mobile and web apps with Flutter, Swift, and modern web tech.';
+
+const skillGroups: { label: string; items: string[] }[] = [
+	{ label: 'Mobile', items: ['Flutter', 'Dart', 'Swift', 'SwiftUI', 'Riverpod'] },
+	{ label: 'Web', items: ['React', 'Next.js', 'ASP.NET Core', 'Astro', 'TypeScript'] },
+	{ label: 'Foundations', items: ['AES-256', 'Platform channels', 'REST APIs', 'Git'] },
+	{ label: 'Design', items: ['Figma', 'Canva', 'Lightroom', 'DaVinci Resolve'] },
+];
+
+const selectedWork: { title: string; tag: string; desc: string }[] = [
+	{
+		title: 'SecureVault',
+		tag: 'Flutter · iOS / Android',
+		desc: 'A privacy vault disguised as everyday utility apps — AES-256 encryption plus native platform-channel tricks like dynamic app-icon switching.',
+	},
+	{
+		title: 'Chain Reaction MAX',
+		tag: 'Flutter · Riverpod',
+		desc: 'A multiplayer strategy game with real-time game state managed end to end on Riverpod.',
+	},
+	{
+		title: '2ndThought',
+		tag: 'Flutter · Behavioural design',
+		desc: 'A cognitive app-blocker grounded in System 1 vs System 2 psychology — friction before you open the apps that pull you in.',
+	},
+];
+
+const contributions: { title: string; role: string; desc: string }[] = [
+	{
+		title: 'GeeksforGeeks',
+		role: 'Technical Content Writer',
+		desc: 'Installation and how-to guides focused on macOS and developer tooling — several are linked from my blog.',
+	},
+	{
+		title: 'SciML · NeuralPDE.jl',
+		role: 'Open-source contributor',
+		desc: 'Contributed adaptive loss functions for physics-informed neural networks.',
+	},
+	{
+		title: 'TuringLang',
+		role: 'Open-source contributor',
+		desc: 'Built a theme system with dark mode for the documentation sites.',
+	},
+];
 ---
 
-<Layout
-	title="About Jitendra Verma"
-	description="Jitendra Verma — a Computer Science engineer and developer building mobile and web apps, writing technical guides, and contributing to open source."
-	pubDate={new Date('January 1 2026')}
-	heroImage={AboutHeroImage}
->
-	<p>
-		Hi, I'm <strong>Jitendra Verma</strong> — a Computer Science and Engineering student at Uka Tarsadia University, Surat, and a developer who likes turning ideas into shipped apps. I work across mobile and web: Flutter and Dart for cross-platform apps, Swift and SwiftUI on iOS, and React, Next.js, and ASP.NET Core on the web.
-	</p>
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`About | ${SITE_TITLE}`} description={description} />
+		<style>
+			.about {
+				max-width: var(--max-width);
+				margin: 0 auto;
+			}
 
-	<p>
-		Most of my time goes into building products end to end. I built <strong>SecureVault</strong>, a privacy vault disguised as everyday utility apps with AES-256 encryption and native platform-channel tricks like dynamic app-icon switching; <strong>Chain Reaction MAX</strong>, a multiplayer strategy game with real-time state on Riverpod; and <strong>2ndThought</strong>, a cognitive app-blocker grounded in System 1 vs System 2 psychology. On the web, I've shipped an e-commerce site and a TMDB-powered iOS app for discovering movies and shows.
-	</p>
+			/* Hero */
+			.about-hero {
+				display: flex;
+				align-items: center;
+				gap: 2.5rem;
+				margin-bottom: 4rem;
+			}
+			.about-avatar {
+				flex-shrink: 0;
+				width: 170px;
+				height: 170px;
+				border-radius: 50%;
+				object-fit: cover;
+				border: 4px solid var(--color-accent);
+				box-shadow: var(--shadow-md);
+			}
+			.about-hero h1 {
+				font-family: var(--font-serif);
+				font-size: 3rem;
+				line-height: 1.1;
+				letter-spacing: -0.02em;
+				margin: 0 0 0.4rem 0;
+			}
+			.about-role {
+				display: inline-block;
+				font-weight: 700;
+				font-size: 0.95rem;
+				color: var(--color-accent-text);
+				text-transform: uppercase;
+				letter-spacing: 0.06em;
+				margin-bottom: 1rem;
+			}
+			.about-intro {
+				color: var(--color-text-muted);
+				font-size: 1.1rem;
+				line-height: 1.7;
+				margin: 0 0 1.5rem 0;
+			}
+			.about-cta {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.75rem;
+			}
 
-	<p>
-		I also enjoy writing and giving back. As a <strong>Technical Content Writer at GeeksforGeeks</strong>, I wrote installation and how-to guides focused on macOS and developer tooling — many of those articles live on GeeksforGeeks, and you'll find them linked from my <a href="/blog">blog</a>. In open source, I've contributed adaptive loss functions to <strong>SciML / NeuralPDE.jl</strong> and a theme system with dark mode to <strong>TuringLang</strong>'s documentation sites.
-	</p>
+			/* Section scaffolding */
+			.about-section {
+				margin-bottom: 3.5rem;
+			}
+			.about-section > h2 {
+				font-size: 1.6rem;
+			}
+			.section-lead {
+				color: var(--color-text-muted);
+				line-height: 1.7;
+				max-width: 70ch;
+			}
 
-	<p>
-		Outside of code, I'm into design and creative tools — Figma, Canva, Lightroom, and DaVinci Resolve. In 2024, my team was a finalist at the <strong>Smart India Hackathon</strong>.
-	</p>
+			/* Skills */
+			.skill-row {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				gap: 0.6rem;
+				margin-bottom: 1rem;
+			}
+			.skill-label {
+				min-width: 120px;
+				font-weight: 700;
+				color: var(--color-text-main);
+			}
+			.skill-tag {
+				display: inline-block;
+				padding: 0.3rem 0.85rem;
+				background-color: var(--color-bg-offset);
+				border: 1px solid var(--color-border);
+				border-radius: 999px;
+				font-size: 0.85rem;
+				font-weight: 600;
+				color: var(--color-text-muted);
+				transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+			}
+			.skill-tag:hover {
+				border-color: var(--color-accent);
+				color: var(--color-accent-text);
+				transform: translateY(-2px);
+			}
 
-	<p>
-		Want to build something or just say hi? Reach me at
-		<a href="mailto:jitendravjh@gmail.com">jitendravjh@gmail.com</a>, or find me on
-		<a href="https://github.com/jitendravjh" target="_blank" rel="noopener noreferrer">GitHub</a> and
-		<a href="https://linkedin.com/in/jitendravjh" target="_blank" rel="noopener noreferrer">LinkedIn</a>.
-	</p>
-</Layout>
+			/* Selected work cards */
+			.work-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+				gap: 1.5rem;
+				margin-top: 1.5rem;
+			}
+			.work-card {
+				display: flex;
+				flex-direction: column;
+				padding: 1.6rem;
+				background-color: var(--color-bg-offset);
+				border: 1px solid var(--color-border);
+				border-radius: 16px;
+				transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+			}
+			.work-card:hover {
+				transform: translateY(-6px);
+				box-shadow: var(--shadow-lg);
+				border-color: var(--color-accent);
+			}
+			.work-card .work-tag {
+				font-size: 0.72rem;
+				font-weight: 700;
+				text-transform: uppercase;
+				letter-spacing: 0.08em;
+				color: var(--color-accent-text);
+				margin-bottom: 0.5rem;
+			}
+			.work-card h3 {
+				font-family: var(--font-serif);
+				font-size: 1.25rem;
+				margin: 0 0 0.6rem 0;
+				color: var(--color-text-main);
+			}
+			.work-card p {
+				margin: 0;
+				font-size: 0.92rem;
+				line-height: 1.6;
+				color: var(--color-text-muted);
+			}
+			.see-all {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.3rem;
+				margin-top: 1.75rem;
+				font-weight: 700;
+				color: var(--color-accent-text);
+				text-decoration: none;
+				transition: gap 0.2s ease;
+			}
+			.see-all:hover { gap: 0.6rem; }
+
+			/* Contributions list */
+			.contrib-list {
+				display: flex;
+				flex-direction: column;
+				gap: 0;
+				margin-top: 1.5rem;
+			}
+			.contrib-item {
+				display: grid;
+				grid-template-columns: 1fr;
+				gap: 0.25rem;
+				padding: 1.25rem 0;
+				border-bottom: 1px solid var(--color-border);
+			}
+			.contrib-item:last-child { border-bottom: none; }
+			.contrib-head {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: baseline;
+				gap: 0.75rem;
+			}
+			.contrib-item .contrib-title {
+				font-family: var(--font-serif);
+				font-size: 1.15rem;
+				font-weight: 700;
+				color: var(--color-text-main);
+			}
+			.contrib-item .contrib-role {
+				font-size: 0.8rem;
+				font-weight: 700;
+				text-transform: uppercase;
+				letter-spacing: 0.06em;
+				color: var(--color-accent-text);
+			}
+			.contrib-item p {
+				margin: 0;
+				color: var(--color-text-muted);
+				line-height: 1.6;
+			}
+
+			/* Contact band */
+			.about-contact {
+				margin-top: 1rem;
+				padding: 2.5rem 2rem;
+				background-color: var(--color-bg-offset);
+				border: 1px solid var(--color-border);
+				border-radius: 18px;
+				text-align: center;
+			}
+			.about-contact h2 {
+				border: none;
+				margin: 0 0 0.5rem 0;
+				font-size: 1.6rem;
+			}
+			.about-contact p {
+				color: var(--color-text-muted);
+				margin: 0 0 1.5rem 0;
+			}
+
+			@media (max-width: 720px) {
+				.about-hero {
+					flex-direction: column;
+					text-align: center;
+					gap: 1.5rem;
+				}
+				.about-cta { justify-content: center; }
+				.about-hero h1 { font-size: 2.4rem; }
+				.skill-label { min-width: 0; width: 100%; }
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main class="about">
+			<section class="about-hero">
+				<Image src={profileImg} alt="Jitendra Verma" class="about-avatar" width={340} height={340} />
+				<div>
+					<h1>Hi, I'm Jitendra Verma.</h1>
+					<span class="about-role">Software Developer · Mobile &amp; Web</span>
+					<p class="about-intro">
+						I'm a Computer Science &amp; Engineering student at Uka Tarsadia University, Surat,
+						and a developer who likes turning ideas into shipped apps. I work across mobile and
+						web — Flutter &amp; Dart, Swift &amp; SwiftUI, and React, Next.js &amp; ASP.NET Core.
+					</p>
+					<div class="about-cta">
+						<a class="btn" href={url(CV_URL)}>View résumé</a>
+						<a class="btn-outline" href="mailto:jitendravjh@gmail.com">Email me</a>
+						<a class="btn-outline" href={GITHUB_PROFILE} target="_blank" rel="noopener noreferrer">GitHub</a>
+					</div>
+				</div>
+			</section>
+
+			<section class="about-section">
+				<h2>What I do</h2>
+				<p class="section-lead">
+					Most of my time goes into building products end to end — from the first sketch to the
+					store listing. I care about clean architecture, thoughtful UX, and the small native
+					details that make an app feel right, whether that's encryption under the hood or an
+					interaction you barely notice but would miss if it were gone.
+				</p>
+			</section>
+
+			<section class="about-section">
+				<h2>Skills &amp; tools</h2>
+				<div style="margin-top: 1.5rem;">
+					{skillGroups.map((group) => (
+						<div class="skill-row">
+							<span class="skill-label">{group.label}</span>
+							{group.items.map((item) => (
+								<span class="skill-tag">{item}</span>
+							))}
+						</div>
+					))}
+				</div>
+			</section>
+
+			<section class="about-section">
+				<h2>Selected work</h2>
+				<div class="work-grid">
+					{selectedWork.map((item) => (
+						<article class="work-card">
+							<span class="work-tag">{item.tag}</span>
+							<h3>{item.title}</h3>
+							<p>{item.desc}</p>
+						</article>
+					))}
+				</div>
+				<a class="see-all" href={url('/projects')}>See all projects &rarr;</a>
+			</section>
+
+			<section class="about-section">
+				<h2>Writing &amp; open source</h2>
+				<div class="contrib-list">
+					{contributions.map((item) => (
+						<div class="contrib-item">
+							<div class="contrib-head">
+								<span class="contrib-title">{item.title}</span>
+								<span class="contrib-role">{item.role}</span>
+							</div>
+							<p>{item.desc}</p>
+						</div>
+					))}
+				</div>
+			</section>
+
+			<section class="about-section">
+				<h2>Beyond the code</h2>
+				<p class="section-lead">
+					Outside of code I'm into design and creative tools — Figma, Canva, Lightroom, and
+					DaVinci Resolve. In 2024, my team was a finalist at the Smart India Hackathon.
+				</p>
+			</section>
+
+			<section class="about-contact">
+				<h2>Let's build something</h2>
+				<p>Want to build something, or just say hi? I'm always up for a good problem.</p>
+				<div class="about-cta" style="justify-content: center;">
+					<a class="btn" href="mailto:jitendravjh@gmail.com">jitendravjh@gmail.com</a>
+					<a class="btn-outline" href="https://linkedin.com/in/jitendravjh" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+					<a class="btn-outline" href={GITHUB_PROFILE} target="_blank" rel="noopener noreferrer">GitHub</a>
+				</div>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>

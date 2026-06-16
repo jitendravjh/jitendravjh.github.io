@@ -15,11 +15,11 @@ async function loadGoogleFont(font: string, text: string) {
 
 export async function generateOgImage(title: string, subtitle: string) {
     const textToLoad = title + subtitle + "Jitendra Verma Portfolio ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@";
-    const fontDataRegular = await loadGoogleFont("Comfortaa", textToLoad);
-    const fontDataBold = await loadGoogleFont("Comfortaa:wght@700", textToLoad);
+    const fontDataRegular = await loadGoogleFont("Nunito", textToLoad);
+    const fontDataBold = await loadGoogleFont("Nunito:wght@700", textToLoad);
 
     const markup = html`
-        <div style="background-color: #1a1a1a; width: 100%; height: 100%; display: flex; flex-direction: column; font-family: 'Comfortaa';">
+        <div style="background-color: #1a1a1a; width: 100%; height: 100%; display: flex; flex-direction: column; font-family: 'Nunito';">
             <div style="display: flex; flex-direction: column; justify-content: space-between; padding: 80px; flex: 1;">
                 <div style="display: flex;">
                     <div style="display: flex; align-items: center; padding: 12px 28px; background-color: rgba(255, 213, 35, 0.14); border-radius: 999px; border: 2px solid #ffd523;">
@@ -51,8 +51,8 @@ export async function generateOgImage(title: string, subtitle: string) {
         width: 1200,
         height: 630,
         fonts: [
-            { name: "Comfortaa", data: fontDataRegular, weight: 400, style: "normal" },
-            { name: "Comfortaa", data: fontDataBold, weight: 700, style: "normal" }
+            { name: "Nunito", data: fontDataRegular, weight: 400, style: "normal" },
+            { name: "Nunito", data: fontDataBold, weight: 700, style: "normal" }
         ],
     });
 

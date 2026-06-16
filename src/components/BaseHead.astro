@@ -72,22 +72,24 @@ const imageUrl = typeof image === 'string'
 	:root {
 		--color-bg: #ffffff;
 		--color-bg-offset: #f7f7f4;
-		--color-bg-header: rgba(255, 255, 255, 0.85);
+		--color-bg-header: rgba(255, 255, 255, 0.6);
 		--color-text-main: #000000;
 		--color-text-muted: #747474;
-		--color-accent: #ffd523;
-		--color-accent-text: #8a6d00;
+		--color-accent: #08c225;
+		--color-accent-text: #08c225;
 		--color-border: #e5e5e5;
+		--color-header-border: rgba(0, 0, 0, 0.08);
 	}
 	[data-theme='dark'] {
 		--color-bg: #1a1a1a;
 		--color-bg-offset: #242424;
-		--color-bg-header: rgba(26, 26, 26, 0.85);
+		--color-bg-header: rgba(26, 26, 26, 0.6);
 		--color-text-main: #f1f1f1;
 		--color-text-muted: #b3b3b3;
 		--color-accent: #ffd523;
 		--color-accent-text: #ffd523;
 		--color-border: #333333;
+		--color-header-border: rgba(255, 255, 255, 0.1);
 	}
 	html, body { min-height: 100%; background-color: var(--color-bg); }
 	html[data-theme='dark'], html[data-theme='dark'] body { background-color: var(--color-bg); color-scheme: dark; }
@@ -95,21 +97,24 @@ const imageUrl = typeof image === 'string'
 	/* Critical header layout — prevents FOUC before component CSS loads */
 	header {
 		position: sticky;
-		top: 0;
+		top: 0.75rem;
 		z-index: 100;
-		padding: 0 1em;
-		backdrop-filter: blur(12px);
-		-webkit-backdrop-filter: blur(12px);
+		margin: 0.75rem auto 0;
+		width: calc(100% - 2rem);
+		max-width: 960px;
+		padding: 0 0.6rem 0 1.5rem;
+		background-color: var(--color-bg-header);
+		border: 1px solid var(--color-header-border);
+		border-radius: 999px;
+		backdrop-filter: blur(24px) saturate(180%);
+		-webkit-backdrop-filter: blur(24px) saturate(180%);
 	}
 	header nav {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		max-width: 960px;
-		margin: 0 auto;
-		height: 4.5rem;
+		height: 4rem;
 	}
-	header { background-color: var(--color-bg-header); }
 	.project-card, .interactive-card, .team-card {
 		background-color: var(--color-bg-offset);
 		border-color: var(--color-border);
@@ -143,7 +148,7 @@ const imageUrl = typeof image === 'string'
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
 	rel="stylesheet"
-	href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;700&display=swap"
+	href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap"
 />
 
 <link rel="canonical" href={canonicalURL} />

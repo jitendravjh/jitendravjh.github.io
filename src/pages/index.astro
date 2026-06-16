@@ -19,7 +19,7 @@ const socialIcons = SOCIAL_LINKS.filter((l) => l.icon !== 'email');
 
 <Base>
 	<section id="intro">
-		<h1>{INTRO.heading}</h1>
+		<h1 set:html={INTRO.heading.replace('earth', '<span class="earth-text">earth</span>')}></h1>
 		{INTRO.thanks && <p class="intro-thanks">{INTRO.thanks}</p>}
 		<img src={url(INTRO.image)} alt={INTRO.name} id="profile-pic" />
 		<p>{INTRO.greeting}</p>
