@@ -45,7 +45,7 @@ const faIcon: Record<string, string> = {
                 <li><a href={url('/blog')}>Blog</a></li>
                 <li><a href={url('/projects')}>Projects</a></li>
                 <li><a href={url('/about')}>About</a></li>
-                {cvHref && <li><a href={cvHref}>Resume</a></li>}
+                {cvHref && <li><a href={cvHref} data-resume-pdf={url('/resume/resume.pdf')}>Resume</a></li>}
             </ul>
         </div>
 

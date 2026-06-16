@@ -71,7 +71,8 @@ const cvPdfHref = cvHref ? url('/resume/resume.pdf') : null;
     });
 
     // On touch devices (phones + iPads) the in-page PDF viewer iframe is unreliable,
-    // so point the Resume nav links straight at the PDF instead of the /resume viewer.
+    // so point every resume link (nav, footer, home, 404 — any a[data-resume-pdf])
+    // straight at the PDF instead of the /resume viewer. This runs on every page.
     // (pointer: coarse) catches phones/tablets; maxTouchPoints covers iPadOS desktop mode.
     const isTouchDevice =
         window.matchMedia('(pointer: coarse)').matches || navigator.maxTouchPoints > 1;
