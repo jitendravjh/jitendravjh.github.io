@@ -7,6 +7,8 @@ import projectsData from '../data/projects.json';
 import { url } from '../utils/paths';
 
 const projects = projectsData.sort((a, b) => b.year - a.year);
+
+const primaryLink = (project: (typeof projects)[number]) => project.links[0];
 ---
 
 <!doctype html>
@@ -153,6 +155,18 @@ const projects = projectsData.sort((a, b) => b.year - a.year);
 			.read-more:hover {
 				gap: 0.5rem;
 			}
+			.project-links {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.4rem 1.25rem;
+			}
+			.read-more.secondary {
+				color: var(--color-text-muted);
+				font-weight: 500;
+			}
+			.read-more.secondary:hover {
+				color: var(--color-accent-text);
+			}
 			@media (max-width: 768px) {
 				.projects-hero h1 { font-size: 2.5rem; }
 				.projects-grid { gap: 2rem; }
@@ -183,14 +197,14 @@ const projects = projectsData.sort((a, b) => b.year - a.year);
 							<div class="project-header">
 								<span class="project-year">{project.year > 0 ? project.year : 'Classical'}</span>
 								<h3>
-									{project.link ? (
-										<a href={project.link} target="_blank">{project.title}</a>
+									{primaryLink(project) ? (
+										<a href={primaryLink(project).href} target="_blank">{project.title}</a>
 									) : (
 										project.title
 									)}
 								</h3>
 							</div>
-							
+
 							<p class="project-description">{project.description}</p>
 
 							{project.tech && (
@@ -200,10 +214,19 @@ const projects = projectsData.sort((a, b) => b.year - a.year);
 								</div>
 							)}
 
-							{project.link && (
-								<a href={project.link} target="_blank" rel="noopener noreferrer" class="read-more">
-									View Project &rarr;
-								</a>
+							{project.links.length > 0 && (
+								<div class="project-links">
+									{project.links.map((link, i) => (
+										<a
+											href={link.href}
+											target="_blank"
+											rel="noopener noreferrer"
+											class={i === 0 ? 'read-more' : 'read-more secondary'}
+										>
+											{link.label} {i === 0 ? '→' : '↗'}
+										</a>
+									))}
+								</div>
 							)}
 						</div>
 					</article>

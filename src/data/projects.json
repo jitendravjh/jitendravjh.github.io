@@ -1,5 +1,18 @@
 [
   {
+    "id": "synq",
+    "title": "Synq — Real-Time Video Calling App",
+    "description": "Real-time 1:1 and group (mesh) video calling on WebRTC, backed by a Node.js/Socket.IO signalling server with live presence, shareable call codes, and in-call chat over the WebRTC data channel. Finds its server on the LAN over mDNS with a public fallback, and relays through Cloudflare TURN when a direct path isn't possible.",
+    "year": 2026,
+    "status": "Live",
+    "authors": ["jitendra-verma"],
+    "tech": "Flutter, Dart, WebRTC, Riverpod, Freezed, Node.js, Socket.IO, Cloudflare TURN",
+    "links": [
+      { "label": "Live demo", "href": "https://jitendravjh.in/Synq/" },
+      { "label": "Source", "href": "https://github.com/jitendravjh/Synq" }
+    ]
+  },
+  {
     "id": "securevault",
     "title": "SecureVault — Privacy Vault App",
     "description": "A privacy vault disguised as four utility apps, with AES-256 encryption, a multi-vault system, panic password, auto-lock, and screenshot prevention. Uses native Platform Channels for dynamic app-icon switching and the iOS Screen Time API.",
@@ -7,7 +20,13 @@
     "status": "Maintained",
     "authors": ["jitendra-verma"],
     "tech": "Flutter, Dart, AES-256, Kotlin, Swift, Platform Channels",
-    "link": "https://play.google.com/store/apps/details?id=com.shravangoswami.securevault"
+    "links": [
+      {
+        "label": "Play Store",
+        "href": "https://play.google.com/store/apps/details?id=com.shravangoswami.securevault"
+      },
+      { "label": "Website", "href": "https://shravangoswami.com/SecureVault/" }
+    ]
   },
   {
     "id": "chain-reaction-max",
@@ -17,7 +36,10 @@
     "status": "Released",
     "authors": ["jitendra-verma"],
     "tech": "Flutter, Dart, Riverpod, Custom Animations",
-    "link": "https://thecodechaos.github.io/ChainReactionMax/"
+    "links": [
+      { "label": "Website", "href": "https://thecodechaos.github.io/ChainReactionMax/" },
+      { "label": "Source", "href": "https://github.com/TheCodeChaos/ChainReactionMax" }
+    ]
   },
   {
     "id": "2ndthought",
@@ -27,7 +49,7 @@
     "status": "In Progress",
     "authors": ["jitendra-verma"],
     "tech": "Flutter, Dart, Riverpod, SQLite, Platform Channels",
-    "link": "https://github.com/TheCodeChaos/2ndThought"
+    "links": []
   },
   {
     "id": "shiv-shakti-textile",
@@ -37,7 +59,7 @@
     "status": "Live",
     "authors": ["jitendra-verma"],
     "tech": "Next.js, React, TypeScript, Tailwind CSS, EmailJS",
-    "link": "https://www.shivshaktitextile.online"
+    "links": [{ "label": "Live site", "href": "https://www.shivshaktitextile.online" }]
   },
   {
     "id": "tvflix",
@@ -47,7 +69,7 @@
     "status": "Released",
     "authors": ["jitendra-verma"],
     "tech": "Swift 5, SwiftUI, MVVM, TMDB REST API, Async/Await",
-    "link": "https://github.com/jitendravjh/TvFlixApp"
+    "links": []
   },
   {
     "id": "neuralpde-contrib",
@@ -57,7 +79,12 @@
     "status": "Open Source",
     "authors": ["jitendra-verma"],
     "tech": "Julia, SciML, Physics-Informed Neural Networks",
-    "link": "https://github.com/SciML/NeuralPDE.jl/pulls?q=is:pr+is:closed+author:jitendravjh"
+    "links": [
+      {
+        "label": "Pull requests",
+        "href": "https://github.com/SciML/NeuralPDE.jl/pulls?q=is:pr+is:closed+author:jitendravjh"
+      }
+    ]
   },
   {
     "id": "turinglang-theme",
@@ -67,6 +94,15 @@
     "status": "Open Source",
     "authors": ["jitendra-verma"],
     "tech": "JavaScript, CSS, Quarto",
-    "link": "https://github.com/TuringLang/docs/pulls?q=is:pr+is:closed+author:jitendravjh"
+    "links": [
+      {
+        "label": "Docs PRs",
+        "href": "https://github.com/TuringLang/docs/pulls?q=is:pr+is:closed+author:jitendravjh"
+      },
+      {
+        "label": "Website PRs",
+        "href": "https://github.com/TuringLang/turinglang.github.io/pulls?q=is:pr+is:closed+author:jitendravjh"
+      }
+    ]
   }
 ]

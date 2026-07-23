@@ -13,11 +13,16 @@ const description =
 const skillGroups: { label: string; items: string[] }[] = [
 	{ label: 'Mobile', items: ['Flutter', 'Dart', 'Swift', 'SwiftUI', 'Riverpod'] },
 	{ label: 'Web', items: ['React', 'Next.js', 'ASP.NET Core', 'Astro', 'TypeScript'] },
-	{ label: 'Foundations', items: ['AES-256', 'Platform channels', 'REST APIs', 'Git'] },
+	{ label: 'Foundations', items: ['WebRTC', 'AES-256', 'Platform channels', 'REST APIs', 'Git'] },
 	{ label: 'Design', items: ['Figma', 'Canva', 'Lightroom', 'DaVinci Resolve'] },
 ];
 
 const selectedWork: { title: string; tag: string; desc: string }[] = [
+	{
+		title: 'Synq',
+		tag: 'Flutter · WebRTC',
+		desc: 'Real-time 1:1 and group video calling on WebRTC, with its own signalling server, zero-config server discovery, and in-call chat over the data channel.',
+	},
 	{
 		title: 'SecureVault',
 		tag: 'Flutter · iOS / Android',
