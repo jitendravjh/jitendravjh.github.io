@@ -13,7 +13,16 @@ async function loadGoogleFont(font: string, text: string) {
     return res.arrayBuffer();
 }
 
-export async function generateOgImage(title: string, subtitle: string) {
+// The accent tracks the site theme: green in light mode, yellow in dark mode.
+const ACCENT = {
+    light: { solid: '#08c225', soft: 'rgba(8, 194, 37, 0.14)' },
+    dark: { solid: '#ffd523', soft: 'rgba(255, 213, 35, 0.14)' },
+} as const;
+
+export type OgTheme = keyof typeof ACCENT;
+
+export async function generateOgImage(title: string, subtitle: string, theme: OgTheme = 'dark') {
+    const accent = ACCENT[theme];
     const textToLoad = title + subtitle + "Jitendra Verma Portfolio ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@";
     const fontDataRegular = await loadGoogleFont("Nunito", textToLoad);
     const fontDataBold = await loadGoogleFont("Nunito:wght@700", textToLoad);
@@ -22,8 +31,8 @@ export async function generateOgImage(title: string, subtitle: string) {
         <div style="background-color: #1a1a1a; width: 100%; height: 100%; display: flex; flex-direction: column; font-family: 'Nunito';">
             <div style="display: flex; flex-direction: column; justify-content: space-between; padding: 80px; flex: 1;">
                 <div style="display: flex;">
-                    <div style="display: flex; align-items: center; padding: 12px 28px; background-color: rgba(255, 213, 35, 0.14); border-radius: 999px; border: 2px solid #ffd523;">
-                        <span style="color: #ffd523; font-size: 26px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;">
+                    <div style="display: flex; align-items: center; padding: 12px 28px; background-color: ${accent.soft}; border-radius: 999px; border: 2px solid ${accent.solid};">
+                        <span style="color: ${accent.solid}; font-size: 26px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;">
                             ${subtitle}
                         </span>
                     </div>
@@ -38,12 +47,12 @@ export async function generateOgImage(title: string, subtitle: string) {
                         <span style="color: #b3b3b3; font-size: 28px; font-weight: 400;">Portfolio</span>
                         <span style="color: #ffffff; font-size: 34px; font-weight: 700;">Jitendra Verma</span>
                     </div>
-                    <div style="display: flex; align-items: center; justify-content: center; width: 84px; height: 84px; background-color: #ffd523; border-radius: 22px;">
+                    <div style="display: flex; align-items: center; justify-content: center; width: 84px; height: 84px; background-color: ${accent.solid}; border-radius: 22px;">
                         <span style="color: #000000; font-size: 46px; font-weight: 700;">@</span>
                     </div>
                 </div>
             </div>
-            <div style="display: flex; height: 16px; background-color: #ffd523; width: 100%;"></div>
+            <div style="display: flex; height: 16px; background-color: ${accent.solid}; width: 100%;"></div>
         </div>
     `;
 

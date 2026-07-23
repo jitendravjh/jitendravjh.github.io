@@ -47,6 +47,7 @@ const primaryLink = (project: (typeof projects)[number]) => project.links[0];
 				margin-bottom: 4rem;
 			}
 			.project-card {
+				position: relative;
 				display: flex;
 				flex-direction: column;
 				background-color: var(--color-bg-offset);
@@ -55,6 +56,17 @@ const primaryLink = (project: (typeof projects)[number]) => project.links[0];
 				overflow: hidden;
 				transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 				box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+			}
+			/* The title link is stretched over the whole card, so clicking
+			   anywhere opens the primary link and also triggers the title hover. */
+			.project-card h3 a::after {
+				content: '';
+				position: absolute;
+				inset: 0;
+				z-index: 1;
+			}
+			.project-badge {
+				pointer-events: none;
 			}
 			.project-card:hover {
 				transform: translateY(-6px);
@@ -116,6 +128,10 @@ const primaryLink = (project: (typeof projects)[number]) => project.links[0];
 			.project-card h3 a {
 				color: inherit;
 				text-decoration: none;
+				transition: color 0.2s ease;
+			}
+			.project-card h3 a:hover {
+				color: var(--color-accent-text);
 			}
 			.project-description {
 				color: var(--color-text-muted);
@@ -159,6 +175,17 @@ const primaryLink = (project: (typeof projects)[number]) => project.links[0];
 				display: flex;
 				flex-wrap: wrap;
 				gap: 0.4rem 1.25rem;
+				position: relative;
+				z-index: 2;
+			}
+			.poster-light {
+				display: none;
+			}
+			:global(html[data-theme='light']) .poster-light {
+				display: block;
+			}
+			:global(html[data-theme='light']) .poster-dark {
+				display: none;
 			}
 			.read-more.secondary {
 				color: var(--color-text-muted);
@@ -186,10 +213,8 @@ const primaryLink = (project: (typeof projects)[number]) => project.links[0];
 				{projects.length > 0 ? projects.map((project) => (
 					<article class="project-card">
 						<div class="project-image">
-							<img
-								src={url(`/projects/${project.id}.png`)}
-								alt={project.title}
-							/>
+							<img class="poster-dark" src={url(`/projects/${project.id}.png`)} alt={project.title} loading="lazy" />
+							<img class="poster-light" src={url(`/projects/${project.id}-light.png`)} alt={project.title} loading="lazy" />
 							<span class="project-badge">{project.status}</span>
 						</div>
 

@@ -80,6 +80,17 @@ const { posts, currentPage, totalPages, nextPage, prevPage } = Astro.props;
                 transform: scale(1.03);
                 filter: brightness(1.05);
             }
+            /* Poster accent follows the theme. Defaults to the dark one so a
+               missing data-theme never shows both. */
+            .poster-light {
+                display: none;
+            }
+            :global(html[data-theme='light']) .poster-light {
+                display: block;
+            }
+            :global(html[data-theme='light']) .poster-dark {
+                display: none;
+            }
 
             .blog-content {
                 flex: 1;
@@ -166,7 +177,7 @@ const { posts, currentPage, totalPages, nextPage, prevPage } = Astro.props;
 		<main>
 			<h1>Blog</h1>
             <p style="margin-bottom: 2rem; max-width: 700px; color: var(--color-text-muted);">
-                Notes, tutorials, and articles. Some posts are published on external platforms and open there.
+                Notes, tutorials, and articles on what I'm building.
             </p>
 
             <div class="blog-list">
@@ -223,7 +234,10 @@ const { posts, currentPage, totalPages, nextPage, prevPage } = Astro.props;
                                 {post.data.heroImage ? (
                                     <Image width={560} height={315} src={post.data.heroImage} alt={post.data.title} />
                                 ) : (
-                                    <img src={url(`/blog/${post.id}.png`)} alt={post.data.title} />
+                                    <>
+                                        <img class="poster-dark" src={url(`/blog/${post.id}.png`)} alt={post.data.title} loading="lazy" />
+                                        <img class="poster-light" src={url(`/blog/${post.id}-light.png`)} alt={post.data.title} loading="lazy" />
+                                    </>
                                 )}
                             </a>
                         </article>

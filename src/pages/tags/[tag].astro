@@ -70,6 +70,15 @@ const { posts } = Astro.props;
                 transform: scale(1.03);
                 filter: brightness(1.05);
             }
+            .poster-light {
+                display: none;
+            }
+            :global(html[data-theme='light']) .poster-light {
+                display: block;
+            }
+            :global(html[data-theme='light']) .poster-dark {
+                display: none;
+            }
 
             .blog-content {
                 flex: 1;
@@ -213,7 +222,10 @@ const { posts } = Astro.props;
                                 {post.data.heroImage ? (
                                     <Image width={560} height={315} src={post.data.heroImage} alt={post.data.title} />
                                 ) : (
-                                    <img src={url(`/blog/${post.id}.png`)} alt={post.data.title} />
+                                    <>
+                                        <img class="poster-dark" src={url(`/blog/${post.id}.png`)} alt={post.data.title} loading="lazy" />
+                                        <img class="poster-light" src={url(`/blog/${post.id}-light.png`)} alt={post.data.title} loading="lazy" />
+                                    </>
                                 )}
                             </a>
                         </article>
