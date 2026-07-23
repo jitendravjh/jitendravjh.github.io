@@ -59,7 +59,7 @@
     "status": "Live",
     "authors": ["jitendra-verma"],
     "tech": "Next.js, React, TypeScript, Tailwind CSS, EmailJS",
-    "links": [{ "label": "Live site", "href": "https://www.shivshaktitextile.online" }]
+    "links": [{ "label": "Live site", "href": "https://shivshaktitextile-online.vercel.app/" }]
   },
   {
     "id": "tvflix",

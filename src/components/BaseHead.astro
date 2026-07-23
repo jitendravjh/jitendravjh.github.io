@@ -58,11 +58,24 @@ const imageUrl = typeof image === 'string'
 			root.style.setProperty('background-color', 'var(--color-bg)');
 			root.style.colorScheme = dark ? 'dark' : 'light';
 		};
-		let theme = 'light';
+		const systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+		let saved = null;
 		try {
-			if (localStorage.getItem('theme') === 'dark') theme = 'dark';
+			saved = localStorage.getItem('theme');
 		} catch {}
-		paintTheme(theme);
+		// An explicit choice always wins; otherwise follow the system.
+		const isChoice = saved === 'dark' || saved === 'light';
+		paintTheme(isChoice ? saved : systemDark && systemDark.matches ? 'dark' : 'light');
+		// Keep following the system while the visitor has made no choice of their own.
+		if (systemDark && !isChoice) {
+			systemDark.addEventListener('change', (event) => {
+				let stored = null;
+				try {
+					stored = localStorage.getItem('theme');
+				} catch {}
+				if (stored !== 'dark' && stored !== 'light') paintTheme(event.matches ? 'dark' : 'light');
+			});
+		}
 		window.addEventListener('load', () => root.setAttribute('data-theme-ready', 'true'), { once: true });
 		window.__setPreferredTheme = paintTheme;
 	})();
