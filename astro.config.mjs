@@ -7,7 +7,7 @@ import remarkMath from 'remark-math';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://jitendravjh.github.io',
+	site: 'https://jitendravjh.in',
 	integrations: [mdx(), sitemap()],
 	markdown: {
 		shikiConfig: {
