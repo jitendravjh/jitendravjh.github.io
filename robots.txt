@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://jitendravjh.github.io/sitemap-index.xml
+Sitemap: https://jitendravjh.in/sitemap-index.xml
