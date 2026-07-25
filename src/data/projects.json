@@ -29,16 +29,15 @@
     ]
   },
   {
-    "id": "chain-reaction-max",
-    "title": "Chain Reaction MAX — Multiplayer Strategy Game",
+    "id": "reaktor",
+    "title": "Reaktor — Chain Reaction Strategy Game",
     "description": "A multiplayer strategy game supporting 2–6 players across multiple board sizes, with dramatic chain-burst animations and real-time game-state management built on Riverpod.",
     "year": 2025,
     "status": "Released",
     "authors": ["jitendra-verma"],
     "tech": "Flutter, Dart, Riverpod, Custom Animations",
     "links": [
-      { "label": "Website", "href": "https://thecodechaos.github.io/ChainReactionMax/" },
-      { "label": "Source", "href": "https://github.com/TheCodeChaos/ChainReactionMax" }
+      { "label": "Website", "href": "https://thecodechaos.github.io/reaktor/" }
     ]
   },
   {
