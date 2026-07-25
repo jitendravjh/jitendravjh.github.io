@@ -1,16 +1,9 @@
 # jitendravjh.github.io
 
-My personal portfolio, built with [Astro](https://astro.build).
+My personal portfolio, built with [Astro](https://astro.build) — MDX blog,
+full-text search, and auto-generated OG images.
 
-**Live:** https://jitendravjh.github.io/
-
-## Development
-
-```sh
-npm install      # install dependencies
-npm run dev      # start the dev server at localhost:4321
-npm run build    # build to ./dist/
-```
+**Live:** https://jitendravjh.in
 
 ## License
 
