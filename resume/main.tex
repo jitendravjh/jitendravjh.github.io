@@ -1,0 +1,409 @@
+%
+%Academic CV LaTeX Template
+% Author: Jitendra Verma
+% LinkedIn: https://www.linkedin.com/in/jitendravjh/
+% License: MIT
+%
+
+\documentclass[a4paper,10pt]{article}
+
+% ------------------------------------------------------------------------------------
+% PACKAGE IMPORTS
+% ------------------------------------------------------------------------------------
+\usepackage{latexsym}
+\usepackage{xcolor}
+\usepackage{float}
+\usepackage{ragged2e}
+\usepackage[empty]{fullpage}
+\usepackage{wrapfig}
+\usepackage{lipsum}
+\usepackage{tabularx}
+\usepackage{titlesec}
+\usepackage{geometry}
+\usepackage{marvosym}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage{lastpage}
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{fontawesome5}
+
+% Line spacing
+\usepackage{setspace}
+\setstretch{1.0}
+
+% ------------------------------------------------------------------------------------
+% PAGE GEOMETRY (TIGHTER MARGINS)
+% ------------------------------------------------------------------------------------
+\geometry{
+  left=0.59in,
+  top=0.5in,
+  right=0.59in,
+  bottom=0.5in
+}
+\setlength{\footskip}{5pt}
+
+% ------------------------------------------------------------------------------------
+% COLOR DEFINITIONS
+% ------------------------------------------------------------------------------------
+\definecolor{darkblue}{HTML}{0072CF}
+\definecolor{graytext}{gray}{0.5}
+
+% ------------------------------------------------------------------------------------
+% PAGE STYLE
+% ------------------------------------------------------------------------------------
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer fields
+\fancyfoot[C]{\footnotesize \textcolor{graytext}{Page \thepage\ of \pageref{LastPage}}}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ------------------------------------------------------------------------------------
+% HYPERLINK SETUP
+% ------------------------------------------------------------------------------------
+\usepackage[]{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=darkblue,
+    filecolor=darkblue,
+    urlcolor=darkblue,
+}
+
+% ------------------------------------------------------------------------------------
+% CUSTOM BOX SETTINGS
+% ------------------------------------------------------------------------------------
+\usepackage[most]{tcolorbox}
+\tcbset{
+    frame code={},
+    center title,
+    left=0pt,
+    right=0pt,
+    top=0pt,
+    bottom=0pt,
+    colback=gray!20,
+    colframe=white,
+    width=\dimexpr\textwidth\relax,
+    boxsep=4pt,
+    arc=0pt,outer arc=0pt,
+}
+
+% ------------------------------------------------------------------------------------
+% URL STYLE
+% ------------------------------------------------------------------------------------
+\urlstyle{same}
+
+% ------------------------------------------------------------------------------------
+% TEXT ALIGNMENT
+% ------------------------------------------------------------------------------------
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+% ------------------------------------------------------------------------------------
+% SECTION FORMATTING
+% ------------------------------------------------------------------------------------
+\titleformat{\section}{
+  \vspace{0pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule]
+\titlespacing*{\section}{0pt}{1.5ex}{1ex}
+
+% ------------------------------------------------------------------------------------
+% CUSTOM COMMANDS
+% ------------------------------------------------------------------------------------
+\newcommand{\resumeItem}[2]{
+  \item{
+    \textbf{#1}{\hspace{0.5mm}#2}
+  }
+}
+
+\newcommand{\resumePOR}[3]{
+  \item
+  \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+    \textbf{#1}\hspace{0.3mm}#2 & \textit{\small{#3}} 
+  \end{tabular*}
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \item
+    \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & \textit{\footnotesize{#4}} \\
+      \textit{\footnotesize{#3}} &  \footnotesize{#2}\\
+    \end{tabular*}
+}
+
+\newcommand{\resumeProject}[4]{
+  \item
+    \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & \footnotesize{#3} \\[2pt]
+      \footnotesize{\textit{#2}} & \footnotesize{#4}
+    \end{tabular*}
+}
+
+\newcommand{\resumeSubItem}[2]{\resumeItem{#1}{#2}}
+
+\renewcommand{\labelitemi}{$\vcenter{\hbox{\tiny$\bullet$}}$}
+\renewcommand{\labelitemii}{$\vcenter{\hbox{\tiny$\circ$}}$}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=*,labelsep=1mm,itemsep=1mm]}
+\newcommand{\resumeHeadingSkillStart}{\begin{itemize}[leftmargin=*,itemsep=1mm, rightmargin=2ex]}
+\newcommand{\resumeItemListStart}{\vspace{-1.5mm}\begin{itemize}[leftmargin=*,labelsep=1mm,itemsep=1pt,topsep=0pt,parsep=0mm,partopsep=0mm]}
+
+
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeHeadingSkillEnd}{\end{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{0mm}}
+
+\newcommand{\cvsection}[1]{%
+\vspace{1pt}
+\begin{tcolorbox}
+    \textbf{\large #1}
+\end{tcolorbox}
+}
+
+\newcolumntype{L}{>{\raggedright\arraybackslash}X}%
+\newcolumntype{R}{>{\raggedleft\arraybackslash}X}%
+\newcolumntype{C}{>{\centering\arraybackslash}X}%
+
+% Commands for icon sizing and positioning
+\newcommand{\socialicon}[1]{\raisebox{-0.05em}{\resizebox{!}{1em}{#1}}}
+\newcommand{\ieeeicon}[1]{\raisebox{-0.3em}{\resizebox{!}{1.3em}{#1}}}
+
+
+
+% Phone is injected only in the private build via an optional resume-phone.tex.
+% The public repo has no such file, so no number is rendered.
+\providecommand{\resumephone}{}
+\providecommand{\resumephonetel}{}
+\IfFileExists{resume-phone.tex}{\input{resume-phone.tex}}{}
+
+% ------------------------------------------------------------------------------------
+% DOCUMENT START
+% ------------------------------------------------------------------------------------
+\begin{document}
+
+% ------------------------------------------------------------------------------------
+% HEADER
+% ------------------------------------------------------------------------------------
+\begin{center}
+    {\Huge\textbf{Jitendra Verma}}
+    \vspace{2mm}
+    
+    \ifx\resumephone\empty\else\href{tel:\resumephonetel}{\faPhone\ \resumephone } $|$\fi
+    \href{mailto:jitendravjh@gmail.com}{\faEnvelope\ jitendravjh@gmail.com} $|$
+    \href{https://www.linkedin.com/in/jitendravjh/}{\faLinkedin\ jitendravjh} $|$
+    \href{https://github.com/jitendravjh}{\faGithub\ jitendravjh}
+    \\
+    \href{https://jitendravjh.in/}{\faGlobe\ jitendravjh.in}
+\end{center}
+
+% ------------------------------------------------------------------------------------
+% EDUCATION
+% ------------------------------------------------------------------------------------
+\section{\textbf{Education}}
+\resumeSubHeadingListStart
+\resumeSubheading
+{Uka Tarsadia University}{Surat, Gujarat}
+{Bachelor of Technology in Computer Science and Engineering}{2022 - 2026}
+\resumeItemListStart
+  \item Cumulative GPA: 7.55
+\resumeItemListEnd
+\resumeSubHeadingListEnd
+
+% ------------------------------------------------------------------------------------
+% PROJECTS
+% ------------------------------------------------------------------------------------
+\section{\textbf{Projects}}
+\resumeSubHeadingListStart
+
+\resumeProject
+  {Synq - Real-Time Video Calling App \normalfont{\textit{}}}
+  {Tech Stack: Flutter, Dart, WebRTC, Riverpod, Freezed, Node.js, Socket.IO, Cloudflare TURN}
+  {[\href{https://github.com/jitendravjh/Synq}{\textcolor{darkblue}{GitHub }{\faGithub}} $|$ \href{https://jitendravjh.in/Synq/}{\textcolor{darkblue}{Live }{\faGlobe}}]}
+  {}
+\resumeItemListStart
+  \item Built real-time 1:1 and group (mesh) video calling on WebRTC with a Node.js/Socket.IO signalling server, live presence, shareable call codes, and in-call chat over the WebRTC data channel.
+  \item Added zero-config mDNS server discovery with a public fallback and a Cloudflare TURN relay for cross-network calls; designed a clean three-layer architecture (Riverpod, Freezed) with unit tests and a native Kotlin EventChannel mic-level meter.
+\resumeItemListEnd
+
+\resumeProject
+  {SecureVault - Privacy Vault App \normalfont{\textit{}}}
+  {Tech Stack: Flutter, Dart, AES-256, Kotlin, Swift, Platform Channels}
+  {[\href{https://play.google.com/store/apps/details?id=com.shravangoswami.securevault}{\textcolor{darkblue}{Play Store }{\faGooglePlay}} $|$ \href{https://shravangoswami.com/SecureVault/}{\textcolor{darkblue}{Website }{\faGlobe}}]}
+  {}
+\resumeItemListStart
+  \item Built a privacy vault disguised as 4 utility apps (Calculator, Notes, Clock, MoodSpace) with AES-256 encryption, PBKDF2 key derivation, multi-vault system with panic password, auto-lock, and screenshot prevention.
+  \item Engineered native Platform Channels for dynamic app icon/name switching on Android and iOS Screen Time API integration; published on Google Play Store.
+\resumeItemListEnd
+
+\resumeProject
+  {Reaktor - Chain Reaction Strategy Game \normalfont{\textit{}}}
+  {Tech Stack: Flutter, Dart, Riverpod, Custom Animations}
+  {{}[\href{https://thecodechaos.github.io/reaktor/}{\textcolor{darkblue}{Website }{\faGlobe}}]}
+  {}
+\resumeItemListStart
+  \item Developed a multiplayer strategy game supporting 2--6 players with multiple board sizes and real-time game state management using Riverpod.
+  \item Implemented dramatic chain burst animations with custom paint rendering and smooth particle effects for an engaging gameplay experience.
+\resumeItemListEnd
+
+\resumeProject
+  {2ndThought \normalfont{\textit{}}}
+  {Tech Stack: Flutter, Dart, Riverpod, SQLite, Platform Channels}
+  {}
+  {}
+\resumeItemListStart
+  \item Built a cognitive app-blocker based on System 1 vs System 2 psychology with brain challenges (Stroop, Schulte, Mental Math). 
+  \item Time Wallet screen-time tracking via Riverpod, and native MethodChannel/EventChannel integration for Android Accessibility Service and iOS Screen Time API.
+\resumeItemListEnd
+
+\resumeProject
+  {Shiv Shakti Textile - E-Commerce Website \normalfont{\textit{(Developer \& Maintainer)}}}
+  {Tech Stack: Next.js, React, TypeScript, Tailwind CSS, EmailJS}
+  {{}[\href{https://shivshaktitextile-online.vercel.app/}{\textcolor{darkblue}{Live }{\faGlobe}}]}
+  {}
+\resumeItemListStart
+  \item Developing a modern textile e-commerce platform using Next.js and TypeScript, featuring a responsive UI built with Tailwind CSS.
+  \item Integrated EmailJS to automate order placement notifications and streamline direct customer communication.
+\resumeItemListEnd
+
+\resumeProject
+  {TvFlix - Discover Movies \& TV Shows}
+  {Tech Stack: Swift 5, SwiftUI, MVVM, TMDB REST API, Async/Await}
+  {}
+  {}
+\resumeItemListStart
+  \item Built an iOS app to discover movies and TV series with trending and top-rated sections, TMDB-powered search, wishlist support, trailers, and TV season episode details.
+\resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+% ------------------------------------------------------------------------------------
+% OPEN-SOURCE CONTRIBUTION
+% ------------------------------------------------------------------------------------
+\section{\textbf{Open-source Contribution}}
+\resumeSubHeadingListStart
+
+\resumeProject
+  {Adaptive Loss Functions \& Documentation Improvements}
+  {SciML / NeuralPDE.jl - GitHub \#1054, \#1055, \#1057}
+  {{}[\href{https://github.com/SciML/NeuralPDE.jl/pulls?q=is:pr+is:closed+author:jitendravjh}{\textcolor{darkblue}{GitHub }{\faGithub}}]}
+  {}
+\resumeItemListStart
+  \item Implemented new adaptive loss functions (\texttt{SoftAdaptAdaptiveLoss} and \texttt{ReLOBRaLoAdaptiveLoss}).
+  \item Enhanced documentation by filling placeholder docstrings for \texttt{PINNRepresentation} and \texttt{PhysicsInformedNN}, and updated CI badges.
+\resumeItemListEnd
+
+\resumeProject
+  {Added Multiple Theme-Related Features}
+  {turinglang.org/docs/ - GitHub \#509}
+  {{}[\href{https://github.com/TuringLang/docs/pulls?q=is:pr+is:closed+author:jitendravjh}{\textcolor{darkblue}{GitHub }{\faGithub}}]}
+  {}
+\resumeItemListStart
+  \item Enabled seamless theme switching with customizable options, optimizing performance for faster load times.
+\resumeItemListEnd
+
+\resumeProject
+  {Added Dark Theme}
+  {TuringLang / turinglang.github.io - GitHub \#92}
+  {{}[\href{https://github.com/TuringLang/turinglang.github.io/pulls?q=is:pr+is:closed+author:jitendravjh}{\textcolor{darkblue}{GitHub }{\faGithub}}]}
+  {}
+\resumeItemListStart
+  \item Implemented a user-friendly dark theme with auto theme support, enhancing readability and reducing eye strain.
+\resumeItemListEnd
+
+\resumeSubHeadingListEnd
+
+% ------------------------------------------------------------------------------------
+% EXPERIENCE
+% ------------------------------------------------------------------------------------
+\section{\textbf{Experience}}
+\resumeSubHeadingListStart
+  \resumeSubheading
+      {{Krtya Technologies Pvt. Ltd {}}}{Surat, Gujarat}
+      {Web Developer Intern}{July 2024 - Dec 2024}
+      \resumeItemListStart
+        \item Tech Stack: React.js, ASP.NET Core, Blazor, MySQL, C\#, REST APIs, Bootstrap
+        \item Developed a feature-rich eCommerce website with product browsing, secure checkout, order management, and responsive UI for seamless user experience.
+      \resumeItemListEnd 
+
+  \resumeSubheading
+      {{GeeksforGeeks {}}}{Remote}
+      {Technical Content Writer}{Jan 2024 - Dec 2024}
+      \resumeItemListStart
+        \item Domain: macOS, Software Installation Guide
+      \resumeItemListEnd
+\resumeSubHeadingListEnd
+
+% ------------------------------------------------------------------------------------
+% SKILLS
+% ------------------------------------------------------------------------------------
+\section{\textbf{Skills}}
+\resumeHeadingSkillStart
+  \resumeSubItem{Mobile Development:}
+    {Flutter, Dart, iOS (Swift)}
+  \resumeSubItem{Web Development:}
+    {React.js, Tailwind CSS, REST APIs, Quarto, Astro, JavaScript, HTML, CSS, MySQL}
+  \resumeSubItem{Programming Languages:}
+    {JavaScript, Dart, Python,}
+  \resumeSubItem{Design \& Creative Tools:}
+    {Figma, Canva, Lightroom, DaVinci Resolve}
+\resumeHeadingSkillEnd
+
+% ------------------------------------------------------------------------------------
+% CERTIFICATION & ACHIEVEMENT
+% ------------------------------------------------------------------------------------
+\section{\textbf{Certifications \& Achievements}}
+\resumeSubHeadingListStart
+\resumeProject
+  {Smart India Hackathon 2024 Finalist}
+  {Tech Stack: .NET, C\#, WPF}
+  {}
+  {}
+\resumeItemListStart
+  \item Built a Windows application (GPO Manager) to generate and manage custom Group Policy Objects aligned with CIS security benchmarks.
+  \item Team Techolics\_ selected as finalist for offline/standalone Windows GPO deployment.
+\resumeItemListEnd
+
+\resumeProject
+  {HDFC Bank Parivartan ECSS Scholarship}
+  {Undergraduate Programme 2022--2023}
+  {}
+  {}
+\resumeItemListStart
+  \item Awarded merit-cum-need based scholarship by HDFC Bank under their CSR initiative, supporting academically meritorious undergraduate students.
+\resumeItemListEnd
+
+\resumeProject
+  {Workshop on Distributed Version Control using Git and GitHub}
+  {Asha M. Tarsadia Institute of Computer Science and Technology}
+  {}
+  {}
+\resumeItemListStart
+  \item Certificate of participation covering Git workflows, branching strategies, and collaborative development on GitHub.
+\resumeItemListEnd
+\resumeSubHeadingListEnd
+% ------------------------------------------------------------------------------------
+% EXTRA-CURRICULAR INTERESTS
+% ------------------------------------------------------------------------------------
+\section{\textbf{Extra-Curricular Interests}}
+\begin{itemize}[leftmargin=*, nosep, itemsep=2pt]
+    \item \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{Cinema:} Passionate about films and visual storytelling
+    \end{tabular*}
+    \item \begin{tabular*}{0.98\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{Photography:} Street and landscape photography & {[\href{https://unsplash.com/@jitendravjh}{\textcolor{darkblue}{Unsplash }{\faIcon{unsplash}}}]}
+    \end{tabular*}
+    \item \textbf{UI/UX Design:} Exploring modern design systems, typography, and micro-interactions
+\end{itemize}
+
+\vspace{5em}
+\begin{center}
+    {\small\textcolor{graytext}{\rule{0.24\linewidth}{0.4pt}\hspace{0.7em}\textbf{Thank You}\hspace{0.7em}\rule{0.24\linewidth}{0.4pt}}}
+\end{center}
+
+\vfill
+\begin{center}
+    \footnotesize\textcolor{graytext}{Last Updated: July 25, 2026. The latest version can be found at \href{https://jitendravjh.in/resume/}{jitendravjh.in/resume}}
+\end{center}
+\end{document}
