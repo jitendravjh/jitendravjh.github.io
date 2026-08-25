@@ -19,7 +19,6 @@ export const INTRO = {
   thanks: 'Thank you',
   name: 'Jitendra Verma',
   greeting: "Hi! I'm Jitendra Verma.",
-  image: '/me.jpeg',
 };
 
 export const CONTACT = {

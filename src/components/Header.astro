@@ -1,7 +1,12 @@
 ---
+import { Image } from 'astro:assets';
 import HeaderLink from './HeaderLink.astro';
-import { CV_URL, GITHUB_PROFILE, INTRO, SITE_TITLE } from '../consts';
+import { CV_URL, GITHUB_PROFILE, SITE_TITLE } from '../consts';
 import { url } from '../utils/paths';
+import { profileImg, profileUrl } from '../utils/profileImage';
+
+// The aura is blurred behind frosted glass, so it never needs full resolution.
+const auraSrc = await profileUrl(240);
 
 const cvHref = CV_URL ? url(CV_URL) : null;
 // Touch devices (phones, iPads) get sent straight to the PDF — the in-page
@@ -9,13 +14,13 @@ const cvHref = CV_URL ? url(CV_URL) : null;
 const cvPdfHref = cvHref ? url('/resume/resume.pdf') : null;
 ---
 
-<div class="nav-aura" aria-hidden="true" style={`background-image: url(${url(INTRO.image)})`}></div>
+<div class="nav-aura" aria-hidden="true" style={`background-image: url(${auraSrc})`}></div>
 
 <header>
 	<nav>
 		<h2>
 			<a href={url('/')}>
-				<img class="nav-avatar" src={url(INTRO.image)} alt="" aria-hidden="true" />
+				<Image class="nav-avatar" src={profileImg} loading="eager" alt="" aria-hidden="true" width={68} height={68} />
 				<span>{SITE_TITLE}</span>
 			</a>
 		</h2>
@@ -102,6 +107,9 @@ const cvPdfHref = cvHref ? url('/resume/resume.pdf') : null;
 		max-width: var(--max-width);
 		padding: 0 0.6rem 0 1.5rem;
 		background-color: var(--color-bg-header);
+        --brand-grad-a: #08c225;
+        --brand-grad-b: #4f7a3a;
+        --brand-grad-c: #5c6843;
         backdrop-filter: blur(24px) saturate(180%);
         -webkit-backdrop-filter: blur(24px) saturate(180%);
         border: 1px solid var(--color-header-border);
@@ -124,15 +132,39 @@ const cvPdfHref = cvHref ? url('/resume/resume.pdf') : null;
         letter-spacing: -0.02em;
         border-bottom: none;
         padding-bottom: 0;
+        display: flex;
+        align-items: center;
+        line-height: 1;
 	}
 	h2 a {
 		text-decoration: none;
 		color: var(--color-accent-text);
         border: none;
-        display: inline-flex;
+        display: flex;
         align-items: center;
         gap: 0.6rem;
+        line-height: 1;
 	}
+	:global(html[data-theme='dark']) header {
+		--brand-grad-a: #ffd523;
+		--brand-grad-b: #d8c95e;
+		--brand-grad-c: #b3ad74;
+	}
+	/* Wordmark picks up the same wash the glass shows over the photo */
+	h2 a span {
+		background-image: linear-gradient(95deg, var(--brand-grad-a) 0%, var(--brand-grad-b) 55%, var(--brand-grad-c) 100%);
+		-webkit-background-clip: text;
+		background-clip: text;
+		color: transparent;
+		-webkit-text-fill-color: transparent;
+	}
+	@supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+		h2 a span {
+			color: var(--color-accent-text);
+			-webkit-text-fill-color: currentColor;
+		}
+	}
+
 	.nav-avatar {
 		width: 2.1rem;
 		height: 2.1rem;

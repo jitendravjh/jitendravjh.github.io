@@ -41,14 +41,14 @@
     ]
   },
   {
-    "id": "2ndthought",
-    "title": "2ndThought — Cognitive App Blocker",
-    "description": "An app-blocker grounded in System 1 vs System 2 psychology, with brain challenges (Stroop, Schulte, Mental Math), a Time Wallet screen-time tracker, and native MethodChannel/EventChannel integration for the Android Accessibility Service and iOS Screen Time API.",
-    "year": 2025,
-    "status": "In Progress",
+    "id": "callback",
+    "title": "Callback — Job Application Tracker",
+    "description": "A job application tracker aimed at the Indian market, which US-built trackers like Teal and Huntr don't cover. A Chrome side-panel extension clips postings from Naukri, LinkedIn, Internshala, Unstop and Instahyre; a React web app tracks each one on a kanban board. Extraction falls through JSON-LD JobPosting, then per-site adapters, then page metadata, recording which strategy won each field so accuracy is measured rather than assumed. The panel also autofills application forms from a saved profile and learns new question and answer pairs on submit.",
+    "year": 2026,
+    "status": "Live",
     "authors": ["jitendra-verma"],
-    "tech": "Flutter, Dart, Riverpod, SQLite, Platform Channels",
-    "links": []
+    "tech": "React, TypeScript, Supabase, Postgres RLS, Chrome MV3, TanStack Query, dnd-kit, Cloudflare Workers",
+    "links": [{ "label": "Live site", "href": "https://callback.jitendravjh.in" }]
   },
   {
     "id": "shiv-shakti-textile",

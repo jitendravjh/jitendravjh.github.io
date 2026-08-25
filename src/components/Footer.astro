@@ -2,13 +2,14 @@
 const today = new Date();
 import {
   FOOTER_CREDIT,
-  INTRO,
   SITE_DESCRIPTION,
   SITE_TITLE,
   SOCIAL_LINKS,
 } from '../consts';
 import Search from './Search.astro';
-import { url } from '../utils/paths';
+import { profileUrl } from '../utils/profileImage';
+
+const auraSrc = await profileUrl(240);
 
 // Font Awesome icons — kept in sync with the home page (src/pages/index.astro)
 // so the header, footer and body all share one consistent icon set.
@@ -52,7 +53,7 @@ const faIcon: Record<string, string> = {
         </div>
     </div>
     <div class="footer-credit-wrap">
-        <div class="credit-aura" aria-hidden="true" style={`background-image: url(${url(INTRO.image)})`}></div>
+        <div class="credit-aura" aria-hidden="true" style={`background-image: url(${auraSrc})`}></div>
         <div class="footer-credit">
         <p>
             Made with <span class="heart" aria-label="love">&#9825;</span> by
@@ -223,6 +224,9 @@ const faIcon: Record<string, string> = {
 
 <style>
 	.site-footer {
+		--brand-grad-a: #08c225;
+		--brand-grad-b: #4f7a3a;
+		--brand-grad-c: #5c6843;
 		background-color: var(--color-bg-offset);
 		color: var(--color-text-main);
 		padding: 2.25rem 1rem 0;
@@ -254,6 +258,16 @@ const faIcon: Record<string, string> = {
         font-size: 1.5rem;
         margin-bottom: 0.4rem;
         color: var(--color-accent-text);
+        background-image: linear-gradient(95deg, var(--brand-grad-a) 0%, var(--brand-grad-b) 55%, var(--brand-grad-c) 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        width: fit-content;
+    }
+    :global(html[data-theme='dark']) .site-footer {
+        --brand-grad-a: #ffd523;
+        --brand-grad-b: #d8c95e;
+        --brand-grad-c: #b3ad74;
     }
     .footer-col h4 {
         font-family: var(--font-sans);
@@ -308,6 +322,11 @@ const faIcon: Record<string, string> = {
         .footer-content {
             grid-template-columns: 1fr;
             text-align: center;
+        }
+        /* width: fit-content above would otherwise pin the gradient heading left */
+        .footer-col h3 {
+            margin-left: auto;
+            margin-right: auto;
         }
         .social-links {
             justify-content: center;
@@ -459,6 +478,10 @@ const faIcon: Record<string, string> = {
         color: inherit;
         text-decoration: none;
         font-weight: bold;
+        background-image: linear-gradient(95deg, #2ee85a 0%, #8fd06a 55%, #cfe0a8 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
     }
     .footer-credit a:hover {
         color: var(--color-accent);
@@ -470,9 +493,12 @@ const faIcon: Record<string, string> = {
        fails and the hover falls back to yellow-on-yellow. Darken the link instead. */
     :global(html[data-theme='dark']) .footer-credit a {
         color: rgba(0, 0, 0, 0.62);
+        background-image: none;
+        -webkit-text-fill-color: currentColor;
     }
     :global(html[data-theme='dark']) .footer-credit a:hover {
         color: #000000;
+        -webkit-text-fill-color: currentColor;
         text-decoration: underline;
     }
     

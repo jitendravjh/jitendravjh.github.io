@@ -6,6 +6,14 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, CV_URL, GITHUB_PROFILE } from '../consts';
 import { url } from '../utils/paths';
+import projectsData from '../data/projects.json';
+
+// Same primary link the projects page uses; fall back to the card on /projects
+// for anything that has no link of its own yet.
+const projectHref = (id: string) => {
+	const project = projectsData.find((p) => p.id === id);
+	return project?.links?.[0]?.href ?? url(`/projects#${id}`);
+};
 
 const description =
 	'Jitendra Verma — a Computer Science engineer and developer building mobile and web apps with Flutter, Swift, and modern web tech.';
@@ -17,42 +25,49 @@ const skillGroups: { label: string; items: string[] }[] = [
 	{ label: 'Design', items: ['Figma', 'Canva', 'Lightroom', 'DaVinci Resolve'] },
 ];
 
-const selectedWork: { title: string; tag: string; desc: string }[] = [
+const selectedWork: { title: string; tag: string; desc: string; id: string }[] = [
 	{
 		title: 'Synq',
+		id: 'synq',
 		tag: 'Flutter · WebRTC',
 		desc: 'Real-time 1:1 and group video calling on WebRTC, with its own signalling server, zero-config server discovery, and in-call chat over the data channel.',
 	},
 	{
 		title: 'SecureVault',
+		id: 'securevault',
 		tag: 'Flutter · iOS / Android',
 		desc: 'A privacy vault disguised as everyday utility apps — AES-256 encryption plus native platform-channel tricks like dynamic app-icon switching.',
 	},
 	{
 		title: 'Reaktor',
+		id: 'reaktor',
 		tag: 'Flutter · Riverpod',
 		desc: 'A multiplayer strategy game with real-time game state managed end to end on Riverpod.',
 	},
 	{
-		title: '2ndThought',
-		tag: 'Flutter · Behavioural design',
-		desc: 'A cognitive app-blocker grounded in System 1 vs System 2 psychology — friction before you open the apps that pull you in.',
+		title: 'Callback',
+		id: 'callback',
+		tag: 'React · Chrome extension',
+		desc: 'A job tracker for Indian job boards. A Chrome extension clips postings from Naukri, LinkedIn and Internshala, a kanban web app tracks where each one stands, and the panel autofills forms from a saved profile.',
 	},
 ];
 
-const contributions: { title: string; role: string; desc: string }[] = [
+const contributions: { title: string; role: string; desc: string; href: string }[] = [
 	{
 		title: 'GeeksforGeeks',
+		href: 'https://www.geeksforgeeks.org/user/jitendravjh/',
 		role: 'Technical Content Writer',
 		desc: 'Installation and how-to guides focused on macOS and developer tooling.',
 	},
 	{
 		title: 'SciML · NeuralPDE.jl',
+		href: 'https://github.com/SciML/NeuralPDE.jl/pulls?q=is:pr+is:closed+author:jitendravjh',
 		role: 'Open-source contributor',
 		desc: 'Contributed adaptive loss functions for physics-informed neural networks.',
 	},
 	{
 		title: 'TuringLang',
+		href: 'https://github.com/TuringLang/docs/pulls?q=is:pr+is:closed+author:jitendravjh',
 		role: 'Open-source contributor',
 		desc: 'Built a theme system with dark mode for the documentation sites.',
 	},
@@ -164,6 +179,8 @@ const contributions: { title: string; role: string; desc: string }[] = [
 				margin-top: 1.5rem;
 			}
 			.work-card {
+				text-decoration: none;
+				color: inherit;
 				display: flex;
 				flex-direction: column;
 				padding: 1.6rem;
@@ -176,6 +193,12 @@ const contributions: { title: string; role: string; desc: string }[] = [
 				transform: translateY(-6px);
 				box-shadow: var(--shadow-lg);
 				border-color: var(--color-accent);
+			}
+			.work-card:hover h3 {
+				color: var(--color-accent-text);
+			}
+			.work-card h3 {
+				transition: color 0.2s ease;
 			}
 			.work-card .work-tag {
 				font-size: 0.72rem;
@@ -217,6 +240,8 @@ const contributions: { title: string; role: string; desc: string }[] = [
 				margin-top: 1.5rem;
 			}
 			.contrib-item {
+				text-decoration: none;
+				color: inherit;
 				display: grid;
 				grid-template-columns: 1fr;
 				gap: 0.25rem;
@@ -224,6 +249,12 @@ const contributions: { title: string; role: string; desc: string }[] = [
 				border-bottom: 1px solid var(--color-border);
 			}
 			.contrib-item:last-child { border-bottom: none; }
+			.contrib-item .contrib-title {
+				transition: color 0.2s ease;
+			}
+			.contrib-item:hover .contrib-title {
+				color: var(--color-accent-text);
+			}
 			.contrib-head {
 				display: flex;
 				flex-wrap: wrap;
@@ -326,15 +357,24 @@ const contributions: { title: string; role: string; desc: string }[] = [
 			</section>
 
 			<section class="about-section">
-				<h2>Selected work</h2>
+				<h2>Things I've built</h2>
 				<div class="work-grid">
-					{selectedWork.map((item) => (
-						<article class="work-card">
-							<span class="work-tag">{item.tag}</span>
-							<h3>{item.title}</h3>
-							<p>{item.desc}</p>
-						</article>
-					))}
+					{selectedWork.map((item) => {
+						const href = projectHref(item.id);
+						const external = href.startsWith('http');
+						return (
+							<a
+								class="work-card"
+								href={href}
+								target={external ? '_blank' : undefined}
+								rel={external ? 'noopener noreferrer' : undefined}
+							>
+								<span class="work-tag">{item.tag}</span>
+								<h3>{item.title}</h3>
+								<p>{item.desc}</p>
+							</a>
+						);
+					})}
 				</div>
 				<a class="see-all" href={url('/projects')}>See all projects &rarr;</a>
 			</section>
@@ -343,13 +383,13 @@ const contributions: { title: string; role: string; desc: string }[] = [
 				<h2>Writing &amp; open source</h2>
 				<div class="contrib-list">
 					{contributions.map((item) => (
-						<div class="contrib-item">
+						<a class="contrib-item" href={item.href} target="_blank" rel="noopener noreferrer">
 							<div class="contrib-head">
 								<span class="contrib-title">{item.title}</span>
 								<span class="contrib-role">{item.role}</span>
 							</div>
 							<p>{item.desc}</p>
-						</div>
+						</a>
 					))}
 				</div>
 			</section>

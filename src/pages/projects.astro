@@ -47,6 +47,7 @@ const primaryLink = (project: (typeof projects)[number]) => project.links[0];
 				margin-bottom: 4rem;
 			}
 			.project-card {
+				scroll-margin-top: 6.5rem;
 				position: relative;
 				display: flex;
 				flex-direction: column;
@@ -211,7 +212,7 @@ const primaryLink = (project: (typeof projects)[number]) => project.links[0];
 			
 			<div class="projects-grid">
 				{projects.length > 0 ? projects.map((project) => (
-					<article class="project-card">
+					<article class="project-card" id={project.id}>
 						<div class="project-image">
 							<img class="poster-dark" src={url(`/projects/${project.id}.png`)} alt={project.title} loading="lazy" />
 							<img class="poster-light" src={url(`/projects/${project.id}-light.png`)} alt={project.title} loading="lazy" />

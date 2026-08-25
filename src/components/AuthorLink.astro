@@ -1,5 +1,18 @@
 ---
+import { getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import authorsData from '../data/authors.json';
+
+// An avatar given as a bare filename refers to src/assets and gets optimised;
+// anything absolute or remote is passed through untouched.
+const assets = import.meta.glob<{ default: ImageMetadata }>('../assets/*.{jpg,jpeg,png,webp}', { eager: true });
+
+const resolveAvatar = async (avatar?: string) => {
+    if (!avatar || avatar.startsWith('/') || avatar.startsWith('http')) return avatar;
+    const asset = assets[`../assets/${avatar}`];
+    if (!asset) return avatar;
+    return (await getImage({ src: asset.default, width: 160, height: 160, format: 'webp' })).src;
+};
 
 interface Props {
   nameOrSlug: string;
@@ -22,11 +35,13 @@ if (!author && target) {
         return dbName.includes(target) || target.includes(dbName);
     });
 }
+
+const member = author ? { ...author, avatar: await resolveAvatar(author.avatar) } : null;
 ---
 
-{author ? (
-    <span class="author-link author-modal-trigger" data-member={JSON.stringify(author)} style="cursor: pointer;">
-        {author.name}
+{member ? (
+    <span class="author-link author-modal-trigger" data-member={JSON.stringify(member)} style="cursor: pointer;">
+        {member.name}
     </span>
 ) : (
     <span>{nameOrSlug.replace(/[{}]/g, '')}</span>
