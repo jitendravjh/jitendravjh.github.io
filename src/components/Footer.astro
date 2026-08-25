@@ -1,17 +1,14 @@
 ---
 const today = new Date();
 import {
-  CONTACT,
-  CV_URL,
   FOOTER_CREDIT,
+  INTRO,
   SITE_DESCRIPTION,
   SITE_TITLE,
   SOCIAL_LINKS,
 } from '../consts';
 import Search from './Search.astro';
 import { url } from '../utils/paths';
-
-const cvHref = CV_URL ? url(CV_URL) : null;
 
 // Font Awesome icons — kept in sync with the home page (src/pages/index.astro)
 // so the header, footer and body all share one consistent icon set.
@@ -39,36 +36,6 @@ const faIcon: Record<string, string> = {
         </div>
 
         <div class="footer-col">
-            <h4>Quick Links</h4>
-            <ul>
-                <li><a href={url('/')}>Home</a></li>
-                <li><a href={url('/blog')}>Blog</a></li>
-                <li><a href={url('/projects')}>Projects</a></li>
-                <li><a href={url('/about')}>About</a></li>
-                {cvHref && <li><a href={cvHref} data-resume-pdf={url('/resume/resume.pdf')}>Resume</a></li>}
-            </ul>
-        </div>
-
-        <div class="footer-col">
-            <h4>Contact</h4>
-            <address>
-                {CONTACT.organization}<br/>
-                {CONTACT.addressLines.map((line) => (
-                    <>
-                        {line}<br/>
-                    </>
-                ))}
-            </address>
-            <p style="margin-top: 1rem;">
-                {CONTACT.emails.map((email) => (
-                    <>
-                        <a href={`mailto:${email}`} style="text-decoration: underline;">{email}</a><br/>
-                    </>
-                ))}
-            </p>
-        </div>
-
-        <div class="footer-col">
             <h4>Connect</h4>
             <div class="social-links">
                 {SOCIAL_LINKS.map((link) => (
@@ -84,15 +51,14 @@ const faIcon: Record<string, string> = {
             </div>
         </div>
     </div>
-    <div class="footer-credit">
+    <div class="footer-credit-wrap">
+        <div class="credit-aura" aria-hidden="true" style={`background-image: url(${url(INTRO.image)})`}></div>
+        <div class="footer-credit">
         <p>
-            Made with <span class="heart" aria-label="love">&#10084;</span> by
+            Made with <span class="heart" aria-label="love">&#9825;</span> by
             <a href={FOOTER_CREDIT.designerUrl} target="_blank" rel="noopener noreferrer">{FOOTER_CREDIT.designerName}</a>
-            &middot; <a href={FOOTER_CREDIT.sourceUrl} target="_blank" rel="noopener noreferrer">{FOOTER_CREDIT.sourceLabel}</a>
         </p>
-        <p class="footer-attribution">
-            Based on <a href="https://github.com/shravanngoswamii/astro-scholar" target="_blank" rel="noopener noreferrer">Astro Scholar</a> design
-        </p>
+        </div>
     </div>
 </footer>
 
@@ -259,7 +225,7 @@ const faIcon: Record<string, string> = {
 	.site-footer {
 		background-color: var(--color-bg-offset);
 		color: var(--color-text-main);
-		padding: 4rem 1rem 0;
+		padding: 2.25rem 1rem 0;
         margin-top: auto;
         transition: background-color 0.3s ease;
         position: relative;
@@ -280,13 +246,13 @@ const faIcon: Record<string, string> = {
         max-width: var(--max-width);
         margin: 0 auto;
         display: grid;
-        grid-template-columns: 2fr 1fr 1fr 1fr;
-        gap: 3rem;
+        grid-template-columns: 2fr 1fr;
+        gap: 2rem;
     }
     .footer-col h3 {
         font-family: var(--font-serif);
         font-size: 1.5rem;
-        margin-bottom: 1rem;
+        margin-bottom: 0.4rem;
         color: var(--color-accent-text);
     }
     .footer-col h4 {
@@ -294,16 +260,8 @@ const faIcon: Record<string, string> = {
         font-size: 0.9rem;
         text-transform: uppercase;
         letter-spacing: 0.05em;
-        margin-bottom: 1.25rem;
+        margin-bottom: 0.7rem;
         color: var(--color-text-main);
-    }
-    .footer-col ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
-    .footer-col ul li {
-        margin-bottom: 0.75rem;
     }
     .footer-col a {
         color: var(--color-text-muted);
@@ -315,20 +273,14 @@ const faIcon: Record<string, string> = {
     }
     .brand-col p {
         font-size: 0.95rem;
-        line-height: 1.6;
+        line-height: 1.55;
         color: var(--color-text-muted);
-        margin-bottom: 1.5rem;
+        margin-bottom: 0.7rem;
     }
     .copyright {
         font-size: 0.85rem;
         color: var(--color-text-muted);
         line-height: 1.5;
-    }
-    address {
-        font-style: normal;
-        font-size: 0.95rem;
-        line-height: 1.6;
-        color: var(--color-text-muted);
     }
     .social-links {
         display: flex;
@@ -349,20 +301,13 @@ const faIcon: Record<string, string> = {
 
 	@media (max-width: 900px) {
 		.footer-content {
-            grid-template-columns: 1fr 1fr;
             gap: 2rem;
-        }
-        .brand-col {
-            grid-column: span 2;
         }
 	}
     @media (max-width: 600px) {
         .footer-content {
             grid-template-columns: 1fr;
             text-align: center;
-        }
-        .brand-col {
-            grid-column: span 1;
         }
         .social-links {
             justify-content: center;
@@ -458,15 +403,50 @@ const faIcon: Record<string, string> = {
         transform: translateY(-2px);
     }
 
-    /* Old-site footer bar: full-width black strip (light) / yellow strip (dark) */
+    /* Old-site footer bar: frosted black strip (light) / solid yellow strip (dark) */
+    .footer-credit-wrap {
+        position: relative;
+        margin: 1.75rem -1rem 0;
+    }
+    /* Same trick as the nav pill: the photo sits under the bar so the glass has
+       something to refract. It is never seen directly, only through the blur. */
+    .credit-aura {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: min(660px, 92%);
+        z-index: 0;
+        background-size: cover;
+        background-position: center 35%;
+        background-repeat: no-repeat;
+        filter: blur(9px) saturate(1.6);
+        opacity: 0.9;
+        pointer-events: none;
+        -webkit-mask-image: radial-gradient(72% 100% at 50% 50%, #000 0%, rgba(0, 0, 0, 0.5) 55%, transparent 86%);
+        mask-image: radial-gradient(72% 100% at 50% 50%, #000 0%, rgba(0, 0, 0, 0.5) 55%, transparent 86%);
+    }
     .footer-credit {
-        margin: 3rem -1rem 0;
+        position: relative;
+        z-index: 1;
         padding: 12px 1rem;
-        background-color: var(--color-footer-bg);
+        background-color: rgba(0, 0, 0, 0.62);
+        backdrop-filter: blur(18px) saturate(170%);
+        -webkit-backdrop-filter: blur(18px) saturate(170%);
         color: var(--color-footer-text);
         text-align: center;
         font-size: 0.95rem;
         line-height: 1.4;
+    }
+    /* Dark mode keeps the flat yellow strip — no glass, no photo. */
+    :global(html[data-theme='dark']) .credit-aura {
+        display: none;
+    }
+    :global(html[data-theme='dark']) .footer-credit {
+        background-color: var(--color-footer-bg);
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
     }
     .footer-credit p {
         margin: 0;
@@ -494,11 +474,6 @@ const faIcon: Record<string, string> = {
     :global(html[data-theme='dark']) .footer-credit a:hover {
         color: #000000;
         text-decoration: underline;
-    }
-    .footer-attribution {
-        margin-top: 0.35rem !important;
-        font-size: 0.8rem;
-        opacity: 0.75;
     }
     
     .author-link.author-modal-trigger {

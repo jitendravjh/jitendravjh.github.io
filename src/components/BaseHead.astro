@@ -58,24 +58,13 @@ const imageUrl = typeof image === 'string'
 			root.style.setProperty('background-color', 'var(--color-bg)');
 			root.style.colorScheme = dark ? 'dark' : 'light';
 		};
-		const systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
 		let saved = null;
 		try {
 			saved = localStorage.getItem('theme');
 		} catch {}
-		// An explicit choice always wins; otherwise follow the system.
+		// The visitor's own choice wins; everyone else starts in light, whatever the device prefers.
 		const isChoice = saved === 'dark' || saved === 'light';
-		paintTheme(isChoice ? saved : systemDark && systemDark.matches ? 'dark' : 'light');
-		// Keep following the system while the visitor has made no choice of their own.
-		if (systemDark && !isChoice) {
-			systemDark.addEventListener('change', (event) => {
-				let stored = null;
-				try {
-					stored = localStorage.getItem('theme');
-				} catch {}
-				if (stored !== 'dark' && stored !== 'light') paintTheme(event.matches ? 'dark' : 'light');
-			});
-		}
+		paintTheme(isChoice ? saved : 'light');
 		window.addEventListener('load', () => root.setAttribute('data-theme-ready', 'true'), { once: true });
 		window.__setPreferredTheme = paintTheme;
 	})();
@@ -85,7 +74,7 @@ const imageUrl = typeof image === 'string'
 	:root {
 		--color-bg: #ffffff;
 		--color-bg-offset: #f7f7f4;
-		--color-bg-header: rgba(255, 255, 255, 0.6);
+		--color-bg-header: rgba(255, 255, 255, 0.48);
 		--color-text-main: #000000;
 		--color-text-muted: #747474;
 		--color-accent: #08c225;
@@ -96,7 +85,7 @@ const imageUrl = typeof image === 'string'
 	[data-theme='dark'] {
 		--color-bg: #1a1a1a;
 		--color-bg-offset: #242424;
-		--color-bg-header: rgba(26, 26, 26, 0.6);
+		--color-bg-header: rgba(26, 26, 26, 0.48);
 		--color-text-main: #f1f1f1;
 		--color-text-muted: #b3b3b3;
 		--color-accent: #ffd523;
@@ -161,7 +150,7 @@ const imageUrl = typeof image === 'string'
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
 	rel="stylesheet"
-	href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap"
+	href="https://fonts.googleapis.com/css2?family=Fleur+De+Leah&family=Nunito:wght@400;500;600;700;800&display=swap"
 />
 
 <link rel="canonical" href={canonicalURL} />

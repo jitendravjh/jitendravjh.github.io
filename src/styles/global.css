@@ -4,11 +4,12 @@
 	/* Typography — Nunito, matching ente.com's rounded-geometric look (ente ships Gilroy/Nunito) */
 	--font-sans: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 	--font-serif: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+	--font-display: 'Fleur De Leah', 'Snell Roundhand', cursive;
 
 	/* --- LIGHT THEME (Default) --- */
 	--color-bg: #ffffff;
 	--color-bg-offset: #f7f7f4;
-	--color-bg-header: rgba(255, 255, 255, 0.6);
+	--color-bg-header: rgba(255, 255, 255, 0.48);
 	--color-text-main: #000000;
 	--color-text-muted: #747474;
 	/* Light theme: accent is GREEN (#08c225). Dark theme keeps the yellow #ffd523. */
@@ -39,7 +40,7 @@
 [data-theme='dark'] {
 	--color-bg: #1a1a1a;
 	--color-bg-offset: #242424;
-	--color-bg-header: rgba(26, 26, 26, 0.6);
+	--color-bg-header: rgba(26, 26, 26, 0.48);
 	--color-text-main: #f1f1f1;
 	--color-text-muted: #b3b3b3;
 	--color-accent: #ffd523;
@@ -422,8 +423,12 @@ a:hover {
 #intro h1 {
 	border-bottom: none;
 	display: block;
-	font-size: 2rem;
-	margin-bottom: 0.5rem;
+	font-family: var(--font-display);
+	font-weight: 400;
+	font-size: clamp(3.1rem, 7.2vw, 5rem);
+	line-height: 1.15;
+	letter-spacing: 0;
+	margin-bottom: 0.75rem;
 }
 
 /* "earth" highlight in the intro heading (ente-style green) */
@@ -433,7 +438,8 @@ a:hover {
 
 #intro .intro-thanks {
 	margin: 0 0 1rem;
-	font-size: 1.15rem;
+	font-family: var(--font-display);
+	font-size: 2rem;
 	color: var(--color-text-muted);
 }
 
