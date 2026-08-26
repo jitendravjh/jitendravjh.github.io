@@ -228,13 +228,13 @@
 \resumeItemListEnd
 
 \resumeProject
-  {SecureVault - Privacy Vault App \normalfont{\textit{}}}
-  {Tech Stack: Flutter, Dart, AES-256, Kotlin, Swift, Platform Channels}
-  {[\href{https://play.google.com/store/apps/details?id=com.shravangoswami.securevault}{\textcolor{darkblue}{Play Store }{\faGooglePlay}} $|$ \href{https://shravangoswami.com/SecureVault/}{\textcolor{darkblue}{Website }{\faGlobe}}]}
+  {Callback - Job Application Tracker \normalfont{\textit{}}}
+  {Tech Stack: React, TypeScript, Supabase, Postgres, Chrome MV3, Cloudflare Workers}
+  {{}[\href{https://callback.jitendravjh.in}{\textcolor{darkblue}{Live }{\faGlobe}}]}
   {}
 \resumeItemListStart
-  \item Built a privacy vault disguised as 4 utility apps (Calculator, Notes, Clock, MoodSpace) with AES-256 encryption, PBKDF2 key derivation, multi-vault system with panic password, auto-lock, and screenshot prevention.
-  \item Engineered native Platform Channels for dynamic app icon/name switching on Android and iOS Screen Time API integration; published on Google Play Store.
+  \item Built a job application tracker for Indian job boards: a Chrome side-panel extension clips postings from Naukri, LinkedIn, Internshala, Unstop and Instahyre, and a React web app tracks each application on a kanban board.
+  \item Layered extraction (JSON-LD, per-site adapters, page metadata) with per-field telemetry, plus form autofill that learns new question and answer pairs on submit; Postgres row-level security enforces per-user access.
 \resumeItemListEnd
 
 \resumeProject
@@ -248,13 +248,13 @@
 \resumeItemListEnd
 
 \resumeProject
-  {Callback - Job Application Tracker \normalfont{\textit{}}}
-  {Tech Stack: React, TypeScript, Supabase, Postgres, Chrome MV3, Cloudflare Workers}
-  {{}[\href{https://callback.jitendravjh.in}{\textcolor{darkblue}{Live }{\faGlobe}}]}
+  {SecureVault - Privacy Vault App \normalfont{\textit{}}}
+  {Tech Stack: Flutter, Dart, AES-256, Kotlin, Swift, Platform Channels}
+  {[\href{https://play.google.com/store/apps/details?id=com.shravangoswami.securevault}{\textcolor{darkblue}{Play Store }{\faGooglePlay}} $|$ \href{https://shravangoswami.com/SecureVault/}{\textcolor{darkblue}{Website }{\faGlobe}}]}
   {}
 \resumeItemListStart
-  \item Built a job application tracker for Indian job boards: a Chrome side-panel extension clips postings from Naukri, LinkedIn, Internshala, Unstop and Instahyre, and a React web app tracks each application on a kanban board.
-  \item Layered extraction (JSON-LD, per-site adapters, page metadata) with per-field telemetry, plus form autofill that learns new question and answer pairs on submit; Postgres row-level security enforces per-user access.
+  \item Built a privacy vault disguised as 4 utility apps (Calculator, Notes, Clock, MoodSpace) with AES-256 encryption, PBKDF2 key derivation, multi-vault system with panic password, auto-lock, and screenshot prevention.
+  \item Engineered native Platform Channels for dynamic app icon/name switching on Android and iOS Screen Time API integration; published on Google Play Store.
 \resumeItemListEnd
 
 \resumeProject
@@ -267,15 +267,6 @@
   \item Integrated EmailJS to automate order placement notifications and streamline direct customer communication.
 \resumeItemListEnd
 
-\resumeProject
-  {TvFlix - Discover Movies \& TV Shows}
-  {Tech Stack: Swift 5, SwiftUI, MVVM, TMDB REST API, Async/Await}
-  {}
-  {}
-\resumeItemListStart
-  \item Built an iOS app to discover movies and TV series with trending and top-rated sections, TMDB-powered search, wishlist support, trailers, and TV season episode details.
-\resumeItemListEnd
-
 \resumeSubHeadingListEnd
 
 % ------------------------------------------------------------------------------------
@@ -283,6 +274,34 @@
 % ------------------------------------------------------------------------------------
 \section{\textbf{Open-source Contribution}}
 \resumeSubHeadingListStart
+
+\resumeProject
+  {Map Projections \& Round-Trip Accuracy}
+  {JuliaEarth / CoordRefSystems.jl - GitHub \#362, \#363, \#364, \#365, \#367}
+  {{}[\href{https://github.com/JuliaEarth/CoordRefSystems.jl/pulls?q=is:pr+is:closed+author:jitendravjh}{\textcolor{darkblue}{GitHub }{\faGithub}}]}
+  {}
+\resumeItemListStart
+  \item Implemented the Stereographic projection covering the polar, equatorial and oblique aspects; validated against PROJ to a relative deviation of 4e-16 and against Snyder's worked examples.
+  \item Fixed round-trip failures across five projections, including a \texttt{DomainError} that crashed 28 of the library's 46 datums, and a cancellation near the antipode that cut the Float32 error by a factor of 50.
+\resumeItemListEnd
+
+\resumeProject
+  {Meshing, Grid Query \& Intersection Fixes}
+  {JuliaGeometry / Meshes.jl - GitHub \#1419, \#1421, \#1423}
+  {{}[\href{https://github.com/JuliaGeometry/Meshes.jl/pulls?q=is:pr+is:closed+author:jitendravjh}{\textcolor{darkblue}{GitHub }{\faGithub}}]}
+  {}
+\resumeItemListStart
+  \item Fixed NaN vertices when bridging a polygon whose hole shares a vertex with the outer ring, and a geodesic grid query that returned an empty range for every box; cross-checked against the Euclidean range over 1100 random boxes.
+\resumeItemListEnd
+
+\resumeProject
+  {Live Transcription \& Cache Fixes}
+  {Screenpipe - GitHub \#6450, \#6212, \#6157}
+  {{}[\href{https://github.com/screenpipe/screenpipe/pulls?q=is:pr+is:closed+author:jitendravjh}{\textcolor{darkblue}{GitHub }{\faGithub}}]}
+  {}
+\resumeItemListStart
+  \item Moved live meeting transcription off the audio ingest loop onto its own task behind a keep-latest mailbox in Rust, taking a two-minute meeting from 3,677 dropped audio frames to zero; also stabilised local Whisper language detection and fixed cache clearing that left transcripts on disk.
+\resumeItemListEnd
 
 \resumeProject
   {Adaptive Loss Functions \& Documentation Improvements}
@@ -345,7 +364,7 @@
   \resumeSubItem{Web Development:}
     {React.js, Tailwind CSS, REST APIs, Quarto, Astro, JavaScript, HTML, CSS, MySQL}
   \resumeSubItem{Programming Languages:}
-    {JavaScript, Dart, Python,}
+    {JavaScript, Dart, Python}
   \resumeSubItem{Design \& Creative Tools:}
     {Figma, Canva, Lightroom, DaVinci Resolve}
 \resumeHeadingSkillEnd
@@ -397,13 +416,13 @@
     \item \textbf{UI/UX Design:} Exploring modern design systems, typography, and micro-interactions
 \end{itemize}
 
-\vspace{5em}
+\vspace{3em}
 \begin{center}
     {\small\textcolor{graytext}{\rule{0.24\linewidth}{0.4pt}\hspace{0.7em}\textbf{Thank You}\hspace{0.7em}\rule{0.24\linewidth}{0.4pt}}}
 \end{center}
 
 \vfill
 \begin{center}
-    \footnotesize\textcolor{graytext}{Last Updated: July 25, 2026. The latest version can be found at \href{https://jitendravjh.in/resume/}{jitendravjh.in/resume}}
+    \footnotesize\textcolor{graytext}{Last Updated: August 26, 2026. The latest version can be found at \href{https://jitendravjh.in/resume/}{jitendravjh.in/resume}}
 \end{center}
 \end{document}

@@ -16,7 +16,7 @@ const projectHref = (id: string) => {
 };
 
 const description =
-	'Jitendra Verma — a Computer Science engineer and developer building mobile and web apps with Flutter, Swift, and modern web tech.';
+	'Jitendra Verma - a Computer Science engineer and developer building mobile and web apps with Flutter, Swift, and modern web tech.';
 
 const skillGroups: { label: string; items: string[] }[] = [
 	{ label: 'Mobile', items: ['Flutter', 'Dart', 'Swift', 'SwiftUI', 'Riverpod'] },
@@ -36,7 +36,7 @@ const selectedWork: { title: string; tag: string; desc: string; id: string }[] =
 		title: 'SecureVault',
 		id: 'securevault',
 		tag: 'Flutter · iOS / Android',
-		desc: 'A privacy vault disguised as everyday utility apps — AES-256 encryption plus native platform-channel tricks like dynamic app-icon switching.',
+		desc: 'A privacy vault disguised as everyday utility apps - AES-256 encryption plus native platform-channel tricks like dynamic app-icon switching.',
 	},
 	{
 		title: 'Reaktor',
@@ -54,10 +54,22 @@ const selectedWork: { title: string; tag: string; desc: string; id: string }[] =
 
 const contributions: { title: string; role: string; desc: string; href: string }[] = [
 	{
-		title: 'GeeksforGeeks',
-		href: 'https://www.geeksforgeeks.org/user/jitendravjh/',
-		role: 'Technical Content Writer',
-		desc: 'Installation and how-to guides focused on macOS and developer tooling.',
+		title: 'JuliaEarth · CoordRefSystems.jl',
+		href: 'https://github.com/JuliaEarth/CoordRefSystems.jl/pulls?q=is:pr+is:closed+author:jitendravjh',
+		role: 'Open-source contributor',
+		desc: 'Added the Stereographic projection, verified against PROJ, and fixed round-trip accuracy across five others.',
+	},
+	{
+		title: 'JuliaGeometry · Meshes.jl',
+		href: 'https://github.com/JuliaGeometry/Meshes.jl/pulls?q=is:pr+is:closed+author:jitendravjh',
+		role: 'Open-source contributor',
+		desc: 'Fixed meshing, geodesic grid and intersection bugs in the geometry library under the Julia geospatial stack.',
+	},
+	{
+		title: 'Screenpipe',
+		href: 'https://github.com/screenpipe/screenpipe/pulls?q=is:pr+is:closed+author:jitendravjh',
+		role: 'Open-source contributor',
+		desc: 'Fixed audio frame loss in live meeting transcription, and cache clearing that left transcripts on disk.',
 	},
 	{
 		title: 'SciML · NeuralPDE.jl',
@@ -322,7 +334,7 @@ const contributions: { title: string; role: string; desc: string; href: string }
 					<p class="about-intro">
 						I'm a Computer Science &amp; Engineering student at Uka Tarsadia University, Surat,
 						and a developer who likes turning ideas into shipped apps. I work across mobile and
-						web — Flutter &amp; Dart, Swift &amp; SwiftUI, and React, Next.js &amp; ASP.NET Core.
+						web - Flutter &amp; Dart, Swift &amp; SwiftUI, and React, Next.js &amp; ASP.NET Core.
 					</p>
 					<div class="about-cta">
 						<a class="btn" href={url(CV_URL)} data-resume-pdf={url('/resume/resume.pdf')}>View résumé</a>
@@ -335,7 +347,7 @@ const contributions: { title: string; role: string; desc: string; href: string }
 			<section class="about-section">
 				<h2>What I do</h2>
 				<p class="section-lead">
-					Most of my time goes into building products end to end — from the first sketch to the
+					Most of my time goes into building products end to end - from the first sketch to the
 					store listing. I care about clean architecture, thoughtful UX, and the small native
 					details that make an app feel right, whether that's encryption under the hood or an
 					interaction you barely notice but would miss if it were gone.
@@ -380,7 +392,7 @@ const contributions: { title: string; role: string; desc: string; href: string }
 			</section>
 
 			<section class="about-section">
-				<h2>Writing &amp; open source</h2>
+				<h2>Open Source Contributions</h2>
 				<div class="contrib-list">
 					{contributions.map((item) => (
 						<a class="contrib-item" href={item.href} target="_blank" rel="noopener noreferrer">
@@ -397,8 +409,9 @@ const contributions: { title: string; role: string; desc: string; href: string }
 			<section class="about-section">
 				<h2>Beyond the code</h2>
 				<p class="section-lead">
-					Outside of code I'm into design and creative tools — Figma, Canva, Lightroom, and
-					DaVinci Resolve. In 2024, my team was a finalist at the Smart India Hackathon.
+					Outside of code I'm into design and creative tools - Figma, Canva, Lightroom, and
+					DaVinci Resolve. I wrote some technical guides for GeeksforGeeks. In 2024, my team was
+					a finalist at the Smart India Hackathon.
 				</p>
 			</section>
 

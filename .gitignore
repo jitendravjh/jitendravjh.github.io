@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# Resume PDF is compiled by the deploy workflow, and locally by `npm run resume`
+public/resume/

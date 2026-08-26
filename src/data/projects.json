@@ -1,7 +1,7 @@
 [
   {
     "id": "synq",
-    "title": "Synq — Real-Time Video Calling App",
+    "title": "Synq - Real-Time Video Calling App",
     "description": "Real-time 1:1 and group (mesh) video calling on WebRTC, backed by a Node.js/Socket.IO signalling server with live presence, shareable call codes, and in-call chat over the WebRTC data channel. Finds its server on the LAN over mDNS with a public fallback, and relays through Cloudflare TURN when a direct path isn't possible.",
     "year": 2026,
     "status": "Live",
@@ -13,8 +13,79 @@
     ]
   },
   {
+    "id": "callback",
+    "title": "Callback - Job Application Tracker",
+    "description": "A job application tracker aimed at the Indian market, which US-built trackers like Teal and Huntr don't cover. A Chrome side-panel extension clips postings from Naukri, LinkedIn, Internshala, Unstop and Instahyre; a React web app tracks each one on a kanban board. Extraction falls through JSON-LD JobPosting, then per-site adapters, then page metadata, recording which strategy won each field so accuracy is measured rather than assumed. The panel also autofills application forms from a saved profile and learns new question and answer pairs on submit.",
+    "year": 2026,
+    "status": "Live",
+    "authors": ["jitendra-verma"],
+    "tech": "React, TypeScript, Supabase, Postgres RLS, Chrome MV3, TanStack Query, dnd-kit, Cloudflare Workers",
+    "links": [{ "label": "Live site", "href": "https://callback.jitendravjh.in" }]
+  },
+  {
+    "id": "reaktor",
+    "title": "Reaktor - Chain Reaction Strategy Game",
+    "description": "A multiplayer strategy game supporting 2-6 players across multiple board sizes, with dramatic chain-burst animations and real-time game-state management built on Riverpod.",
+    "year": 2025,
+    "status": "Released",
+    "authors": ["jitendra-verma"],
+    "tech": "Flutter, Dart, Riverpod, Custom Animations",
+    "links": [
+      {
+        "label": "Play Store",
+        "href": "https://play.google.com/store/apps/details?id=com.shravangoswami.reaktor"
+      },
+      { "label": "Website", "href": "https://thecodechaos.github.io/reaktor/" }
+    ]
+  },
+  {
+    "id": "coordrefsystems-contrib",
+    "title": "Map Projections - CoordRefSystems.jl",
+    "description": "Open-source contributions to JuliaEarth / CoordRefSystems.jl: added the Stereographic projection covering the polar, equatorial and oblique aspects, verified against PROJ to 4e-16 and against Snyder's worked examples, and registered the polar EPSG codes behind a stereo helper that derives the scale factor from a latitude of true scale. Also fixed round-trip accuracy across five projections, including a DomainError that crashed 28 of the library's 46 datums and a cancellation near the antipode that cut the Float32 error from 1.0° to 0.02°.",
+    "year": 2026,
+    "status": "Open Source",
+    "authors": ["jitendra-verma"],
+    "tech": "Julia, Geodesy, Map Projections, Numerical Analysis, PROJ",
+    "links": [
+      {
+        "label": "Pull requests",
+        "href": "https://github.com/JuliaEarth/CoordRefSystems.jl/pulls?q=is:pr+is:closed+author:jitendravjh"
+      }
+    ]
+  },
+  {
+    "id": "meshes-contrib",
+    "title": "Computational Geometry - Meshes.jl",
+    "description": "Open-source contributions to JuliaGeometry / Meshes.jl, the geometry library under the Julia geospatial stack: fixed NaN vertices when bridging a polygon whose hole shares a vertex with the outer ring, a geodesic grid query that returned an empty range for every box, and a stack overflow in line and box intersection. Earlier work added discretization for balls, cones and frusta, and centroid definitions for unbounded geometries.",
+    "year": 2026,
+    "status": "Open Source",
+    "authors": ["jitendra-verma"],
+    "tech": "Julia, Computational Geometry, Meshing, Spatial Indexing",
+    "links": [
+      {
+        "label": "Pull requests",
+        "href": "https://github.com/JuliaGeometry/Meshes.jl/pulls?q=is:pr+is:closed+author:jitendravjh"
+      }
+    ]
+  },
+  {
+    "id": "screenpipe-contrib",
+    "title": "Live Transcription & Cache Fixes - Screenpipe",
+    "description": "Open-source contributions to Screenpipe, a 24/7 screen and audio recorder built on Rust and Tauri. Moved live meeting transcription off the ingest loop onto its own task behind a keep-latest mailbox, so a slow transcriber no longer blocks ingestion and drops audio, taking a two-minute meeting from 3,677 dropped frames to zero. Also locked the local Whisper path to the first confident language detection instead of re-detecting every chunk, and made Clear Cache actually clear the timeline cache and its legacy IndexedDB store, which had been leaving transcripts on disk.",
+    "year": 2026,
+    "status": "Open Source",
+    "authors": ["jitendra-verma"],
+    "tech": "Rust, Tokio, Whisper, Tauri, TypeScript, React, Vitest",
+    "links": [
+      {
+        "label": "Pull requests",
+        "href": "https://github.com/screenpipe/screenpipe/pulls?q=is:pr+is:closed+author:jitendravjh"
+      }
+    ]
+  },
+  {
     "id": "securevault",
-    "title": "SecureVault — Privacy Vault App",
+    "title": "SecureVault - Privacy Vault App",
     "description": "A privacy vault disguised as four utility apps, with AES-256 encryption, a multi-vault system, panic password, auto-lock, and screenshot prevention. Uses native Platform Channels for dynamic app-icon switching and the iOS Screen Time API.",
     "year": 2025,
     "status": "Maintained",
@@ -29,50 +100,8 @@
     ]
   },
   {
-    "id": "reaktor",
-    "title": "Reaktor — Chain Reaction Strategy Game",
-    "description": "A multiplayer strategy game supporting 2–6 players across multiple board sizes, with dramatic chain-burst animations and real-time game-state management built on Riverpod.",
-    "year": 2025,
-    "status": "Released",
-    "authors": ["jitendra-verma"],
-    "tech": "Flutter, Dart, Riverpod, Custom Animations",
-    "links": [
-      { "label": "Website", "href": "https://thecodechaos.github.io/reaktor/" }
-    ]
-  },
-  {
-    "id": "callback",
-    "title": "Callback — Job Application Tracker",
-    "description": "A job application tracker aimed at the Indian market, which US-built trackers like Teal and Huntr don't cover. A Chrome side-panel extension clips postings from Naukri, LinkedIn, Internshala, Unstop and Instahyre; a React web app tracks each one on a kanban board. Extraction falls through JSON-LD JobPosting, then per-site adapters, then page metadata, recording which strategy won each field so accuracy is measured rather than assumed. The panel also autofills application forms from a saved profile and learns new question and answer pairs on submit.",
-    "year": 2026,
-    "status": "Live",
-    "authors": ["jitendra-verma"],
-    "tech": "React, TypeScript, Supabase, Postgres RLS, Chrome MV3, TanStack Query, dnd-kit, Cloudflare Workers",
-    "links": [{ "label": "Live site", "href": "https://callback.jitendravjh.in" }]
-  },
-  {
-    "id": "shiv-shakti-textile",
-    "title": "Shiv Shakti Textile — E-Commerce Website",
-    "description": "A responsive textile e-commerce platform with product browsing, EmailJS-powered order notifications, and streamlined customer communication.",
-    "year": 2025,
-    "status": "Live",
-    "authors": ["jitendra-verma"],
-    "tech": "Next.js, React, TypeScript, Tailwind CSS, EmailJS",
-    "links": [{ "label": "Live site", "href": "https://shivshaktitextile-online.vercel.app/" }]
-  },
-  {
-    "id": "tvflix",
-    "title": "TvFlix — Discover Movies & TV Shows",
-    "description": "An iOS app to discover movies and TV series with trending and top-rated sections, TMDB-powered search, wishlist support, trailers, and TV season episode details.",
-    "year": 2024,
-    "status": "Released",
-    "authors": ["jitendra-verma"],
-    "tech": "Swift 5, SwiftUI, MVVM, TMDB REST API, Async/Await",
-    "links": []
-  },
-  {
     "id": "neuralpde-contrib",
-    "title": "Adaptive Loss Functions — NeuralPDE.jl",
+    "title": "Adaptive Loss Functions - NeuralPDE.jl",
     "description": "Open-source contributions to SciML / NeuralPDE.jl: implemented new adaptive loss functions (SoftAdaptAdaptiveLoss and ReLOBRaLoAdaptiveLoss) and improved documentation for PINNRepresentation and PhysicsInformedNN.",
     "year": 2024,
     "status": "Open Source",
@@ -87,7 +116,7 @@
   },
   {
     "id": "turinglang-theme",
-    "title": "Theme System & Dark Mode — TuringLang",
+    "title": "Theme System & Dark Mode - TuringLang",
     "description": "Open-source contributions to TuringLang's documentation sites: implemented theme switching with customizable options and a dark theme with auto-detection, improving readability and performance.",
     "year": 2024,
     "status": "Open Source",
@@ -103,5 +132,25 @@
         "href": "https://github.com/TuringLang/turinglang.github.io/pulls?q=is:pr+is:closed+author:jitendravjh"
       }
     ]
+  },
+  {
+    "id": "shiv-shakti-textile",
+    "title": "Shiv Shakti Textile - E-Commerce Website",
+    "description": "A responsive textile e-commerce platform with product browsing, EmailJS-powered order notifications, and streamlined customer communication.",
+    "year": 2025,
+    "status": "Live",
+    "authors": ["jitendra-verma"],
+    "tech": "Next.js, React, TypeScript, Tailwind CSS, EmailJS",
+    "links": [{ "label": "Live site", "href": "https://shivshaktitextile-online.vercel.app/" }]
+  },
+  {
+    "id": "tvflix",
+    "title": "TvFlix - Discover Movies & TV Shows",
+    "description": "An iOS app to discover movies and TV series with trending and top-rated sections, TMDB-powered search, wishlist support, trailers, and TV season episode details.",
+    "year": 2024,
+    "status": "Released",
+    "authors": ["jitendra-verma"],
+    "tech": "Swift 5, SwiftUI, MVVM, TMDB REST API, Async/Await",
+    "links": []
   }
 ]
