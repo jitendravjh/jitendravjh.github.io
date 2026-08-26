@@ -22,8 +22,8 @@ jobs:
           root_file: main.tex
           latexmk_shell_escape: true
 
-      - name: Publish resume to public/resume/resume.pdf
-        run: mkdir -p public/resume && cp resume/main.pdf public/resume/resume.pdf
+      - name: Publish resume to public/resume.pdf
+        run: cp resume/main.pdf public/resume.pdf
 
       - name: Setup Node
         uses: actions/setup-node@v6
