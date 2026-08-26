@@ -75,4 +75,4 @@ There was an unexpected bonus. The computed value turned out to be **more accura
 
 The review was the most useful part. I went in thinking the question was "is this correct", and correct it was, verified to 4e-16. The question that actually mattered was "is this the right shape for the people who will use it", and that is not something a test suite can answer for you.
 
-Both the [EPSG registrations](https://github.com/JuliaEarth/CoordRefSystems.jl/pull/369) and an [Oblique Stereographic](https://github.com/JuliaEarth/CoordRefSystems.jl/pull/370) implementation, the variant that projects through a Gauss conformal sphere, are open at the time of writing. The [base projection](https://github.com/JuliaEarth/CoordRefSystems.jl/pull/367) is merged.
+The [base projection](https://github.com/JuliaEarth/CoordRefSystems.jl/pull/367) and the [EPSG registrations](https://github.com/JuliaEarth/CoordRefSystems.jl/pull/369) with the `stereo` helper are both merged. An [Oblique Stereographic](https://github.com/JuliaEarth/CoordRefSystems.jl/pull/370) implementation, the variant that projects through a Gauss conformal sphere, is still open at the time of writing.
