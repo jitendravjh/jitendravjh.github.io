@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
+import LiquidHeading from '../components/LiquidHeading.astro';
 import { CONTACT, CV_URL, INTRO, SOCIAL_LINKS } from '../consts';
 import { url } from '../utils/paths';
 import { profileImg } from '../utils/profileImage';
@@ -21,7 +22,7 @@ const socialIcons = SOCIAL_LINKS.filter((l) => l.icon !== 'email');
 
 <Base>
 	<section id="intro">
-		<h1 set:html={INTRO.heading.replace('earth', '<span class="earth-text">earth</span>')}></h1>
+		<LiquidHeading />
 		{INTRO.thanks && <p class="intro-thanks">{INTRO.thanks}</p>}
 		<Image src={profileImg} alt={INTRO.name} id="profile-pic" loading="eager" width={300} height={300} />
 		<p>{INTRO.greeting}</p>

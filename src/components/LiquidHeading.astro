@@ -1,0 +1,130 @@
+---
+import { INTRO } from '../consts';
+import { profileUrl } from '../utils/profileImage';
+
+// The photo is the same one the nav pill and footer bar blur underneath
+// themselves, so the heading extends a treatment the site already uses.
+const fill = await profileUrl(1200);
+---
+
+<div class="liquid" style={`--fill: url(${fill})`}>
+	<h1>{INTRO.heading}</h1>
+</div>
+
+<svg class="liquid-defs" aria-hidden="true" focusable="false" width="0" height="0">
+	<filter id="liquid-flow" x="-15%" y="-15%" width="130%" height="130%" color-interpolation-filters="sRGB">
+		<feTurbulence
+			id="liquid-noise"
+			type="fractalNoise"
+			baseFrequency="0.008 0.016"
+			numOctaves="2"
+			seed="4"
+			result="noise"
+		/>
+		<feDisplacementMap
+			id="liquid-disp"
+			in="SourceGraphic"
+			in2="noise"
+			scale="0"
+			xChannelSelector="R"
+			yChannelSelector="G"
+		/>
+	</filter>
+</svg>
+
+<style>
+	.liquid {
+		/* Tint tracks the theme accent so the photo reads as texture, not a face. */
+		--tint: rgba(8, 194, 37, 0.46);
+		position: relative;
+		filter: url(#liquid-flow);
+	}
+	:global(html[data-theme='dark']) .liquid {
+		--tint: rgba(255, 213, 35, 0.44);
+	}
+
+	/* #intro h1 in global.css is an ID rule, so match it and add the scope attribute. */
+	:global(#intro) h1 {
+		background-image: linear-gradient(var(--tint), var(--tint)), var(--fill);
+		background-size: cover;
+		background-position: center 32%;
+		background-repeat: no-repeat;
+		-webkit-background-clip: text;
+		background-clip: text;
+		color: transparent;
+		-webkit-text-fill-color: transparent;
+	}
+
+	/* No background-clip support: fall back to ordinary accent-coloured text. */
+	@supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+		:global(#intro) h1 {
+			background-image: none;
+			color: var(--color-accent-text);
+			-webkit-text-fill-color: currentColor;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.liquid {
+			filter: none;
+		}
+	}
+
+	.liquid-defs {
+		position: absolute;
+		width: 0;
+		height: 0;
+		pointer-events: none;
+	}
+</style>
+
+<script>
+	const wrap = document.querySelector<HTMLElement>('.liquid');
+	const disp = document.getElementById('liquid-disp');
+	const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+	if (wrap && disp && !reduced.matches) {
+		let strength = 0;
+		let target = 0;
+		let last: { x: number; y: number; t: number } | null = null;
+		let running = false;
+
+		const onMove = (e: PointerEvent) => {
+			const now = performance.now();
+			if (last) {
+				// Pointer speed in px/ms, capped so a fast flick cannot smear the
+				// heading into illegibility.
+				const dt = Math.max(8, now - last.t);
+				const speed = Math.hypot(e.clientX - last.x, e.clientY - last.y) / dt;
+				target = Math.min(26, speed * 14);
+			}
+			last = { x: e.clientX, y: e.clientY, t: now };
+			if (!running) {
+				running = true;
+				requestAnimationFrame(tick);
+			}
+		};
+
+		const tick = () => {
+			// Ease toward the target, then let the target fall away, so the
+			// distortion trails the pointer and settles back to crisp text.
+			strength += (target - strength) * 0.18;
+			target *= 0.9;
+			disp.setAttribute('scale', strength.toFixed(2));
+
+			if (strength > 0.05) {
+				requestAnimationFrame(tick);
+			} else {
+				disp.setAttribute('scale', '0');
+				strength = 0;
+				running = false;
+			}
+		};
+
+		wrap.addEventListener('pointermove', onMove);
+		wrap.addEventListener('pointerleave', () => {
+			target = 0;
+			last = null;
+		});
+	}
+</script>
