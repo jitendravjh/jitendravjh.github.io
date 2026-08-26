@@ -66,6 +66,10 @@
 html {
 	box-sizing: border-box;
 	scroll-behavior: smooth;
+	/* The nav pill is sticky while the photo aura behind it is fixed, so an
+	   overscroll bounce slides them apart and the blur shows past the pill.
+	   Disabling the bounce keeps the two locked together. */
+	overscroll-behavior-y: none;
 }
 
 /* Minimal Scrollbar for Browser and Modals */
