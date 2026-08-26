@@ -56,31 +56,31 @@ const contributions: { title: string; role: string; desc: string; href: string }
 	{
 		title: 'JuliaEarth · CoordRefSystems.jl',
 		href: 'https://github.com/JuliaEarth/CoordRefSystems.jl/pulls?q=is:pr+is:closed+author:jitendravjh',
-		role: 'Open-source contributor',
+		role: 'Contributor',
 		desc: 'Added the Stereographic projection, verified against PROJ, and fixed round-trip accuracy across five others.',
 	},
 	{
 		title: 'JuliaGeometry · Meshes.jl',
 		href: 'https://github.com/JuliaGeometry/Meshes.jl/pulls?q=is:pr+is:closed+author:jitendravjh',
-		role: 'Open-source contributor',
+		role: 'Contributor',
 		desc: 'Fixed meshing, geodesic grid and intersection bugs in the geometry library under the Julia geospatial stack.',
 	},
 	{
 		title: 'Screenpipe',
 		href: 'https://github.com/screenpipe/screenpipe/pulls?q=is:pr+is:closed+author:jitendravjh',
-		role: 'Open-source contributor',
+		role: 'Contributor',
 		desc: 'Fixed audio frame loss in live meeting transcription, and cache clearing that left transcripts on disk.',
 	},
 	{
 		title: 'SciML · NeuralPDE.jl',
 		href: 'https://github.com/SciML/NeuralPDE.jl/pulls?q=is:pr+is:closed+author:jitendravjh',
-		role: 'Open-source contributor',
+		role: 'Contributor',
 		desc: 'Contributed adaptive loss functions for physics-informed neural networks.',
 	},
 	{
 		title: 'TuringLang',
 		href: 'https://github.com/TuringLang/docs/pulls?q=is:pr+is:closed+author:jitendravjh',
-		role: 'Open-source contributor',
+		role: 'Contributor',
 		desc: 'Built a theme system with dark mode for the documentation sites.',
 	},
 ];
@@ -270,7 +270,7 @@ const contributions: { title: string; role: string; desc: string; href: string }
 			.contrib-head {
 				display: flex;
 				flex-wrap: wrap;
-				align-items: baseline;
+				align-items: center;
 				gap: 0.75rem;
 			}
 			.contrib-item .contrib-title {
@@ -279,9 +279,25 @@ const contributions: { title: string; role: string; desc: string; href: string }
 				font-weight: 700;
 				color: var(--color-text-main);
 			}
+			/* Same pill as the kind badge on the project posters: accent border,
+			   accent text on a 14% accent fill, scaled down for a list row. */
+			.contrib-list {
+				--badge-soft: rgba(8, 194, 37, 0.14);
+			}
+			:global(html[data-theme='dark']) .contrib-list {
+				--badge-soft: rgba(255, 213, 35, 0.14);
+			}
 			.contrib-item .contrib-role {
-				font-size: 0.8rem;
+				display: inline-flex;
+				align-items: center;
+				padding: 0.26rem 0.7rem;
+				background-color: var(--badge-soft);
+				border: 1.5px solid var(--color-accent);
+				border-radius: 999px;
+				font-size: 0.68rem;
 				font-weight: 700;
+				line-height: 1;
+				white-space: nowrap;
 				text-transform: uppercase;
 				letter-spacing: 0.06em;
 				color: var(--color-accent-text);
