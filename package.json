@@ -11,7 +11,9 @@
     "postbuild": "pagefind --site dist",
     "preview": "astro preview",
     "astro": "astro",
-    "resume": "cd resume && latexmk -pdf -interaction=nonstopmode main.tex && mkdir -p ../public/resume && cp main.pdf ../public/resume/resume.pdf"
+    "resume": "node scripts/resume.mjs",
+    "predev": "npm run resume",
+    "prebuild": "npm run resume"
   },
   "dependencies": {
     "@astrojs/mdx": "^5.0.3",

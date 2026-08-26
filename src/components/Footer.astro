@@ -51,7 +51,7 @@ const faIcon: Record<string, string> = {
 
         <div class="footer-col copyright-col">
             <div class="copyright">
-                &copy; {today.getFullYear()} {SITE_TITLE}. All rights reserved.
+                &copy; <span data-year>{today.getFullYear()}</span> {SITE_TITLE}. All rights reserved.
             </div>
         </div>
     </div>
@@ -83,6 +83,12 @@ const faIcon: Record<string, string> = {
 </dialog>
 
 <script>
+    // The year above is baked in at build time and the site only rebuilds on
+    // push, so correct it once on load rather than shipping a stale copyright.
+    for (const el of document.querySelectorAll('[data-year]')) {
+        el.textContent = String(new Date().getFullYear());
+    }
+
     const avatarPalette = [
         { bg: '#DCEBFF', fg: '#1D4ED8' },
         { bg: '#DFF7E2', fg: '#166534' },
