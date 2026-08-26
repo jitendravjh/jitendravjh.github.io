@@ -27,7 +27,7 @@ v = A == B ? (coordmean(inner) - A) : (B - A)
 
 There is a second half to it. The usual construction inserts two pairs of split points, but with a zero-length bridge those points coincide and come back as zero-area triangles, so a single pair is enough.
 
-The issue thread suggested routing around it with `Repair(10)`, which snaps nearby vertices together. That does clear the `NaN`, but it moves the outer ring by ten times the tolerance, so the vertices you put in are no longer the vertices you get out. For a meshing library that is a bad trade.
+The issue thread suggested routing around it with `Repair(10)`, which expands a polygon's outer rings. That does clear the `NaN`, but it moves the outer ring by ten times the tolerance, so the vertices you put in are no longer the vertices you get out. For a meshing library that is a bad trade.
 
 <div class="callout" data-callout="note">
   <p>Verified against <code>measure(poly)</code> over a sweep of hole sizes, corners and scales, 64 cases in total: no NaN and no area mismatch. One zero-area triangle survives at the pinch point, which is unavoidable, because that shared vertex has to appear twice in the bridged ring.</p>

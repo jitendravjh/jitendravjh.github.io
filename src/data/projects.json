@@ -41,7 +41,7 @@
   {
     "id": "coordrefsystems-contrib",
     "title": "Map Projections - CoordRefSystems.jl",
-    "description": "Open-source contributions to JuliaEarth / CoordRefSystems.jl: added the Stereographic projection covering the polar, equatorial and oblique aspects, verified against PROJ to 4e-16 and against Snyder's worked examples, and registered the polar EPSG codes behind a stereo helper that derives the scale factor from a latitude of true scale. Also fixed round-trip accuracy across five projections, including a DomainError that crashed 28 of the library's 46 datums and a cancellation near the antipode that cut the Float32 error from 1.0° to 0.02°.",
+    "description": "Open-source contributions to JuliaEarth / CoordRefSystems.jl: added the Stereographic projection covering the polar, equatorial and oblique aspects, verified against PROJ to 4e-16 and against Snyder's worked examples, and fixed round-trip accuracy across four projections, including a DomainError that crashed 28 of the library's 46 datums and a cancellation near the antipode that cut the Float32 error from 1.0° to 0.02°.",
     "year": 2026,
     "status": "Open Source",
     "authors": ["jitendra-verma"],
@@ -56,7 +56,7 @@
   {
     "id": "meshes-contrib",
     "title": "Computational Geometry - Meshes.jl",
-    "description": "Open-source contributions to JuliaGeometry / Meshes.jl, the geometry library under the Julia geospatial stack: fixed NaN vertices when bridging a polygon whose hole shares a vertex with the outer ring, a geodesic grid query that returned an empty range for every box, and a stack overflow in line and box intersection. Earlier work added discretization for balls, cones and frusta, and centroid definitions for unbounded geometries.",
+    "description": "Open-source contributions to JuliaGeometry / Meshes.jl, the geometry library under the Julia geospatial stack: fixed NaN vertices when bridging a polygon whose hole shares a vertex with the outer ring, and a geodesic grid query that returned an empty range for every box. Earlier work added discretization for balls, cones and frusta, and centroid definitions for unbounded geometries.",
     "year": 2026,
     "status": "Open Source",
     "authors": ["jitendra-verma"],

@@ -1,5 +1,5 @@
 ---
-title: 'Five Bugs Hiding Behind a Skip List'
+title: 'Four Bugs Hiding Behind a Skip List'
 description: 'Round-trip testing every map projection in CoordRefSystems.jl over the whole globe, and what the blanket skips in the test suite were quietly covering up.'
 pubDate: '2026-08-23'
 authors:
@@ -13,7 +13,7 @@ tags:
 
 Every map projection makes the same quiet promise: take a latitude and longitude, project it, convert it back, and you should land where you started. That is an invariant you can test everywhere, cheaply, without a reference implementation.
 
-[CoordRefSystems.jl](https://github.com/JuliaEarth/CoordRefSystems.jl) already had such a test, in `fwdbwd.jl`. It also had a list of projections it skipped. Those skips turned out to be five real bugs that nobody had filed.
+[CoordRefSystems.jl](https://github.com/JuliaEarth/CoordRefSystems.jl) already had such a test, in `fwdbwd.jl`. It also had a list of projections it skipped. Those skips turned out to be four real bugs that nobody had filed.
 
 ## Measuring the error honestly
 
@@ -94,4 +94,4 @@ Each of those is a property of the mathematics, not of the code. The old skips w
   <p><strong>Lesson learned:</strong> a skip in a test suite is a bug report nobody filed. If you cannot write down why a case is excluded in terms of the maths, it is excluded because it fails.</p>
 </div>
 
-All five fixes are merged: [#362](https://github.com/JuliaEarth/CoordRefSystems.jl/pull/362), [#363](https://github.com/JuliaEarth/CoordRefSystems.jl/pull/363), [#364](https://github.com/JuliaEarth/CoordRefSystems.jl/pull/364), [#365](https://github.com/JuliaEarth/CoordRefSystems.jl/pull/365) and [#366](https://github.com/JuliaEarth/CoordRefSystems.jl/pull/366).
+All four fixes are merged, along with a companion Albers round-trip test: [#362](https://github.com/JuliaEarth/CoordRefSystems.jl/pull/362), [#363](https://github.com/JuliaEarth/CoordRefSystems.jl/pull/363), [#364](https://github.com/JuliaEarth/CoordRefSystems.jl/pull/364), [#365](https://github.com/JuliaEarth/CoordRefSystems.jl/pull/365) and [#366](https://github.com/JuliaEarth/CoordRefSystems.jl/pull/366).
