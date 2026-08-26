@@ -1,7 +1,7 @@
-/* @jitendravjh portfolio theme — Nunito + #FFD523 over astro-scholar structure (ente.com-inspired nav) */
+/* @jitendravjh portfolio theme - Nunito + #FFD523 over astro-scholar structure (ente.com-inspired nav) */
 
 :root {
-	/* Typography — Nunito, matching ente.com's rounded-geometric look (ente ships Gilroy/Nunito) */
+	/* Typography - Nunito, matching ente.com's rounded-geometric look (ente ships Gilroy/Nunito) */
 	--font-sans: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 	--font-serif: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 	--font-display: 'Fleur De Leah', 'Snell Roundhand', cursive;
@@ -24,7 +24,7 @@
 	--color-footer-bg: #000000;
 	--color-footer-text: #ffffff;
 
-	/* Buttons — old-site: dark base, yellow hover */
+	/* Buttons - old-site: dark base, yellow hover */
 	--color-btn-bg: #000000;
 	--color-btn-text: #ffffff;
 
@@ -146,7 +146,7 @@ p {
 	color: var(--color-text-muted);
 }
 
-/* Links — old-site behavior: text-colored, yellow on hover */
+/* Links - old-site behavior: text-colored, yellow on hover */
 a {
 	color: var(--color-text-main);
 	text-decoration: none;
@@ -158,7 +158,7 @@ a:hover {
 	text-decoration: underline;
 }
 
-/* Buttons — old-site: dark base, yellow hover */
+/* Buttons - old-site: dark base, yellow hover */
 .btn {
 	display: inline-block;
 	background-color: var(--color-btn-bg);

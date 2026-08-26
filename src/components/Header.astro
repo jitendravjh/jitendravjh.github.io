@@ -9,7 +9,7 @@ import { profileImg, profileUrl } from '../utils/profileImage';
 const auraSrc = await profileUrl(240);
 
 const cvHref = CV_URL ? url(CV_URL) : null;
-// Touch devices (phones, iPads) get sent straight to the PDF — the in-page
+// Touch devices (phones, iPads) get sent straight to the PDF - the in-page
 // iframe viewer at /resume is unreliable there. The <script> below swaps the href.
 const cvPdfHref = cvHref ? url('/resume/resume.pdf') : null;
 ---
@@ -83,7 +83,7 @@ const cvPdfHref = cvHref ? url('/resume/resume.pdf') : null;
     });
 
     // On touch devices (phones + iPads) the in-page PDF viewer iframe is unreliable,
-    // so point every resume link (nav, footer, home, 404 — any a[data-resume-pdf])
+    // so point every resume link (nav, footer, home, 404 - any a[data-resume-pdf])
     // straight at the PDF instead of the /resume viewer. This runs on every page.
     // (pointer: coarse) catches phones/tablets; maxTouchPoints covers iPadOS desktop mode.
     const isTouchDevice =
@@ -97,7 +97,7 @@ const cvPdfHref = cvHref ? url('/resume/resume.pdf') : null;
 </script>
 
 <style>
-	/* Floating frosted "pill" nav — ente.com-inspired: space above, full side radius, glassy blur */
+	/* Floating frosted "pill" nav - ente.com-inspired: space above, full side radius, glassy blur */
 	header {
 		position: sticky;
 		top: 0.75rem;
@@ -176,7 +176,7 @@ const cvPdfHref = cvHref ? url('/resume/resume.pdf') : null;
 	}
 
 	/* The pill is frosted glass, but at the top of the page it has nothing behind it
-	   to refract. This lays the profile photo just under the bar — invisible on its own,
+	   to refract. This lays the profile photo just under the bar - invisible on its own,
 	   it only reads as the colour the glass picks up and blurs. */
 	.nav-aura {
 		position: fixed;
@@ -284,7 +284,7 @@ const cvPdfHref = cvHref ? url('/resume/resume.pdf') : null;
         width: 18px;
         height: 18px;
     }
-    /* Dark mode: invert the toggle — light pill + dark icon (mirrors the black pill in light mode).
+    /* Dark mode: invert the toggle - light pill + dark icon (mirrors the black pill in light mode).
        :global() keeps the html[data-theme] selector from being scoped away. */
     :global(html[data-theme="dark"]) #theme-toggle {
         background-color: var(--color-text-main);

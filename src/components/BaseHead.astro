@@ -70,7 +70,7 @@ const imageUrl = typeof image === 'string'
 	})();
 </script>
 <style is:inline>
-	/* CSS variables inline — available immediately, before any external CSS, to prevent FOUC */
+	/* CSS variables inline - available immediately, before any external CSS, to prevent FOUC */
 	:root {
 		--color-bg: #ffffff;
 		--color-bg-offset: #f7f7f4;
@@ -96,7 +96,7 @@ const imageUrl = typeof image === 'string'
 	html, body { min-height: 100%; background-color: var(--color-bg); }
 	html[data-theme='dark'], html[data-theme='dark'] body { background-color: var(--color-bg); color-scheme: dark; }
 	html[data-theme='light'], html[data-theme='light'] body { background-color: var(--color-bg); color-scheme: light; }
-	/* Critical header layout — prevents FOUC before component CSS loads */
+	/* Critical header layout - prevents FOUC before component CSS loads */
 	header {
 		position: sticky;
 		top: 0.75rem;

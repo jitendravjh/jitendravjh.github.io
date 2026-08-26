@@ -1,6 +1,6 @@
 ---
 title: 'No IP Address to Type: mDNS Discovery and a TURN Fallback'
-description: 'Making a self-hosted app connect with zero configuration — advertising a server over mDNS, falling back to a public one, and relaying through TURN when peers are on different networks.'
+description: 'Making a self-hosted app connect with zero configuration - advertising a server over mDNS, falling back to a public one, and relaying through TURN when peers are on different networks.'
 pubDate: '2026-07-08'
 authors:
   - jitendra-verma
@@ -11,7 +11,7 @@ tags:
   - flutter
 ---
 
-The least pleasant part of demoing a self-hosted app is the setup: *find your machine's LAN IP, rebuild the app with that IP baked in, hope nobody switches networks.* While building [Synq](https://jitendravjh.in/Synq/), a Flutter calling app with its own signalling server, I wanted the app to just connect — on Wi-Fi, on cellular, on the web, with nothing typed and no build flag.
+The least pleasant part of demoing a self-hosted app is the setup: *find your machine's LAN IP, rebuild the app with that IP baked in, hope nobody switches networks.* While building [Synq](https://jitendravjh.in/Synq/), a Flutter calling app with its own signalling server, I wanted the app to just connect - on Wi-Fi, on cellular, on the web, with nothing typed and no build flag.
 
 This post is the two-part answer: **mDNS** to find the server, and a **TURN relay** to reach the person you're calling.
 
@@ -19,7 +19,7 @@ This post is the two-part answer: **mDNS** to find the server, and a **TURN rela
 
 ### Advertising it
 
-mDNS (Bonjour, DNS-SD — same family) lets a service announce itself on the local network under a service type, so clients can browse for it instead of being told where it is. The server publishes itself when it starts listening:
+mDNS (Bonjour, DNS-SD - same family) lets a service announce itself on the local network under a service type, so clients can browse for it instead of being told where it is. The server publishes itself when it starts listening:
 
 ```js
 const bonjour = new Bonjour();
@@ -34,9 +34,9 @@ bonjour.publish({
 
 Two of those lines are scar tissue from real debugging.
 
-**`host: 'synq-signal.local'`** — by default `bonjour-service` advertises under `os.hostname()`, which makes the responder claim the Mac's own `.local` name. macOS's built-in responder already owns that name, notices the conflict, and *renames the machine* — `MacBook-2`, `-3`, `-4` — once per run. Publishing under a dedicated host name stops it.
+**`host: 'synq-signal.local'`** - by default `bonjour-service` advertises under `os.hostname()`, which makes the responder claim the Mac's own `.local` name. macOS's built-in responder already owns that name, notices the conflict, and *renames the machine* - `MacBook-2`, `-3`, `-4` - once per run. Publishing under a dedicated host name stops it.
 
-**`txt: { ip }`** — the client is supposed to resolve the SRV target to an address. But some routers hand the host a domain suffix (`.bbrouter` in my case) whose hostname has no mDNS A record, so resolution returns nothing at all. Carrying the IP in the TXT record sidesteps the whole resolution step.
+**`txt: { ip }`** - the client is supposed to resolve the SRV target to an address. But some routers hand the host a domain suffix (`.bbrouter` in my case) whose hostname has no mDNS A record, so resolution returns nothing at all. Carrying the IP in the TXT record sidesteps the whole resolution step.
 
 <div class="callout" data-callout="warning">
   <p><strong>Don't trust the hostname.</strong> A service can be discoverable and still unreachable if its advertised name doesn't resolve. Put an address in the TXT record and prefer it.</p>
@@ -68,7 +68,7 @@ static String? _urlFromServices(List<Service> services) {
 
 ### When there's nothing to find
 
-mDNS is a local-network protocol. On cellular, on a guest network with client isolation, or on the web — where the API doesn't exist at all — browsing will simply never succeed. The important thing is that it doesn't *fail* either; it just waits, and a UI that waits forever is indistinguishable from a broken one.
+mDNS is a local-network protocol. On cellular, on a guest network with client isolation, or on the web - where the API doesn't exist at all - browsing will simply never succeed. The important thing is that it doesn't *fail* either; it just waits, and a UI that waits forever is indistinguishable from a broken one.
 
 So discovery is a race between finding a LAN server and a timer:
 
@@ -82,11 +82,11 @@ if (AppConfig.fallbackUrl.isNotEmpty) {
 }
 ```
 
-mDNS is tried *first*, so at home the direct LAN server still wins and media stays on the local network. If nothing answers within five seconds, the app quietly uses the public server. The same `completeWith` guard handles mDNS being unavailable outright — a caught exception at startup completes with the fallback instead of surfacing an error nobody can act on.
+mDNS is tried *first*, so at home the direct LAN server still wins and media stays on the local network. If nothing answers within five seconds, the app quietly uses the public server. The same `completeWith` guard handles mDNS being unavailable outright - a caught exception at startup completes with the fallback instead of surfacing an error nobody can act on.
 
 ### Discovered isn't the same as reachable
 
-That timeout only covers the case where nothing answers. The subtler failure is a server that *does* answer and still can't be reached — most reliably reproduced by putting the host machine on phone tethering, where it happily advertises an address that no other client on that network can route to.
+That timeout only covers the case where nothing answers. The subtler failure is a server that *does* answer and still can't be reached - most reliably reproduced by putting the host machine on phone tethering, where it happily advertises an address that no other client on that network can route to.
 
 Discovery succeeds, the URL looks fine, and the socket then hangs forever. So there's a second, shorter fallback one layer down, at the point where the socket is actually opened:
 
@@ -107,7 +107,7 @@ if (fallback.isNotEmpty && url != fallback) {
 }
 ```
 
-The guard `url != fallback` keeps this from looping — there's no point timing out the public server in order to switch to the public server. The two identity checks make sure a stale timer can't tear down a socket that has since been replaced.
+The guard `url != fallback` keeps this from looping - there's no point timing out the public server in order to switch to the public server. The two identity checks make sure a stale timer can't tear down a socket that has since been replaced.
 
 <div class="callout" data-callout="note">
   <p>Two timeouts, two different questions. Five seconds asks <em>"did we find anything?"</em>; three seconds asks <em>"does what we found actually work?"</em> Discovery protocols answer only the first, and a service you can see but can't reach looks exactly like a hang.</p>
@@ -130,7 +130,7 @@ Finding the signalling server only gets the two peers introduced. The media stil
 
 ### STUN gets you most of the way
 
-Both peers are almost certainly behind NAT, with no public address of their own. STUN is a server that answers one question — *what address does the world see me on?* — and that's usually enough for two peers to punch a hole and connect directly. It's cheap: the traffic is a handful of packets, and the media never touches the server.
+Both peers are almost certainly behind NAT, with no public address of their own. STUN is a server that answers one question - *what address does the world see me on?* - and that's usually enough for two peers to punch a hole and connect directly. It's cheap: the traffic is a handful of packets, and the media never touches the server.
 
 Usually. **Symmetric NAT**, common on mobile carriers and corporate networks, allocates a different external port per destination, so the address STUN reports is useless to anyone else. No amount of retrying fixes it.
 
@@ -138,7 +138,7 @@ Usually. **Symmetric NAT**, common on mobile carriers and corporate networks, al
 
 TURN is a relay: both peers connect *out* to a server that forwards packets between them. It always works, because it only needs outbound connections. The cost is real bandwidth on someone's server, so it should be the last resort, never the default.
 
-WebRTC handles the preference for you — ICE gathers every candidate it can and picks the best working pair, direct beating relayed. You just have to supply both, in the right order:
+WebRTC handles the preference for you - ICE gathers every candidate it can and picks the best working pair, direct beating relayed. You just have to supply both, in the right order:
 
 ```js
 // Drop the :53 URLs (blocked/timeout-prone on many ISPs) and keep the
@@ -183,7 +183,7 @@ class IceServers {
   <p><strong>Refresh well before expiry.</strong> Credentials live 24 hours; the cache refreshes after 12. A credential that expires mid-call takes the relay down with it, and the cache is pre-warmed at startup so the first user to register doesn't pay for the round trip.</p>
 </div>
 
-That `if (servers.isEmpty) return;` matters more than it looks. If the TURN request fails — bad token, Cloudflare having a moment — the server falls back to returning STUN alone rather than an empty list, and the client keeps whatever it already had. A failed relay should degrade to "direct calls still work", not "no calls work".
+That `if (servers.isEmpty) return;` matters more than it looks. If the TURN request fails - bad token, Cloudflare having a moment - the server falls back to returning STUN alone rather than an empty list, and the client keeps whatever it already had. A failed relay should degrade to "direct calls still work", not "no calls work".
 
 ## Takeaways
 
@@ -192,4 +192,4 @@ That `if (servers.isEmpty) return;` matters more than it looks. If the TURN requ
 - STUN first, TURN as fallback, in that candidate order. Direct is free; relayed is not.
 - Mint TURN credentials server-side, keep them short-lived, refresh at half their lifetime, and always have a degraded path when the relay is unavailable.
 
-The whole thing is in [the Synq repo](https://github.com/jitendravjh/Synq) — `ServerDiscovery` on the client, and the `mintIceServers` block in `server/index.js`.
+The whole thing is in [the Synq repo](https://github.com/jitendravjh/Synq) - `ServerDiscovery` on the client, and the `mintIceServers` block in `server/index.js`.

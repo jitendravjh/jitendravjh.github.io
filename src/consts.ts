@@ -3,11 +3,11 @@
 
 export const SITE_TITLE = '@jitendravjh';
 export const SITE_DESCRIPTION =
-  'Jitendra Verma — a software developer building mobile and web apps with Flutter, Swift, and modern web tech.';
+  'Jitendra Verma - a software developer building mobile and web apps with Flutter, Swift, and modern web tech.';
 
 export const SITE_URL = 'https://jitendravjh.in';
 
-// Resume / CV — points to the in-site resume viewer page.
+// Resume / CV - points to the in-site resume viewer page.
 export const CV_URL = '/resume';
 
 // GitHub profile (shown in the header).

@@ -1,6 +1,6 @@
 ---
 title: 'Adaptive Loss Functions for PINNs: My NeuralPDE.jl Contribution'
-description: 'Contributing SoftAdapt and ReLoBRaLo adaptive loss weighting to SciML/NeuralPDE.jl — and what adaptive weighting actually does for physics-informed neural networks.'
+description: 'Contributing SoftAdapt and ReLoBRaLo adaptive loss weighting to SciML/NeuralPDE.jl - and what adaptive weighting actually does for physics-informed neural networks.'
 pubDate: '2024-11-18'
 authors:
   - jitendra-verma
@@ -15,7 +15,7 @@ One of my favourite open-source contributions was adding two **adaptive loss fun
 
 ## The multi-objective problem in PINNs
 
-A physics-informed neural network (PINN) minimises a loss that is really a *sum* of competing terms — the PDE residual, the boundary conditions, and the initial conditions:
+A physics-informed neural network (PINN) minimises a loss that is really a *sum* of competing terms - the PDE residual, the boundary conditions, and the initial conditions:
 
 $$
 \mathcal{L}(\theta) = \lambda_r \mathcal{L}_{r}(\theta) + \lambda_b \mathcal{L}_{b}(\theta) + \lambda_i \mathcal{L}_{i}(\theta)
@@ -45,7 +45,7 @@ $$
 \hat{\lambda}_k^{(n)} = m\,\hat{\lambda}_k^{(n-1)} + (1 - m)\,\lambda_k^{(n)}
 $$
 
-where $m$ is an exponential-moving-average momentum. In NeuralPDE the call site stays clean — you just pass the adaptive loss into the discretization:
+where $m$ is an exponential-moving-average momentum. In NeuralPDE the call site stays clean - you just pass the adaptive loss into the discretization:
 
 ```julia
 adaptive_loss = ReLOBRaLoAdaptiveLoss(100; α = 0.999, ρ = 0.999)
@@ -63,7 +63,7 @@ discretization = PhysicsInformedNN(
 - Refreshed CI badges in the README.
 
 <div class="callout" data-callout="tip">
-  <p><strong>Lesson learned:</strong> reading a mature codebase's existing abstractions before writing code is most of the work. The interface was already there — I just had to fit into it.</p>
+  <p><strong>Lesson learned:</strong> reading a mature codebase's existing abstractions before writing code is most of the work. The interface was already there - I just had to fit into it.</p>
 </div>
 
 Contributing to SciML taught me more about both Julia and numerical ML than any tutorial could. If you're nervous about a first PR to a big project: start with the docstrings nobody else wants to write.

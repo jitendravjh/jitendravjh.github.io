@@ -1,6 +1,6 @@
 ---
 title: 'Building Synq: WebRTC Calling in Flutter, from 1:1 to Mesh'
-description: 'How I built real-time video calling in Flutter — a sealed signalling protocol, a call state machine that avoids glare, and a mesh that scales the same code to a group.'
+description: 'How I built real-time video calling in Flutter - a sealed signalling protocol, a call state machine that avoids glare, and a mesh that scales the same code to a group.'
 pubDate: '2026-06-24'
 authors:
   - jitendra-verma
@@ -11,7 +11,7 @@ tags:
   - mobile
 ---
 
-[Synq](https://jitendravjh.in/Synq/) is a Flutter app for real-time voice and video calls — 1:1 and small groups — built directly on WebRTC with a small Node.js and Socket.IO server doing the signalling. This post covers the three decisions that shaped it: how signalling messages are typed, how a call's lifecycle is modelled, and how the same code stretches from a single call to a group mesh.
+[Synq](https://jitendravjh.in/Synq/) is a Flutter app for real-time voice and video calls - 1:1 and small groups - built directly on WebRTC with a small Node.js and Socket.IO server doing the signalling. This post covers the three decisions that shaped it: how signalling messages are typed, how a call's lifecycle is modelled, and how the same code stretches from a single call to a group mesh.
 
 ## WebRTC does the media; you still write the introduction
 
@@ -27,7 +27,7 @@ That exchange is **signalling**, and it's entirely yours to build. In Synq it's 
 | caller ↔ callee | `call-offer`, `call-answer`, `call-decline` | `{ from, to, sdp? }` |
 | both | `ice-candidate`, `call-end` | `{ from, to, ... }` |
 
-The server assigns each connected user a short **call code**, which doubles as the routing key. A client sends it back when it reconnects so it keeps the same identity — and anyone can dial anyone by typing it.
+The server assigns each connected user a short **call code**, which doubles as the routing key. A client sends it back when it reconnects so it keeps the same identity - and anyone can dial anyone by typing it.
 
 ## One sealed type for the whole protocol
 
@@ -60,7 +60,7 @@ sealed class SignalMessage with _$SignalMessage {
 }
 ```
 
-All the JSON lives in one `SignalCodec` that translates between a `SignalMessage` and an `(event, payload)` pair. Because the union is sealed, `switch` over it is exhaustive — adding a variant makes the compiler point at every place that now needs to handle it:
+All the JSON lives in one `SignalCodec` that translates between a `SignalMessage` and an `(event, payload)` pair. Because the union is sealed, `switch` over it is exhaustive - adding a variant makes the compiler point at every place that now needs to handle it:
 
 ```dart
 ({String event, Map<String, dynamic> payload}) encode(SignalMessage message) {
@@ -82,7 +82,7 @@ The nice side effect: the codec is a pure function, so the entire protocol is un
 
 ## A call is a state machine, not a pile of booleans
 
-Early on I tried tracking a call with flags — `isRinging`, `isConnected`, `hasRemoteStream`. It falls apart quickly, because those flags can express states that don't exist (ringing *and* connected) and the UI has to guess which combination it's looking at.
+Early on I tried tracking a call with flags - `isRinging`, `isConnected`, `hasRemoteStream`. It falls apart quickly, because those flags can express states that don't exist (ringing *and* connected) and the UI has to guess which combination it's looking at.
 
 A sealed state makes the illegal combinations unrepresentable:
 
@@ -104,11 +104,11 @@ sealed class CallState with _$CallState {
 
 The flow is `idle → outgoing | incoming → connecting → connected → ended | failed`. `CallController` owns it and is the single source of truth; the router picks the screen from the state rather than pushing routes imperatively, so an incoming call can't land you on two screens at once.
 
-Notice that `incoming` carries the `offerSdp` with it. The offer arrives *before* the user has accepted anything, so it has to be parked somewhere until they tap accept — putting it inside the state means it cannot get lost, and there's no separate "pending offer" variable to keep in sync.
+Notice that `incoming` carries the `offerSdp` with it. The offer arrives *before* the user has accepted anything, so it has to be parked somewhere until they tap accept - putting it inside the state means it cannot get lost, and there's no separate "pending offer" variable to keep in sync.
 
 ## Glare: when both sides offer at once
 
-In a 1:1 call the rule is simple — the caller always creates the offer, the callee always answers. That sidesteps **glare**, the situation where both peers send an offer simultaneously and each receives one while already waiting on its own.
+In a 1:1 call the rule is simple - the caller always creates the offer, the callee always answers. That sidesteps **glare**, the situation where both peers send an offer simultaneously and each receives one while already waiting on its own.
 
 Groups don't get that for free. In a mesh every participant has to connect to every other participant, and there is no natural "caller". When two people join at the same moment, both would try to offer to the other.
 
@@ -122,7 +122,7 @@ static bool shouldOffer(String selfId, String peerId) =>
     selfId.compareTo(peerId) < 0;
 ```
 
-Both peers compute the same comparison over the same two ids and reach opposite conclusions — exactly one offers, the other waits. No coordination round-trip, no server involvement, no tie to break.
+Both peers compute the same comparison over the same two ids and reach opposite conclusions - exactly one offers, the other waits. No coordination round-trip, no server involvement, no tie to break.
 
 <div class="callout" data-callout="note">
   <p>The peer connection is created up front on <em>both</em> sides, offerer or not. ICE candidates can arrive before the offer does, and they need somewhere to go.</p>
@@ -132,7 +132,7 @@ Both peers compute the same comparison over the same two ids and reach opposite 
 
 A mesh means one peer connection per pair of participants. It's the simplest topology that needs no media server: everyone sends their stream directly to everyone else. The cost is that it grows quadratically, which is fine for the small meetings Synq targets and would not be fine for fifty people.
 
-Joining works out to a short loop — for each existing peer, create the link, then offer if the rule says you're the offerer:
+Joining works out to a short loop - for each existing peer, create the link, then offer if the rule says you're the offerer:
 
 ```dart
 Future<void> _connectToPeer(String peerId) async {
@@ -157,7 +157,7 @@ Future<void> _connectToPeer(String peerId) async {
 }
 ```
 
-Those repeated `hasPeer` checks look paranoid, and they are — deliberately. Every `await` is a point where the peer can leave the meeting, and negotiating with a connection that has already been torn down is one of the easier ways to get a hang or a crash in WebRTC code.
+Those repeated `hasPeer` checks look paranoid, and they are - deliberately. Every `await` is a point where the peer can leave the meeting, and negotiating with a connection that has already been torn down is one of the easier ways to get a hang or a crash in WebRTC code.
 
 ## Chat over the data channel
 
@@ -175,7 +175,7 @@ static String encodeMediaState({
 
 Two benefits fall out. The chat survives a brief socket drop, because it never depended on the socket. And "their camera is off" arrives on the same path as the video itself, so the placeholder appears in step with the stream rather than a beat behind it.
 
-Group chat is relayed by the server instead — a data channel per pair would mean sending each message N times. The server stamps the real sender onto every relayed message, so a client can't claim to be someone else.
+Group chat is relayed by the server instead - a data channel per pair would mean sending each message N times. The server stamps the real sender onto every relayed message, so a client can't claim to be someone else.
 
 ## Layers, so it can be tested
 
@@ -187,7 +187,7 @@ The app is one-directional: presentation uses application, application uses data
 | application | controllers (state and logic) | `CallController`, `MeetingController` |
 | data | services and models | `SignalingService`, `WebRtcService`, `MeshService` |
 
-The part that pays for itself is that services sit behind interfaces — `WebRtcEngine` and `SignalingTransport` — and are injected with Riverpod. The call state machine can then be tested against fakes, no camera and no network:
+The part that pays for itself is that services sit behind interfaces - `WebRtcEngine` and `SignalingTransport` - and are injected with Riverpod. The call state machine can then be tested against fakes, no camera and no network:
 
 ```
 test/application/call/call_controller_test.dart
@@ -196,11 +196,11 @@ test/data/signaling/signal_codec_test.dart
 test/data/webrtc/data_channel_codec_test.dart
 ```
 
-Those are the pieces that break in ways you can't see — a codec that drops a field, a glare rule that gets inverted. Testing them on the desk beats discovering it with two phones and a colleague on the other end.
+Those are the pieces that break in ways you can't see - a codec that drops a field, a glare rule that gets inverted. Testing them on the desk beats discovering it with two phones and a colleague on the other end.
 
 ## Takeaways
 
-- Signalling is your problem, not WebRTC's. Give it one typed, sealed representation and one codec, and keep the codec total — never let bad input throw.
+- Signalling is your problem, not WebRTC's. Give it one typed, sealed representation and one codec, and keep the codec total - never let bad input throw.
 - Model a call as a state machine. Sealed states delete whole categories of bug, and carrying the offer SDP inside `incoming` means one less thing to keep in sync.
 - Glare needs a rule both sides can compute alone. Lexicographic id comparison is enough and costs nothing.
 - Re-check your invariants after every `await`. Peers leave mid-negotiation.
