@@ -6,7 +6,9 @@ import { SITE_TITLE } from '../consts';
 import projectsData from '../data/projects.json';
 import { url } from '../utils/paths';
 
-const projects = projectsData.sort((a, b) => b.year - a.year);
+// Ordered by impact rather than by date: the data file is curated, most
+// significant first, so the strongest work leads regardless of its year.
+const projects = projectsData;
 
 const primaryLink = (project: (typeof projects)[number]) => project.links[0];
 ---
@@ -55,8 +57,14 @@ const primaryLink = (project: (typeof projects)[number]) => project.links[0];
 				border: 1px solid var(--color-border);
 				border-radius: 16px;
 				overflow: hidden;
-				transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-				box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+				transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, border-color 0.2s ease-out;
+				--card-shadow: rgba(72, 78, 85, 0.6);
+				box-shadow: 0 1px 1px var(--card-shadow);
+			}
+			/* rgb(72, 78, 85) is lighter than the dark background, so it reads as a
+			   halo rather than a shadow there. */
+			:global(html[data-theme='dark']) .project-card {
+				--card-shadow: rgba(0, 0, 0, 0.6);
 			}
 			/* The title link is stretched over the whole card, so clicking
 			   anywhere opens the primary link and also triggers the title hover. */
@@ -66,12 +74,9 @@ const primaryLink = (project: (typeof projects)[number]) => project.links[0];
 				inset: 0;
 				z-index: 1;
 			}
-			.project-badge {
-				pointer-events: none;
-			}
 			.project-card:hover {
-				transform: translateY(-6px);
-				box-shadow: var(--shadow-lg);
+				transform: translateY(-15px);
+				box-shadow: 0 20px 40px var(--card-shadow);
 				border-color: var(--color-accent);
 			}
 			.project-image {
@@ -84,40 +89,12 @@ const primaryLink = (project: (typeof projects)[number]) => project.links[0];
 				width: 100%;
 				height: 100%;
 				object-fit: cover;
-				transition: transform 0.6s ease;
-			}
-			.project-card:hover .project-image img {
-				transform: scale(1.05);
-			}
-			.project-badge {
-				position: absolute;
-				top: 1rem;
-				right: 1rem;
-				padding: 0.35rem 0.8rem;
-				background-color: var(--color-bg-header);
-				color: var(--color-text-main);
-				font-size: 0.7rem;
-				font-weight: 700;
-				text-transform: uppercase;
-				letter-spacing: 0.1em;
-				border-radius: 20px;
-				backdrop-filter: blur(8px);
-				box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-				z-index: 10;
 			}
 			.project-content-wrapper {
 				display: flex;
 				flex-direction: column;
 				padding: 1.75rem;
 				flex: 1;
-			}
-			.project-year {
-				font-size: 0.75rem;
-				color: var(--color-accent-text);
-				font-weight: 700;
-				text-transform: uppercase;
-				letter-spacing: 0.1em;
-				margin-bottom: 0.5rem;
 			}
 			.project-card h3 {
 				font-family: var(--font-serif);
@@ -207,29 +184,25 @@ const primaryLink = (project: (typeof projects)[number]) => project.links[0];
 		<main class="projects-section">
 			<div class="projects-hero">
 				<h1>Projects</h1>
-				<p>Apps, games, and open-source work I've built — across Flutter, Swift, and the web.</p>
+				<p>Apps, games, and open-source work I've built - across Flutter, Swift, and the web.</p>
 			</div>
 			
 			<div class="projects-grid">
 				{projects.length > 0 ? projects.map((project) => (
 					<article class="project-card" id={project.id}>
 						<div class="project-image">
-							<img class="poster-dark" src={url(`/projects/${project.id}.png`)} alt={project.title} loading="lazy" />
-							<img class="poster-light" src={url(`/projects/${project.id}-light.png`)} alt={project.title} loading="lazy" />
-							<span class="project-badge">{project.status}</span>
+							<img class="poster-dark" src={url(`/projects/${project.id}.png`)} alt={`${project.title} - ${project.status}`} loading="lazy" />
+							<img class="poster-light" src={url(`/projects/${project.id}-light.png`)} alt={`${project.title} - ${project.status}`} loading="lazy" />
 						</div>
 
 						<div class="project-content-wrapper">
-							<div class="project-header">
-								<span class="project-year">{project.year > 0 ? project.year : 'Classical'}</span>
-								<h3>
-									{primaryLink(project) ? (
-										<a href={primaryLink(project).href} target="_blank">{project.title}</a>
-									) : (
-										project.title
-									)}
-								</h3>
-							</div>
+							<h3>
+								{primaryLink(project) ? (
+									<a href={primaryLink(project).href} target="_blank" rel="noopener noreferrer">{project.title}</a>
+								) : (
+									project.title
+								)}
+							</h3>
 
 							<p class="project-description">{project.description}</p>
 
