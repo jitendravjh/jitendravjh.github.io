@@ -279,20 +279,25 @@ const contributions: { title: string; role: string; desc: string; href: string }
 				font-weight: 700;
 				color: var(--color-text-main);
 			}
-			/* Same pill as the kind badge on the project posters: accent border,
-			   accent text on a 14% accent fill, scaled down for a list row. */
+			/* Same neutral pill as the destination badge on the project posters.
+			   The poster sits on a dark ground, so its exact values are used in
+			   dark mode and inverted for light. */
 			.contrib-list {
-				--badge-soft: rgba(8, 194, 37, 0.14);
+				--badge-fill: rgba(0, 0, 0, 0.05);
+				--badge-line: rgba(0, 0, 0, 0.2);
+				--badge-ink: var(--color-text-muted);
 			}
 			:global(html[data-theme='dark']) .contrib-list {
-				--badge-soft: rgba(255, 213, 35, 0.14);
+				--badge-fill: rgba(255, 255, 255, 0.08);
+				--badge-line: rgba(255, 255, 255, 0.28);
+				--badge-ink: #e8e8e8;
 			}
 			.contrib-item .contrib-role {
 				display: inline-flex;
 				align-items: center;
-				padding: 0.16rem 0.42rem;
-				background-color: var(--badge-soft);
-				border: 1px solid var(--color-accent);
+				padding: 0.2rem 0.42rem 0.15rem;
+				background-color: var(--badge-fill);
+				border: 1px solid var(--badge-line);
 				border-radius: 999px;
 				font-size: 0.41rem;
 				font-weight: 700;
@@ -300,7 +305,7 @@ const contributions: { title: string; role: string; desc: string; href: string }
 				white-space: nowrap;
 				text-transform: uppercase;
 				letter-spacing: 0.06em;
-				color: var(--color-accent-text);
+				color: var(--badge-ink);
 			}
 			.contrib-item p {
 				margin: 0;
