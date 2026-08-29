@@ -49,7 +49,7 @@
     "links": [
       {
         "label": "Pull requests",
-        "href": "https://github.com/JuliaEarth/CoordRefSystems.jl/pulls?q=is:pr+is:closed+author:jitendravjh"
+        "href": "https://github.com/JuliaEarth/CoordRefSystems.jl/pulls?q=author:jitendravjh"
       }
     ]
   },
@@ -64,7 +64,7 @@
     "links": [
       {
         "label": "Pull requests",
-        "href": "https://github.com/JuliaGeometry/Meshes.jl/pulls?q=is:pr+is:closed+author:jitendravjh"
+        "href": "https://github.com/JuliaGeometry/Meshes.jl/pulls?q=author:jitendravjh"
       }
     ]
   },
@@ -79,7 +79,7 @@
     "links": [
       {
         "label": "Pull requests",
-        "href": "https://github.com/screenpipe/screenpipe/pulls?q=is:pr+is:closed+author:jitendravjh"
+        "href": "https://github.com/screenpipe/screenpipe/pulls?q=author:jitendravjh"
       }
     ]
   },
@@ -110,7 +110,7 @@
     "links": [
       {
         "label": "Pull requests",
-        "href": "https://github.com/SciML/NeuralPDE.jl/pulls?q=is:pr+is:closed+author:jitendravjh"
+        "href": "https://github.com/SciML/NeuralPDE.jl/pulls?q=author:jitendravjh"
       }
     ]
   },
@@ -125,11 +125,11 @@
     "links": [
       {
         "label": "Docs PRs",
-        "href": "https://github.com/TuringLang/docs/pulls?q=is:pr+is:closed+author:jitendravjh"
+        "href": "https://github.com/TuringLang/docs/pulls?q=author:jitendravjh"
       },
       {
         "label": "Website PRs",
-        "href": "https://github.com/TuringLang/turinglang.github.io/pulls?q=is:pr+is:closed+author:jitendravjh"
+        "href": "https://github.com/TuringLang/turinglang.github.io/pulls?q=author:jitendravjh"
       }
     ]
   },
