@@ -9,6 +9,7 @@ export const SITE_URL = 'https://jitendravjh.in';
 
 // Resume / CV - points to the in-site resume viewer page.
 export const CV_URL = '/resume';
+export const CV_PDF = '/resume.pdf';
 
 // GitHub profile (shown in the header).
 export const GITHUB_PROFILE = 'https://github.com/jitendravjh';

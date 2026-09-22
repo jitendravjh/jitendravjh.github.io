@@ -1,4 +1,4 @@
-# LaTeX build artifacts (the compiled PDF is published to ../public/resume/resume.pdf)
+# LaTeX build artifacts (the compiled PDF is published to ../public/resume.pdf)
 *.aux
 *.log
 *.out

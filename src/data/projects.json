@@ -1,5 +1,18 @@
 [
   {
+    "id": "ghdeck",
+    "title": "ghdeck - GitHub Terminal Dashboard",
+    "description": "All your GitHub PRs and issues in one terminal list, newest first, with the status of each on its row: conflicting, changes requested, CI failing, or waiting on your review. One GraphQL query fetches PRs and issues already interleaved and sorted, so a full sync of 130 items costs about 18 of the 5,000 hourly rate-limit points, and notifications are polled with If-Modified-Since so a quiet minute is free. A SQLite cache opens it instantly while a sync runs in the background, bot comments collapse to one line, and pressing u shows anyone else's work the same way. Ships for macOS, Linux and Windows through Homebrew, install scripts and cargo.",
+    "year": 2026,
+    "status": "Released",
+    "authors": ["jitendra-verma"],
+    "tech": "Rust, Ratatui, Crossterm, GitHub GraphQL API, SQLite, ureq",
+    "links": [
+      { "label": "Website", "href": "https://ghdeck.jitendravjh.in" },
+      { "label": "Source", "href": "https://github.com/jitendravjh/ghdeck" }
+    ]
+  },
+  {
     "id": "synq",
     "title": "Synq - Real-Time Video Calling App",
     "description": "Real-time 1:1 and group (mesh) video calling on WebRTC, backed by a Node.js/Socket.IO signalling server with live presence, shareable call codes, and in-call chat over the WebRTC data channel. Finds its server on the LAN over mDNS with a public fallback, and relays through Cloudflare TURN when a direct path isn't possible.",

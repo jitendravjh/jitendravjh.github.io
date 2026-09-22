@@ -15,6 +15,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
+      - name: Keep the phone number out of the public resume
+        run: |
+          if [ -e resume/resume-phone.tex ]; then
+            echo "resume-phone.tex belongs in the private resume repo only"
+            exit 1
+          fi
+          if grep -nE '(\+91[ -]?)?[6-9][0-9]{4}[ -]?[0-9]{5}' resume/*.tex; then
+            echo "Phone number found in the public resume source"
+            exit 1
+          fi
+
       - name: Compile resume (LaTeX, same as Overleaf)
         uses: xu-cheng/latex-action@v3
         with:
@@ -23,7 +34,11 @@ jobs:
           latexmk_shell_escape: true
 
       - name: Publish resume to public/resume.pdf
-        run: cp resume/main.pdf public/resume.pdf
+        run: |
+          cp resume/main.pdf public/resume.pdf
+          # keep links shared before the move to /resume.pdf working
+          mkdir -p public/resume
+          cp resume/main.pdf public/resume/resume.pdf
 
       - name: Setup Node
         uses: actions/setup-node@v6

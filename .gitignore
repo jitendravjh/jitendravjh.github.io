@@ -24,4 +24,5 @@ pnpm-debug.log*
 .idea/
 
 # Resume PDF is compiled by the deploy workflow, and locally by `npm run resume`
+public/resume.pdf
 public/resume/

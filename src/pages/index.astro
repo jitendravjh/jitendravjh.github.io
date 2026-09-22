@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import Base from '../layouts/Base.astro';
 import LiquidHeading from '../components/LiquidHeading.astro';
-import { CONTACT, CV_URL, INTRO, SOCIAL_LINKS } from '../consts';
+import { CONTACT, CV_PDF, CV_URL, INTRO, SOCIAL_LINKS } from '../consts';
 import { url } from '../utils/paths';
 import { profileImg } from '../utils/profileImage';
 
@@ -48,6 +48,6 @@ const socialIcons = SOCIAL_LINKS.filter((l) => l.icon !== 'email');
 
 	<section id="resume">
 		<h3 class="highlight">My Resume</h3>
-		<p>To view my resume, <a class="resume-link" href={url(CV_URL)} data-resume-pdf={url('/resume/resume.pdf')}>click here</a>.</p>
+		<p>To view my resume, <a class="resume-link" href={url(CV_URL)} data-resume-pdf={url(CV_PDF)}>click here</a>.</p>
 	</section>
 </Base>

@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import HeaderLink from './HeaderLink.astro';
-import { CV_URL, GITHUB_PROFILE, SITE_TITLE } from '../consts';
+import { CV_PDF, CV_URL, GITHUB_PROFILE, SITE_TITLE } from '../consts';
 import { url } from '../utils/paths';
 import { profileImg, profileUrl } from '../utils/profileImage';
 
@@ -11,7 +11,7 @@ const auraSrc = await profileUrl(240);
 const cvHref = CV_URL ? url(CV_URL) : null;
 // Touch devices (phones, iPads) get sent straight to the PDF - the in-page
 // iframe viewer at /resume is unreliable there. The <script> below swaps the href.
-const cvPdfHref = cvHref ? url('/resume/resume.pdf') : null;
+const cvPdfHref = cvHref ? url(CV_PDF) : null;
 ---
 
 <div class="nav-aura" aria-hidden="true" style={`background-image: url(${auraSrc})`}></div>

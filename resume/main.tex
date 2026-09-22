@@ -218,13 +218,23 @@
 \resumeSubHeadingListStart
 
 \resumeProject
+  {ghdeck - GitHub Terminal Dashboard \normalfont{\textit{}}}
+  {Tech Stack: Rust, Ratatui, GitHub GraphQL API, SQLite, Homebrew}
+  {[\href{https://github.com/jitendravjh/ghdeck}{\textcolor{darkblue}{GitHub }{\faGithub}} $|$ \href{https://ghdeck.jitendravjh.in}{\textcolor{darkblue}{Website }{\faGlobe}}]}
+  {}
+\resumeItemListStart
+  \item Built a Rust terminal dashboard listing GitHub PRs and issues together, flagging conflicts and failing CI.
+  \item Syncs 130 items in one GraphQL query for about 18 of 5,000 hourly API points, with a SQLite cache.
+\resumeItemListEnd
+
+\resumeProject
   {Synq - Real-Time Video Calling App \normalfont{\textit{}}}
-  {Tech Stack: Flutter, Dart, WebRTC, Riverpod, Freezed, Node.js, Socket.IO, Cloudflare TURN}
+  {Tech Stack: Flutter, Dart, Kotlin, WebRTC, Riverpod, Freezed, Node.js, Socket.IO, Cloudflare TURN}
   {[\href{https://github.com/jitendravjh/Synq}{\textcolor{darkblue}{GitHub }{\faGithub}} $|$ \href{https://jitendravjh.in/Synq/}{\textcolor{darkblue}{Live }{\faGlobe}}]}
   {}
 \resumeItemListStart
-  \item Built real-time 1:1 and group (mesh) video calling on WebRTC with a Node.js/Socket.IO signalling server, live presence, shareable call codes, and in-call chat over the WebRTC data channel.
-  \item Added zero-config mDNS server discovery with a public fallback and a Cloudflare TURN relay for cross-network calls; designed a clean three-layer architecture (Riverpod, Freezed) with unit tests and a native Kotlin EventChannel mic-level meter.
+  \item Built 1:1 and group (mesh) WebRTC calling with a Node.js/Socket.IO signalling server and data-channel chat.
+  \item Added zero-config mDNS discovery, a Cloudflare TURN relay, unit tests and a native Kotlin mic-level meter.
 \resumeItemListEnd
 
 \resumeProject
@@ -233,8 +243,8 @@
   {{}[\href{https://callback.jitendravjh.in}{\textcolor{darkblue}{Live }{\faGlobe}}]}
   {}
 \resumeItemListStart
-  \item Built a job application tracker for Indian job boards: a Chrome side-panel extension clips postings from Naukri, LinkedIn, Internshala, Unstop and Instahyre, and a React web app tracks each application on a kanban board.
-  \item Layered extraction (JSON-LD, per-site adapters, page metadata) with per-field telemetry, plus form autofill that learns new question and answer pairs on submit; Postgres row-level security enforces per-user access.
+  \item Built a job tracker for Indian job boards: a Chrome extension clips Naukri and LinkedIn jobs into a React kanban.
+  \item Layered JSON-LD and site-adapter extraction with per-field telemetry, answer-learning autofill and Postgres RLS.
 \resumeItemListEnd
 
 \resumeProject
@@ -253,8 +263,8 @@
   {[\href{https://play.google.com/store/apps/details?id=com.shravangoswami.securevault}{\textcolor{darkblue}{Play Store }{\faGooglePlay}} $|$ \href{https://shravangoswami.com/SecureVault/}{\textcolor{darkblue}{Website }{\faGlobe}}]}
   {}
 \resumeItemListStart
-  \item Built a privacy vault disguised as 4 utility apps (Calculator, Notes, Clock, MoodSpace) with AES-256 encryption, PBKDF2 key derivation, multi-vault system with panic password, auto-lock, and screenshot prevention.
-  \item Engineered native Platform Channels for dynamic app icon/name switching on Android and iOS Screen Time API integration; published on Google Play Store.
+  \item Built a vault disguised as 4 utility apps, with AES-256, PBKDF2 key derivation, a panic password and auto-lock.
+  \item Native Platform Channels for icon switching and iOS Screen Time, plus screenshot blocking; on Google Play.
 \resumeItemListEnd
 
 \resumeProject
@@ -346,13 +356,6 @@
         \item Tech Stack: React.js, ASP.NET Core, Blazor, MySQL, C\#, REST APIs, Bootstrap
         \item Developed a feature-rich eCommerce website with product browsing, secure checkout, order management, and responsive UI for seamless user experience.
       \resumeItemListEnd 
-
-  \resumeSubheading
-      {{GeeksforGeeks {}}}{Remote}
-      {Technical Content Writer}{Jan 2024 - Dec 2024}
-      \resumeItemListStart
-        \item Domain: macOS, Software Installation Guide
-      \resumeItemListEnd
 \resumeSubHeadingListEnd
 
 % ------------------------------------------------------------------------------------
@@ -424,6 +427,6 @@
 
 \vfill
 \begin{center}
-    \footnotesize\textcolor{graytext}{Last Updated: August 26, 2026. The latest version can be found at \href{https://jitendravjh.in/resume/}{jitendravjh.in/resume}}
+    \footnotesize\textcolor{graytext}{Last Updated: September 22, 2026. The latest version can be found at \href{https://jitendravjh.in/resume/}{jitendravjh.in/resume}}
 \end{center}
 \end{document}
