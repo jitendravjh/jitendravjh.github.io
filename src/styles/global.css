@@ -317,6 +317,10 @@ a.more { text-decoration: underline; text-underline-offset: 2px; }
 .socials { display: flex; align-items: center; justify-content: center; gap: 4px; }
 .socials a { color: var(--text-faint); }
 .socials a:hover { color: var(--text-strong); }
+/* a size up in the hero, the modal keeps the small ones */
+.hero .socials { gap: 6px; }
+.hero .socials .icon-btn { width: 36px; height: 36px; }
+.hero .socials .icon-btn svg { width: 20px; height: 20px; }
 
 /* inner page heading */
 .page-head { padding: 48px 20px 44px; }
