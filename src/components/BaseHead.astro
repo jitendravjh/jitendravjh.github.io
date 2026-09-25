@@ -18,7 +18,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 // Anything else falls back to /og.png so og:image never 404s.
 const blogIds = (await getCollection('blog')).map((post) => post.id);
 const ogPaths = new Set<string>([
-	'about',
 	'projects',
 	'blog',
 	...blogIds.map((id) => `blog/${id}`),
@@ -32,7 +31,8 @@ if (currentPath.startsWith(basePath)) {
 }
 currentPath = currentPath.replace(/^\/|\/$/g, '');
 
-const defaultImg = currentPath !== '' && ogPaths.has(currentPath) ? `/${currentPath}.png` : '/og.png';
+// the site opens in light mode, so shared links get the light cut of the card
+const defaultImg = currentPath !== '' && ogPaths.has(currentPath) ? `/${currentPath}-light.png` : '/og-light.png';
 
 const { title, description, image = defaultImg } = Astro.props;
 
@@ -51,87 +51,18 @@ const imageUrl = typeof image === 'string'
 <meta charset="utf-8" />
 <script is:inline data-cfasync="false">
 	(() => {
-		const root = document.documentElement;
-		const paintTheme = (theme) => {
-			const dark = theme === 'dark';
-			root.setAttribute('data-theme', dark ? 'dark' : 'light');
-			root.style.setProperty('background-color', 'var(--color-bg)');
-			root.style.colorScheme = dark ? 'dark' : 'light';
-		};
 		let saved = null;
 		try {
 			saved = localStorage.getItem('theme');
 		} catch {}
-		// The visitor's own choice wins; everyone else starts in light, whatever the device prefers.
-		const isChoice = saved === 'dark' || saved === 'light';
-		paintTheme(isChoice ? saved : 'light');
-		window.addEventListener('load', () => root.setAttribute('data-theme-ready', 'true'), { once: true });
-		window.__setPreferredTheme = paintTheme;
+		// the visitor's own choice wins, everyone else starts in light whatever the device prefers
+		const theme = saved === 'dark' ? 'dark' : 'light';
+		document.documentElement.dataset.theme = theme;
+		document.addEventListener('DOMContentLoaded', () => {
+			document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#121316' : '#f5f4f3');
+		});
 	})();
 </script>
-<style is:inline>
-	/* CSS variables inline - available immediately, before any external CSS, to prevent FOUC */
-	:root {
-		--color-bg: #ffffff;
-		--color-bg-offset: #f7f7f4;
-		--color-bg-header: rgba(255, 255, 255, 0.48);
-		--color-text-main: #000000;
-		--color-text-muted: #747474;
-		--color-accent: #08c225;
-		--color-accent-text: #08c225;
-		--color-border: #e5e5e5;
-		--color-header-border: rgba(0, 0, 0, 0.08);
-	}
-	[data-theme='dark'] {
-		--color-bg: #1a1a1a;
-		--color-bg-offset: #242424;
-		--color-bg-header: rgba(26, 26, 26, 0.48);
-		--color-text-main: #f1f1f1;
-		--color-text-muted: #b3b3b3;
-		--color-accent: #ffd523;
-		--color-accent-text: #ffd523;
-		--color-border: #333333;
-		--color-header-border: rgba(255, 255, 255, 0.1);
-	}
-	html, body { min-height: 100%; background-color: var(--color-bg); }
-	html[data-theme='dark'], html[data-theme='dark'] body { background-color: var(--color-bg); color-scheme: dark; }
-	html[data-theme='light'], html[data-theme='light'] body { background-color: var(--color-bg); color-scheme: light; }
-	/* Critical header layout - prevents FOUC before component CSS loads */
-	header {
-		position: sticky;
-		top: 0.75rem;
-		z-index: 100;
-		margin: 0.75rem auto 0;
-		width: calc(100% - 2rem);
-		max-width: 960px;
-		padding: 0 0.6rem 0 1.5rem;
-		background-color: var(--color-bg-header);
-		border: 1px solid var(--color-header-border);
-		border-radius: 999px;
-		backdrop-filter: blur(24px) saturate(180%);
-		-webkit-backdrop-filter: blur(24px) saturate(180%);
-	}
-	header nav {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		height: 4rem;
-	}
-	.project-card, .interactive-card, .team-card {
-		background-color: var(--color-bg-offset);
-		border-color: var(--color-border);
-	}
-	body {
-		background-color: var(--color-bg);
-		color: var(--color-text-main);
-		margin: 0;
-	}
-	/* Suppress all transitions until page is fully styled */
-	html:not([data-theme-ready]) *, html:not([data-theme-ready]) *::before, html:not([data-theme-ready]) *::after {
-		transition: none !important;
-		animation: none !important;
-	}
-</style>
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <meta name="google-site-verification" content="UTlYvpET8RMryubJxU2s-mghNEICAZhgNYrGNfChiUM" />
 <link rel="icon" type="image/svg+xml" href={url('/favicon.svg')} />
@@ -144,14 +75,9 @@ const imageUrl = typeof image === 'string'
 />
 <meta name="generator" content={Astro.generator} />
 <meta name="color-scheme" content="light dark" />
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-	rel="stylesheet"
-	href="https://fonts.googleapis.com/css2?family=Fleur+De+Leah&family=Nunito:wght@400;500;600;700;800&display=swap"
-/>
+<meta name="theme-color" content="#f5f4f3" />
+<link rel="preload" as="font" type="font/woff2" href={url('/fonts/writer-regular.woff2')} crossorigin />
+<link rel="preload" as="font" type="font/woff2" href={url('/fonts/plexserif-var.woff2')} crossorigin />
 
 <link rel="canonical" href={canonicalURL} />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" />
@@ -165,6 +91,11 @@ const imageUrl = typeof image === 'string'
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={imageUrl} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content={title} />
+<meta property="og:site_name" content="Jitendra Verma" />
+<meta property="og:locale" content="en_IN" />
 
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={Astro.url} />

@@ -1,6 +1,8 @@
+import { join } from 'node:path';
 import { Resvg } from '@resvg/resvg-js';
 import satori from 'satori';
 import { html } from 'satori-html';
+import sharp from 'sharp';
 
 // Every page is rendered twice (dark + light) from the same text, so the two
 // renders would otherwise fetch the same two fonts twice.
@@ -49,64 +51,90 @@ const ICON = {
 
 export type OgBadge = { label: string; icon: keyof typeof ICON };
 
-// The accent tracks the site theme: green in light mode, yellow in dark mode.
-const ACCENT = {
-    light: { solid: '#08c225', soft: 'rgba(8, 194, 37, 0.14)' },
-    dark: { solid: '#ffd523', soft: 'rgba(255, 213, 35, 0.14)' },
+// Both cuts share one layout, the palette follows the site theme.
+const PALETTE = {
+    light: {
+        bg: '#f6f5f4', line: '#dadde2', grid: 'rgba(19, 72, 220, 0.07)', nodeBg: '#ffffff', nodeBorder: '#ced1d6',
+        strong: '#14181f', title: '#1348dc', faint: '#727a89', chip: 'rgba(255, 255, 255, 0.6)',
+        glow: 'rgba(19, 72, 220, 0.06)',
+    },
+    dark: {
+        bg: '#111317', line: '#2b2f36', grid: 'rgba(171, 175, 184, 0.07)', nodeBg: '#010409', nodeBorder: '#35383f',
+        strong: '#e3e4e7', title: '#90c5ff', faint: '#878e9b', chip: 'rgba(171, 175, 184, 0.06)',
+        glow: 'rgba(28, 57, 142, 0.22)',
+    },
 } as const;
 
-export type OgTheme = keyof typeof ACCENT;
+export type OgTheme = keyof typeof PALETTE;
+
+let avatar: Promise<string> | null = null;
+const loadAvatar = () =>
+    (avatar ??= sharp(join(process.cwd(), 'src/assets/profile.jpg'))
+        .resize(112, 112)
+        .jpeg({ quality: 88 })
+        .toBuffer()
+        .then((b) => `data:image/jpeg;base64,${b.toString('base64')}`));
+
+const titleSize = (title: string) => (title.length <= 34 ? 76 : title.length <= 60 ? 64 : 54);
 
 export async function generateOgImage(
     title: string,
     subtitle: string,
     theme: OgTheme = 'dark',
     badge: OgBadge | null = null,
+    // the site card mirrors the page hero: photo, name, one line about the work
+    hero: string | null = null,
 ) {
-    const accent = ACCENT[theme];
+    const c = PALETTE[theme];
     const glyph = badge ? ICON[badge.icon] : null;
     const safeTitle = plain(title);
     const safeSubtitle = plain(subtitle);
-    const safeLabel = badge ? plain(badge.label) : "";
-    const textToLoad = safeTitle + safeSubtitle + safeLabel + "Jitendra Verma Portfolio ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@";
-    const fontDataRegular = await loadGoogleFont("Nunito", textToLoad);
-    const fontDataBold = await loadGoogleFont("Nunito:wght@700", textToLoad);
+    const safeLabel = badge ? plain(badge.label) : '';
+    const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.@';
+    const [serif, serifItalic, mono, face] = await Promise.all([
+        loadGoogleFont('IBM+Plex+Serif', 'Jitendra Verma'),
+        loadGoogleFont('IBM+Plex+Serif:ital@1', safeTitle),
+        loadGoogleFont('IBM+Plex+Mono', (safeSubtitle + safeLabel + 'jitendravjh.in' + (hero ?? '') + letters).toUpperCase() + letters),
+        loadAvatar(),
+    ]);
+
+    const node = (x: number, y: number) =>
+        `<div style="display: flex; position: absolute; left: ${x - 5}px; top: ${y - 5}px; width: 10px; height: 10px; box-sizing: border-box; transform: rotate(45deg); background-color: ${c.nodeBg}; border: 1px solid ${c.nodeBorder};"></div>`;
+    const chip = (inner: string) =>
+        `<div style="display: flex; align-items: center; height: 44px; padding: 0 16px; border: 1px solid ${c.line}; border-radius: 3px; background-color: ${c.chip}; color: ${c.strong}; font-family: 'Plex Mono'; font-size: 20px; letter-spacing: 0.08em; text-transform: uppercase;">${inner}</div>`;
 
     const markupString = `
-        <div style="background-color: #1a1a1a; width: 100%; height: 100%; display: flex; flex-direction: column; font-family: 'Nunito';">
-            <div style="display: flex; flex-direction: column; justify-content: space-between; padding: 80px; flex: 1;">
-                <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <div style="display: flex; align-items: center; padding: 12px 28px; background-color: ${accent.soft}; border-radius: 999px; border: 2px solid ${accent.solid};">
-                        <span style="color: ${accent.solid}; font-size: 26px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;">
-                            ${safeSubtitle}
-                        </span>
-                    </div>
-                    ${badge ? `
-                    <div style="display: flex; align-items: center; padding: 12px 28px; background-color: rgba(255, 255, 255, 0.08); border-radius: 999px; border: 2px solid rgba(255, 255, 255, 0.28);">
-                        <svg width="28" height="28" viewBox="${glyph!.viewBox}" fill="#e8e8e8" style="margin-right: 12px;">
-                            <path d="${glyph!.d}" />
-                        </svg>
-                        <span style="color: #e8e8e8; font-size: 26px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;">
-                            ${safeLabel}
-                        </span>
-                    </div>` : ''}
-                </div>
+        <div style="position: relative; display: flex; width: 1200px; height: 630px; background-color: ${c.bg};">
+            <div style="position: absolute; left: 24px; top: ${hero ? 0 : 120}px; width: 1152px; height: ${hero ? 510 : 390}px; display: flex; background-image: linear-gradient(to right, ${c.grid} 1px, transparent 1px), linear-gradient(to bottom, ${c.grid} 1px, transparent 1px); background-size: 24px 24px;"></div>
+            ${hero ? `<div style="display: flex; position: absolute; left: 0; top: 0; width: 1200px; height: 510px; background-image: linear-gradient(to top, ${c.glow}, transparent 70%);"></div>` : ''}
+            <div style="display: flex; position: absolute; left: 24px; top: 0; width: 1px; height: 630px; background-color: ${c.line};"></div>
+            <div style="display: flex; position: absolute; left: 1176px; top: 0; width: 1px; height: 630px; background-color: ${c.line};"></div>
+            ${hero ? '' : `<div style="display: flex; position: absolute; left: 0; top: 120px; width: 1200px; height: 1px; background-color: ${c.line};"></div>`}
+            <div style="display: flex; position: absolute; left: 0; top: 510px; width: 1200px; height: 1px; background-color: ${c.line};"></div>
+            ${hero ? '' : node(24, 120) + node(1176, 120)}${node(24, 510)}${node(1176, 510)}
 
-                <div style="display: flex; color: #ffffff; font-size: 88px; font-weight: 700; line-height: 1.12; letter-spacing: -0.02em; max-width: 1040px; max-height: 320px; overflow: hidden;">
-                    ${safeTitle}
-                </div>
+            ${hero
+                ? `<div style="position: absolute; left: 70px; top: 0; width: 1060px; height: 510px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+                        <div style="display: flex; padding: 6px; margin-bottom: 26px; border: 1px solid ${c.line}; border-radius: 84px; background-color: ${c.chip};">
+                            <img src="${face}" style="width: 132px; height: 132px; border-radius: 66px;" />
+                        </div>
+                        <span style="font-family: 'Plex Serif Italic'; font-style: italic; font-size: 82px; line-height: 1.15; letter-spacing: -0.02em; color: ${c.title};">${safeTitle}</span>
+                        <span style="margin-top: 20px; max-width: 760px; font-family: 'Plex Mono'; font-size: 26px; line-height: 1.45; color: ${c.faint};">${plain(hero)}</span>
+                    </div>`
+                : `<div style="position: absolute; left: 0; top: 0; width: 1200px; height: 120px; display: flex; align-items: center; justify-content: center;">
+                        <img src="${face}" style="width: 56px; height: 56px; border-radius: 28px; margin-right: 18px;" />
+                        <span style="font-family: 'Plex Serif'; font-size: 44px; color: ${c.strong}; letter-spacing: -0.01em;">Jitendra Verma</span>
+                    </div>
+                    <div style="position: absolute; left: 70px; top: 121px; width: 1060px; height: 389px; display: flex; align-items: center; justify-content: center; text-align: center;">
+                        <span style="font-family: 'Plex Serif Italic'; font-style: italic; font-size: ${titleSize(safeTitle)}px; line-height: 1.18; letter-spacing: -0.02em; color: ${c.title};">${safeTitle}</span>
+                    </div>`}
 
-                <div style="display: flex; justify-content: space-between; align-items: flex-end;">
-                    <div style="display: flex; flex-direction: column;">
-                        <span style="color: #b3b3b3; font-size: 28px; font-weight: 400;">Portfolio</span>
-                        <span style="color: #ffffff; font-size: 34px; font-weight: 700;">Jitendra Verma</span>
-                    </div>
-                    <div style="display: flex; align-items: center; justify-content: center; width: 84px; height: 84px; background-color: ${accent.solid}; border-radius: 22px;">
-                        <span style="color: #000000; font-size: 46px; font-weight: 700;">@</span>
-                    </div>
-                </div>
+            <div style="position: absolute; left: 60px; top: 511px; width: 1080px; height: 119px; display: flex; align-items: center; justify-content: space-between;">
+                ${chip(safeSubtitle)}
+                ${badge
+                    ? chip(`<svg width="20" height="20" viewBox="${glyph!.viewBox}" fill="${c.strong}" style="margin-right: 12px;"><path d="${glyph!.d}" /></svg>${safeLabel}`)
+                    : `<span style="font-family: 'Plex Mono'; font-size: 22px; color: ${c.faint};">jitendravjh.in</span>`}
             </div>
-            <div style="display: flex; height: 16px; background-color: ${accent.solid}; width: 100%;"></div>
         </div>
     `;
 
@@ -114,14 +142,14 @@ export async function generateOgImage(
         width: 1200,
         height: 630,
         fonts: [
-            { name: "Nunito", data: fontDataRegular, weight: 400, style: "normal" },
-            { name: "Nunito", data: fontDataBold, weight: 700, style: "normal" }
+            { name: 'Plex Serif', data: serif, weight: 400, style: 'normal' },
+            { name: 'Plex Serif Italic', data: serifItalic, weight: 400, style: 'italic' },
+            { name: 'Plex Mono', data: mono, weight: 400, style: 'normal' },
         ],
     });
 
     // satori already emits every glyph as a path, so scanning the machine's fonts
     // only costs time: about 1.3s per poster against 10ms, for the same bytes.
     const resvg = new Resvg(svg, { font: { loadSystemFonts: false } });
-    const pngData = resvg.render();
-    return new Uint8Array(pngData.asPng());
+    return new Uint8Array(resvg.render().asPng());
 }

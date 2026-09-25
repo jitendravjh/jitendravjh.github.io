@@ -1,5 +1,7 @@
 ---
 import Base from '../../layouts/Base.astro';
+import Band from '../../components/Band.astro';
+import Icon from '../../components/Icon.astro';
 import { CV_PDF, SITE_TITLE } from '../../consts';
 import { url } from '../../utils/paths';
 
@@ -7,12 +9,28 @@ const pdf = url(CV_PDF);
 ---
 
 <Base title={`Resume - ${SITE_TITLE}`} description="Resume of Jitendra Verma.">
-	<section id="resume-controls">
-		<a href={url('/')} class="btn back-btn">← Back to Home</a>
-		<a href={pdf} target="_blank" rel="noopener noreferrer" class="btn download-btn">Download Resume (PDF)</a>
-	</section>
+	<Band nodes="b" seed={5}>
+		<div class="pat grid"></div>
+		<div class="pat glow"></div>
+		<header class="resume-head">
+			<div>
+				<h1 class="h0">Resume</h1>
+				<p>Computer Science &amp; Engineering, Uka Tarsadia University, 2022 to 2026.</p>
+			</div>
+			<div class="resume-actions">
+				<a class="button primary" href={pdf} target="_blank" rel="noopener noreferrer"><Icon name="download" />Download PDF</a>
+				<a class="button secondary" href={url('/')}>Home</a>
+			</div>
+		</header>
+	</Band>
 
-	<section id="resume-section">
-		<iframe src={pdf} width="65%" height="1250px" title="Resume PDF"></iframe>
-	</section>
+	<Band nodes="b" seed={23}>
+		<div class="resume-view">
+			<div class="frame">
+				<div class="framed">
+					<iframe src={pdf} title="Resume PDF"></iframe>
+				</div>
+			</div>
+		</div>
+	</Band>
 </Base>

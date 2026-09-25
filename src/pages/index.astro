@@ -1,53 +1,261 @@
 ---
 import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
-import LiquidHeading from '../components/LiquidHeading.astro';
-import { CONTACT, CV_PDF, CV_URL, INTRO, SOCIAL_LINKS } from '../consts';
+import Band from '../components/Band.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import Icon from '../components/Icon.astro';
+import { CONTACT, CV_PDF, CV_URL, GITHUB_PROFILE, INTRO, SOCIAL_LINKS } from '../consts';
 import { url } from '../utils/paths';
 import { profileImg } from '../utils/profileImage';
 
-const faIcon: Record<string, string> = {
-	linkedin: 'fab fa-linkedin',
-	github: 'fab fa-github',
-	twitter: 'fab fa-x-twitter',
-	instagram: 'fab fa-instagram',
-	email: 'fas fa-envelope',
-	website: 'fas fa-globe',
-	scholar: 'fas fa-graduation-cap',
-};
-
 const email = CONTACT.emails[0];
-const socialIcons = SOCIAL_LINKS.filter((l) => l.icon !== 'email');
+const iconFor: Record<string, string> = { twitter: 'x', email: 'mail', website: 'globe', scholar: 'doc' };
+
+const posts = (await getCollection('blog')).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()).slice(0, 3);
+
+const skillGroups: { label: string; items: string[] }[] = [
+	{ label: 'Mobile', items: ['Flutter', 'Dart', 'Swift', 'SwiftUI', 'Riverpod'] },
+	{ label: 'Web', items: ['React', 'Next.js', 'ASP.NET Core', 'Astro', 'TypeScript'] },
+	{ label: 'Foundations', items: ['WebRTC', 'AES-256', 'Platform channels', 'REST APIs', 'Git'] },
+	{ label: 'Design', items: ['Figma', 'Canva', 'Lightroom', 'DaVinci Resolve'] },
+];
+
+const selectedWork: { title: string; tag: string; desc: string; id: string }[] = [
+	{
+		title: 'ghdeck',
+		id: 'ghdeck',
+		tag: 'Rust · Terminal UI',
+		desc: 'All your GitHub PRs and issues in one terminal list, with conflicts, failing CI and pending reviews flagged on every row. One GraphQL query per sync, cached in SQLite, shipped through Homebrew.',
+	},
+	{
+		title: 'Synq',
+		id: 'synq',
+		tag: 'Flutter · WebRTC',
+		desc: 'Real-time 1:1 and group video calling on WebRTC, with its own signalling server, zero-config server discovery, and in-call chat over the data channel.',
+	},
+	{
+		title: 'SecureVault',
+		id: 'securevault',
+		tag: 'Flutter · iOS / Android',
+		desc: 'A privacy vault disguised as everyday utility apps - AES-256 encryption plus native platform-channel tricks like dynamic app-icon switching.',
+	},
+	{
+		title: 'Reaktor',
+		id: 'reaktor',
+		tag: 'Flutter · Riverpod',
+		desc: 'A multiplayer strategy game with real-time game state managed end to end on Riverpod.',
+	},
+	{
+		title: 'Callback',
+		id: 'callback',
+		tag: 'React · Chrome extension',
+		desc: 'A job tracker for Indian job boards. A Chrome extension clips postings from Naukri, LinkedIn and Internshala, a kanban web app tracks where each one stands, and the panel autofills forms from a saved profile.',
+	},
+];
+
+const contributions: { title: string; role: string; desc: string; href: string }[] = [
+	{
+		title: 'JuliaEarth · CoordRefSystems.jl',
+		href: 'https://github.com/JuliaEarth/CoordRefSystems.jl/pulls?q=author:jitendravjh',
+		role: 'Contributor',
+		desc: 'Added the Stereographic projection, verified against PROJ, and fixed round-trip accuracy across five others.',
+	},
+	{
+		title: 'JuliaGeometry · Meshes.jl',
+		href: 'https://github.com/JuliaGeometry/Meshes.jl/pulls?q=author:jitendravjh',
+		role: 'Contributor',
+		desc: 'Fixed meshing, geodesic grid and intersection bugs in the geometry library under the Julia geospatial stack.',
+	},
+	{
+		title: 'Screenpipe',
+		href: 'https://github.com/screenpipe/screenpipe/pulls?q=author:jitendravjh',
+		role: 'Contributor',
+		desc: 'Fixed audio frame loss in live meeting transcription, and cache clearing that left transcripts on disk.',
+	},
+	{
+		title: 'SciML · NeuralPDE.jl',
+		href: 'https://github.com/SciML/NeuralPDE.jl/pulls?q=author:jitendravjh',
+		role: 'Contributor',
+		desc: 'Contributed adaptive loss functions for physics-informed neural networks.',
+	},
+	{
+		title: 'TuringLang',
+		href: 'https://github.com/TuringLang/docs/pulls?q=author:jitendravjh',
+		role: 'Contributor',
+		desc: 'Built a theme system with dark mode for the documentation sites.',
+	},
+];
 ---
 
 <Base>
-	<section id="intro">
-		<LiquidHeading />
-		{INTRO.thanks && <p class="intro-thanks">{INTRO.thanks}</p>}
-		<Image src={profileImg} alt={INTRO.name} id="profile-pic" loading="eager" width={300} height={300} />
-		<p>{INTRO.greeting}</p>
-	</section>
+	<Band nodes="b" seed={5}>
+		<div class="pat grid"></div>
+		<div class="pat glow"></div>
+		<section class="hero">
+			<div>
+				<Image class="hero-avatar" src={profileImg} alt={INTRO.name} width={224} height={224} loading="eager" />
+				<h1 class="h0">{INTRO.name}</h1>
+				<p class="lead">
+					A software developer building mobile and web apps with Flutter, Swift, and modern web tech.
+				</p>
+			</div>
+			<div class="hero-actions">
+				<div class="hero-buttons">
+					<a class="button primary" href={url(CV_URL)} data-resume-pdf={url(CV_PDF)}><Icon name="doc" />View résumé</a>
+					<a class="button secondary" href={`mailto:${email}`}><Icon name="mail" />Email me</a>
+				</div>
+				<div class="socials">
+					{SOCIAL_LINKS.map((link) => {
+						const mail = link.href.startsWith('mailto:');
+						return (
+							<a class="icon-btn" href={link.href} target={mail ? undefined : '_blank'} rel={mail ? undefined : 'noopener noreferrer'} aria-label={link.label}>
+								<Icon name={iconFor[link.icon] ?? link.icon} />
+							</a>
+						);
+					})}
+				</div>
+			</div>
+		</section>
+	</Band>
 
-	<section id="social">
-		<h3 class="highlight">Connect with Me</h3>
-		<ul>
-			{socialIcons.map((link) => (
-				<li>
-					<a href={link.href} target="_blank" rel="noopener noreferrer" aria-label={link.label}>
-						<i class={faIcon[link.icon]}></i>
-					</a>
-				</li>
+	<Band nodes="b" seed={23}>
+		<section class="split" id="about">
+			<h2 class="h2">What I do</h2>
+			<div class="split-body">
+				<p>
+					I'm a Computer Science &amp; Engineering student at Uka Tarsadia University, Surat, and a
+					developer who likes turning ideas into shipped apps. I build them end to end, from the first
+					sketch to the store listing, across Flutter &amp; Dart, Swift &amp; SwiftUI, and React,
+					Next.js &amp; ASP.NET Core.
+				</p>
+			</div>
+		</section>
+	</Band>
+
+	<Band nodes="b" seed={47}>
+		<div class="sec-head">
+			<hgroup>
+				<h2 class="h2">Things I've built</h2>
+				<p>Apps, games, and open-source work I've built - across Flutter, Swift, and the web.</p>
+			</hgroup>
+			<div class="sec-actions">
+				<a class="button secondary" href={url('/projects')}>All projects<kbd aria-hidden="true">P</kbd></a>
+			</div>
+		</div>
+		<div class="cards three">
+			{selectedWork.map((item) => (
+				<a class="cell" href={url(`/projects#${item.id}`)}>
+					<div class="frame poster-frame">
+						<div class="framed">
+							<img class="poster-light" src={url(`/projects/${item.id}-light.png`)} alt="" loading="lazy" width="1200" height="630" />
+							<img class="poster-dark" src={url(`/projects/${item.id}.png`)} alt="" loading="lazy" width="1200" height="630" />
+						</div>
+					</div>
+					<span class="meta">{item.tag}</span>
+					<h3>{item.title}</h3>
+					<p>{item.desc}</p>
+					<span class="more">Details &rarr;</span>
+				</a>
 			))}
-		</ul>
-	</section>
+		</div>
+	</Band>
 
-	<section id="contact">
-		<h3 class="highlight">Contact Me</h3>
-		<p>You can also reach me at <a href={`mailto:${email}`}>{email}</a>.</p>
-	</section>
+	<Band nodes="b" seed={71}>
+		<div class="sec-head">
+			<hgroup>
+				<h2 class="h2">Open Source Contributions</h2>
+			</hgroup>
+		</div>
+		<div class="rows">
+			{contributions.map((item) => (
+				<a class="row" href={item.href} target="_blank" rel="noopener noreferrer">
+					<div class="row-head">
+						<span class="row-title">{item.title}<span class="ext">&#8599;</span></span>
+						<span class="label">{item.role}</span>
+					</div>
+					<p>{item.desc}</p>
+				</a>
+			))}
+		</div>
+	</Band>
 
-	<section id="resume">
-		<h3 class="highlight">My Resume</h3>
-		<p>To view my resume, <a class="resume-link" href={url(CV_URL)} data-resume-pdf={url(CV_PDF)}>click here</a>.</p>
-	</section>
+	<Band nodes="b" seed={97}>
+		<div class="sec-head">
+			<hgroup>
+				<h2 class="h2">Skills &amp; tools</h2>
+			</hgroup>
+		</div>
+		<div class="cards two">
+			{skillGroups.map((group) => (
+				<div class="cell">
+					<h3>{group.label}</h3>
+					<div class="chips">
+						{group.items.map((item) => <span class="chip">{item}</span>)}
+					</div>
+				</div>
+			))}
+		</div>
+	</Band>
+
+	<Band nodes="b" seed={131}>
+		<div class="sec-head">
+			<hgroup>
+				<h2 class="h2">Latest writing</h2>
+				<p>Notes, tutorials, and articles on what I'm building.</p>
+			</hgroup>
+			<div class="sec-actions">
+				<a class="button ghost" href={url('/archive')}>Archive<Icon name="chevron" /></a>
+				<a class="button secondary" href={url('/blog')}>All posts<kbd aria-hidden="true">B</kbd></a>
+			</div>
+		</div>
+		<div class="cards three">
+			{posts.map((post) => {
+				const href = post.data.externalUrl || url(`/blog/${post.id}/`);
+				const away = post.data.externalUrl ? { target: '_blank', rel: 'noopener noreferrer' } : {};
+				return (
+					<a class="cell" href={href} {...away}>
+						<div class="frame poster-frame">
+							<div class="framed">
+								<img class="poster-light" src={url(`/blog/${post.id}-light.png`)} alt="" loading="lazy" width="1200" height="630" />
+								<img class="poster-dark" src={url(`/blog/${post.id}.png`)} alt="" loading="lazy" width="1200" height="630" />
+							</div>
+						</div>
+						<span class="meta"><FormattedDate date={post.data.pubDate} />{post.data.externalUrl && ` · ${post.data.source || 'External'} ↗`}</span>
+						<h3>{post.data.title}</h3>
+						<p class="clamp">{post.data.description}</p>
+						<span class="more">{post.data.externalUrl ? 'Open' : 'Read'} &rarr;</span>
+					</a>
+				);
+			})}
+		</div>
+	</Band>
+
+	<Band nodes="b" seed={157}>
+		<section class="split">
+			<h2 class="h2">Beyond the code</h2>
+			<div class="split-body">
+				<p>
+					Outside of code I'm into design and creative tools - Figma, Canva, Lightroom, and
+					DaVinci Resolve. I wrote some technical guides for GeeksforGeeks. In 2024, my team was
+					a finalist at the Smart India Hackathon.
+				</p>
+			</div>
+		</section>
+	</Band>
+
+	<Band nodes="b" seed={181}>
+		<div class="pat dots"></div>
+		<section class="split" id="contact">
+			<h2 class="h2">Let's build something</h2>
+			<div class="split-body">
+				<p>Want to build something, or just say hi? I'm always up for a good problem.</p>
+				<div class="cta-actions">
+					<a class="button primary" href={`mailto:${email}`}><Icon name="mail" />{email}</a>
+					<a class="button secondary" href="https://linkedin.com/in/jitendravjh" target="_blank" rel="noopener noreferrer"><Icon name="linkedin" />LinkedIn</a>
+					<a class="button secondary" href={GITHUB_PROFILE} target="_blank" rel="noopener noreferrer"><Icon name="github" />GitHub</a>
+				</div>
+			</div>
+		</section>
+	</Band>
 </Base>

@@ -1,0 +1,42 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import FormattedDate from './FormattedDate.astro';
+import { url } from '../utils/paths';
+
+interface Props {
+	post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { title, description, pubDate, heroImage, tags, externalUrl, source } = post.data;
+const href = externalUrl || url(`/blog/${post.id}/`);
+const away = externalUrl ? { target: '_blank', rel: 'noopener noreferrer' } : {};
+---
+
+<article class="post-row">
+	<a href={href} {...away} tabindex="-1" aria-label={title}>
+		<div class="frame poster-frame">
+			<div class="framed">
+				{heroImage ? (
+					<Image src={heroImage} alt="" width={560} height={294} />
+				) : (
+					<>
+						<img class="poster-light" src={url(`/blog/${post.id}-light.png`)} alt="" loading="lazy" width="1200" height="630" />
+						<img class="poster-dark" src={url(`/blog/${post.id}.png`)} alt="" loading="lazy" width="1200" height="630" />
+					</>
+				)}
+			</div>
+		</div>
+	</a>
+	<div class="post-body">
+		<div class="post-meta">
+			<FormattedDate date={pubDate} />
+			{externalUrl && <span class="src">{source || 'External'} &#8599;</span>}
+			{tags?.map((tag) => <a href={url(`/tags/${tag}`)}>#{tag}</a>)}
+		</div>
+		<h2><a href={href} {...away}>{title}</a></h2>
+		<p>{description}</p>
+		<a class="more" href={href} {...away}>{externalUrl ? `Read on ${source || 'the site'}` : 'Read article'} &rarr;</a>
+	</div>
+</article>

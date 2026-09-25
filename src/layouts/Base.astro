@@ -18,8 +18,9 @@ const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
 		<BaseHead title={title} description={description} />
 	</head>
 	<body>
+		<div class="noise"></div>
 		<Header />
-		<main>
+		<main data-pagefind-body>
 			<slot />
 		</main>
 		<Footer />

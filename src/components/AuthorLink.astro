@@ -40,9 +40,7 @@ const member = author ? { ...author, avatar: await resolveAvatar(author.avatar) 
 ---
 
 {member ? (
-    <span class="author-link author-modal-trigger" data-member={JSON.stringify(member)} style="cursor: pointer;">
-        {member.name}
-    </span>
+    <button type="button" class="author-link author-modal-trigger" data-member={JSON.stringify(member)}>{member.name}</button>
 ) : (
     <span>{nameOrSlug.replace(/[{}]/g, '')}</span>
 )}

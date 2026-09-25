@@ -1,0 +1,33 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Band from '../../components/Band.astro';
+import PostRow from '../../components/PostRow.astro';
+import { SITE_TITLE } from '../../consts';
+import { url } from '../../utils/paths';
+
+const posts = (await getCollection('blog')).sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<Base title={`Blog | ${SITE_TITLE}`} description="Notes, tutorials, and articles on what I'm building.">
+	<Band nodes="b" seed={5}>
+		<div class="pat grid"></div>
+		<div class="pat glow"></div>
+		<header class="page-head">
+			<h1 class="h0">Blog</h1>
+			<p>Notes, tutorials, and articles on what I'm building. {posts.length} posts so far.</p>
+			<div class="head-links" data-pagefind-ignore>
+				<a href={url('/archive')}>Archive</a>
+				<a href={url('/tags')}>Tags</a>
+				<a href={url('/rss.xml')}>RSS</a>
+			</div>
+		</header>
+	</Band>
+
+	<Band nodes="b" seed={23}>
+		<div>
+			{posts.map((post) => <PostRow post={post} />)}
+			{posts.length === 0 && <p class="pager">No posts yet.</p>}
+		</div>
+	</Band>
+</Base>

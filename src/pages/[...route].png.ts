@@ -4,15 +4,20 @@ import { generateOgImage, type OgBadge, type OgTheme } from "../utils/generateOg
 import { SITE_TITLE } from "../consts";
 import projectsData from "../data/projects.json";
 
-type OgPage = { route: string; title: string; subtitle: string; badge?: OgBadge | null };
+type OgPage = { route: string; title: string; subtitle: string; badge?: OgBadge | null; hero?: string };
 
 export async function getStaticPaths() {
     const posts = await getCollection('blog');
 
     // Base static pages
     const staticPages: OgPage[] = [
-        { route: 'og', title: SITE_TITLE, subtitle: 'Software Developer' },
-        { route: 'about', title: 'About', subtitle: SITE_TITLE },
+        // the card every page without one of its own falls back to, drawn like the page hero
+        {
+            route: 'og',
+            title: SITE_TITLE,
+            subtitle: 'Portfolio',
+            hero: 'A software developer building mobile and web apps with Flutter, Swift, and modern web tech.',
+        },
         { route: 'projects', title: 'Projects', subtitle: SITE_TITLE },
         { route: 'blog', title: 'Blog', subtitle: SITE_TITLE },
     ];
@@ -46,14 +51,14 @@ export async function getStaticPaths() {
     return [...staticPages, ...blogPages, ...projectPages].flatMap((page) =>
         (['dark', 'light'] as const).map((theme) => ({
             params: { route: theme === 'dark' ? page.route : `${page.route}-light` },
-            props: { title: page.title, subtitle: page.subtitle, theme, badge: page.badge ?? null },
+            props: { title: page.title, subtitle: page.subtitle, theme, badge: page.badge ?? null, hero: page.hero ?? null },
         })),
     );
 }
 
 export const GET: APIRoute = async ({ props }) => {
     return new Response(
-        await generateOgImage(props.title as string, props.subtitle as string, props.theme as OgTheme, props.badge as OgBadge | null),
+        await generateOgImage(props.title as string, props.subtitle as string, props.theme as OgTheme, props.badge as OgBadge | null, props.hero as string | null),
         { headers: { "Content-Type": "image/png" } },
     );
 };

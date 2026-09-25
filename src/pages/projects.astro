@@ -1,239 +1,56 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
+import Base from '../layouts/Base.astro';
+import Band from '../components/Band.astro';
 import { SITE_TITLE } from '../consts';
 import projectsData from '../data/projects.json';
 import { url } from '../utils/paths';
 
-// Ordered by impact rather than by date: the data file is curated, most
-// significant first, so the strongest work leads regardless of its year.
+// ordered by impact rather than by date, the data file is curated most significant first
 const projects = projectsData;
-
-const primaryLink = (project: (typeof projects)[number]) => project.links[0];
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={`Projects | ${SITE_TITLE}`} description="Apps, games, and open-source work by Jitendra Verma." />
-		<style>
-			.projects-section {
-				max-width: var(--max-width);
-				margin: 0 auto;
-			}
-			.projects-hero {
-				text-align: center;
-				margin-bottom: 4rem;
-				padding: 2rem 0;
-			}
-			.projects-hero h1 {
-				font-family: var(--font-serif);
-				font-size: 3.2rem;
-				margin: 0 0 1rem 0;
-				color: var(--color-text-main);
-				letter-spacing: -0.02em;
-				line-height: 1.2;
-			}
-			.projects-hero p {
-				font-size: 1.15rem;
-				color: var(--color-text-muted);
-				max-width: 700px;
-				margin: 0 auto;
-				line-height: 1.7;
-			}
-			.projects-grid {
-				display: grid;
-				grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-				gap: 2.5rem;
-				margin-bottom: 4rem;
-			}
-			.project-card {
-				scroll-margin-top: 6.5rem;
-				position: relative;
-				display: flex;
-				flex-direction: column;
-				background-color: var(--color-bg-offset);
-				border: 1px solid var(--color-border);
-				border-radius: 16px;
-				overflow: hidden;
-				transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, border-color 0.2s ease-out;
-				--card-shadow: rgba(72, 78, 85, 0.6);
-				box-shadow: 0 1px 1px var(--card-shadow);
-			}
-			/* rgb(72, 78, 85) is lighter than the dark background, so it reads as a
-			   halo rather than a shadow there. */
-			:global(html[data-theme='dark']) .project-card {
-				--card-shadow: rgba(0, 0, 0, 0.6);
-			}
-			/* The title link is stretched over the whole card, so clicking
-			   anywhere opens the primary link and also triggers the title hover. */
-			.project-card h3 a::after {
-				content: '';
-				position: absolute;
-				inset: 0;
-				z-index: 1;
-			}
-			.project-card:hover {
-				transform: translateY(-15px);
-				box-shadow: 0 20px 40px var(--card-shadow);
-				border-color: var(--color-accent);
-			}
-			.project-image {
-				position: relative;
-				width: 100%;
-				aspect-ratio: 16 / 9;
-				overflow: hidden;
-			}
-			.project-image img {
-				width: 100%;
-				height: 100%;
-				object-fit: cover;
-			}
-			.project-content-wrapper {
-				display: flex;
-				flex-direction: column;
-				padding: 1.75rem;
-				flex: 1;
-			}
-			.project-card h3 {
-				font-family: var(--font-serif);
-				font-size: 1.4rem;
-				margin: 0 0 1rem 0;
-				line-height: 1.3;
-				color: var(--color-text-main);
-			}
-			.project-card h3 a {
-				color: inherit;
-				text-decoration: none;
-				transition: color 0.2s ease;
-			}
-			.project-card h3 a:hover {
-				color: var(--color-accent-text);
-			}
-			.project-description {
-				color: var(--color-text-muted);
-				font-size: 0.95rem;
-				line-height: 1.6;
-				margin-bottom: 1.5rem;
-				flex: 1;
-			}
-			.project-meta {
-				display: flex;
-				align-items: center;
-				gap: 0.5rem;
-				font-size: 0.85rem;
-				margin-bottom: 1.25rem;
-				flex-wrap: wrap;
-				padding-top: 1rem;
-				border-top: 1px solid var(--color-border);
-			}
-			.meta-label {
-				font-weight: 600;
-				color: var(--color-text-muted);
-			}
-			.author-names {
-				color: var(--color-text-main);
-				font-weight: 500;
-			}
-			.read-more {
-				display: inline-flex;
-				align-items: center;
-				font-size: 0.9rem;
-				color: var(--color-accent-text);
-				text-decoration: none;
-				font-weight: 600;
-				transition: gap 0.2s ease;
-				gap: 0.25rem;
-			}
-			.read-more:hover {
-				gap: 0.5rem;
-			}
-			.project-links {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 0.4rem 1.25rem;
-				position: relative;
-				z-index: 2;
-			}
-			.poster-light {
-				display: none;
-			}
-			:global(html[data-theme='light']) .poster-light {
-				display: block;
-			}
-			:global(html[data-theme='light']) .poster-dark {
-				display: none;
-			}
-			.read-more.secondary {
-				color: var(--color-text-muted);
-				font-weight: 500;
-			}
-			.read-more.secondary:hover {
-				color: var(--color-accent-text);
-			}
-			@media (max-width: 768px) {
-				.projects-hero h1 { font-size: 2.5rem; }
-				.projects-grid { gap: 2rem; }
-				.project-content-wrapper { padding: 1.5rem; }
-			}
-		</style>
-	</head>
-	<body>
-		<Header />
-		<main class="projects-section">
-			<div class="projects-hero">
-				<h1>Projects</h1>
-				<p>Apps, games, and open-source work I've built - across Flutter, Swift, and the web.</p>
-			</div>
-			
-			<div class="projects-grid">
-				{projects.length > 0 ? projects.map((project) => (
-					<article class="project-card" id={project.id}>
-						<div class="project-image">
-							<img class="poster-dark" src={url(`/projects/${project.id}.png`)} alt={`${project.title} - ${project.status}`} loading="lazy" />
-							<img class="poster-light" src={url(`/projects/${project.id}-light.png`)} alt={`${project.title} - ${project.status}`} loading="lazy" />
-						</div>
+<Base title={`Projects | ${SITE_TITLE}`} description="Apps, games, and open-source work by Jitendra Verma.">
+	<Band nodes="b" seed={5}>
+		<div class="pat grid"></div>
+		<div class="pat glow"></div>
+		<header class="page-head">
+			<h1 class="h0">Projects</h1>
+			<p>Apps, games, and open-source work I've built - across Flutter, Swift, and the web.</p>
+		</header>
+	</Band>
 
-						<div class="project-content-wrapper">
-							<h3>
-								{primaryLink(project) ? (
-									<a href={primaryLink(project).href} target="_blank" rel="noopener noreferrer">{project.title}</a>
-								) : (
-									project.title
-								)}
-							</h3>
-
-							<p class="project-description">{project.description}</p>
-
-							{project.tech && (
-								<div class="project-meta">
-									<span class="meta-label">Tech:</span>
-									<span class="author-names">{project.tech}</span>
+	<Band nodes="b" seed={23}>
+		<div class="cards two">
+			{projects.map((project) => {
+				const main = project.links[0];
+				return (
+					<article class="cell" id={project.id}>
+						<a href={main?.href ?? `#${project.id}`} target={main ? '_blank' : undefined} rel={main ? 'noopener noreferrer' : undefined} tabindex="-1" aria-label={project.title}>
+							<div class="frame poster-frame">
+								<div class="framed">
+									<img class="poster-light" src={url(`/projects/${project.id}-light.png`)} alt="" loading="lazy" width="1200" height="630" />
+									<img class="poster-dark" src={url(`/projects/${project.id}.png`)} alt="" loading="lazy" width="1200" height="630" />
 								</div>
-							)}
-
-							{project.links.length > 0 && (
-								<div class="project-links">
-									{project.links.map((link, i) => (
-										<a
-											href={link.href}
-											target="_blank"
-											rel="noopener noreferrer"
-											class={i === 0 ? 'read-more' : 'read-more secondary'}
-										>
-											{link.label} {i === 0 ? '→' : '↗'}
-										</a>
-									))}
-								</div>
-							)}
-						</div>
+							</div>
+						</a>
+						<span class="meta">{project.status} · {project.year}</span>
+						<h3>
+							{main ? <a href={main.href} target="_blank" rel="noopener noreferrer">{project.title}</a> : project.title}
+						</h3>
+						<p>{project.description}</p>
+						{project.tech && <p class="tech">{project.tech}</p>}
+						{project.links.length > 0 && (
+							<div class="links">
+								{project.links.map((link, i) => (
+									<a class:list={['button small', i === 0 ? 'primary' : 'secondary']} href={link.href} target="_blank" rel="noopener noreferrer">
+										{link.label} &#8599;
+									</a>
+								))}
+							</div>
+						)}
 					</article>
-				)) : (
-                    <p>No projects found in <code>src/data/projects.json</code>.</p>
-                )}
-			</div>
-		</main>
-		<Footer />
-	</body>
-</html>
+				);
+			})}
+		</div>
+	</Band>
+</Base>

@@ -1,63 +1,36 @@
 ---
 import { getCollection } from 'astro:content';
-import BaseHead from '../../components/BaseHead.astro';
-import Header from '../../components/Header.astro';
-import Footer from '../../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
+import Base from '../../layouts/Base.astro';
+import Band from '../../components/Band.astro';
+import { SITE_TITLE } from '../../consts';
 import { url } from '../../utils/paths';
 
 const posts = await getCollection('blog');
-const tags = [...new Set(posts.flatMap((post) => post.data.tags || []))].sort();
+const counts = new Map<string, number>();
+for (const tag of posts.flatMap((post) => post.data.tags || [])) counts.set(tag, (counts.get(tag) ?? 0) + 1);
+const tags = [...counts.keys()].sort();
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={`Tags | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
-        <style>
-            .tags-container {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 1rem;
-                margin-top: 2rem;
-            }
-            .tag-card {
-                padding: 1rem 1.5rem;
-                background-color: var(--color-bg-offset);
-                border: 1px solid var(--color-border);
-                border-radius: 8px;
-                text-decoration: none;
-                color: var(--color-text-main);
-                font-weight: 600;
-                font-size: 1.1rem;
-                transition: all 0.2s ease;
-            }
-            .tag-card:hover {
-                border-color: var(--color-accent);
-                color: var(--color-accent-text);
-                transform: translateY(-2px);
-                box-shadow: var(--shadow-sm);
-            }
-        </style>
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>Tags</h1>
-            <p style="margin-bottom: 2rem; color: var(--color-text-muted);">
-                Browse articles by topic.
-            </p>
-            <div class="tags-container">
-                {tags.map((tag) => (
-                    <a href={url(`/tags/${tag}`)} class="tag-card">
-                        #{tag}
-                    </a>
-                ))}
-                {tags.length === 0 && (
-                    <p style="color: var(--color-text-muted);">No tags found.</p>
-                )}
-            </div>
-		</main>
-		<Footer />
-	</body>
-</html>
+<Base title={`Tags | ${SITE_TITLE}`} description="Browse articles by topic.">
+	<Band nodes="b" seed={5}>
+		<div class="pat grid"></div>
+		<div class="pat glow"></div>
+		<header class="page-head">
+			<h1 class="h0">Tags</h1>
+			<p>Browse articles by topic.</p>
+			<div class="head-links" data-pagefind-ignore>
+				<a href={url('/blog')}>All posts</a>
+				<a href={url('/archive')}>Archive</a>
+			</div>
+		</header>
+	</Band>
+
+	<Band nodes="b" seed={23}>
+		<div class="tag-cloud">
+			{tags.map((tag) => (
+				<a class="chip tag" href={url(`/tags/${tag}`)}>#{tag}<span class="count">{counts.get(tag)}</span></a>
+			))}
+			{tags.length === 0 && <p>No tags yet.</p>}
+		</div>
+	</Band>
+</Base>

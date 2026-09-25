@@ -8,7 +8,14 @@ import remarkMath from 'remark-math';
 // https://astro.build/config
 export default defineConfig({
 	site: 'https://jitendravjh.in',
-	integrations: [mdx(), sitemap()],
+	integrations: [mdx(), sitemap({ filter: (page) => !/\/(about|blog\/\d+)\/?$/.test(page) })],
+	// about now lives on the homepage, old links still land somewhere useful
+	redirects: {
+		'/about': '/',
+		// the blog used to be paginated
+		'/blog/2': '/blog',
+		'/blog/3': '/blog',
+	},
 	markdown: {
 		shikiConfig: {
 			themes: {

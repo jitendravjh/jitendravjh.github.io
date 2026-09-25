@@ -1,11 +1,11 @@
 // Place any global data in this file.
 // You can import this data from anywhere in your site by using the `import` keyword.
 
-export const SITE_TITLE = '@jitendravjh';
+export const SITE_TITLE = 'Jitendra Verma';
+// the handle is the brand in the menu bar, the name is what tabs and shared links show
+export const SITE_HANDLE = '@jitendravjh';
 export const SITE_DESCRIPTION =
   'Jitendra Verma - a software developer building mobile and web apps with Flutter, Swift, and modern web tech.';
-
-export const SITE_URL = 'https://jitendravjh.in';
 
 // Resume / CV - points to the in-site resume viewer page.
 export const CV_URL = '/resume';
@@ -14,19 +14,11 @@ export const CV_PDF = '/resume.pdf';
 // GitHub profile (shown in the header).
 export const GITHUB_PROFILE = 'https://github.com/jitendravjh';
 
-// Home page intro (old-site content).
 export const INTRO = {
-  heading: 'You wandered this green earth and came here.',
-  thanks: 'Thank you',
   name: 'Jitendra Verma',
-  greeting: "Hi! I'm Jitendra Verma.",
 };
 
 export const CONTACT = {
-  organization: 'Jitendra Verma',
-  addressLines: [
-    'India',
-  ],
   emails: [
     'jitendravjh@gmail.com',
   ],
@@ -74,8 +66,5 @@ export const SOCIAL_LINKS: ReadonlyArray<{
 ];
 
 export const FOOTER_CREDIT = {
-  designerName: '@jitendravjh',
-  designerUrl: 'https://linkedin.com/in/jitendravjh',
-  sourceLabel: 'Source',
   sourceUrl: 'https://github.com/jitendravjh/jitendravjh.github.io',
 };
