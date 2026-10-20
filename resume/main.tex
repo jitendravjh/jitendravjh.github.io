@@ -286,6 +286,16 @@
 \resumeSubHeadingListStart
 
 \resumeProject
+  {Backend, Web \& App Fixes for an AI Wearable}
+  {BasedHardware / Omi - 41 merged PRs across the Python backend, the React web app and the Flutter app}
+  {{}[\href{https://github.com/BasedHardware/omi/pulls?q=is:pr+author:jitendravjh+is:merged}{\textcolor{darkblue}{GitHub }{\faGithub}}]}
+  {}
+\resumeItemListStart
+  \item Fixed 12 bugs in the Python (FastAPI) backend, like chat seeing only 3 of a user's goals, and 15 in the React and TypeScript web app, like chat replies arriving in one block instead of streaming.
+  \item Shipped each fix with a regression test that fails on main, plus 12 Flutter app fixes and \texttt{omi app}, a local test harness for app webhooks in the Python CLI.
+\resumeItemListEnd
+
+\resumeProject
   {Map Projections \& Round-Trip Accuracy}
   {JuliaEarth / CoordRefSystems.jl - GitHub \#362, \#363, \#364, \#365, \#366, \#367, \#369}
   {{}[\href{https://github.com/JuliaEarth/CoordRefSystems.jl/pulls?q=author:jitendravjh}{\textcolor{darkblue}{GitHub }{\faGithub}}]}
@@ -315,31 +325,31 @@
 \resumeItemListEnd
 
 \resumeProject
+  {Differentiable Runtime Fixes}
+  {Pasteur Labs / tesseract-core - GitHub \#796, \#810, \#811, \#812, \#814, \#815}
+  {{}[\href{https://github.com/pasteurlabs/tesseract-core/pulls?q=is:pr+author:jitendravjh}{\textcolor{darkblue}{GitHub }{\faGithub}}]}
+  {}
+\resumeItemListStart
+  \item Fixed six bugs in the Python runtime of Tesseract, a toolkit for differentiable scientific computing: gradient paths that matched the wrong field or failed on dict keys and absent optional leaves, big-endian arrays corrupted in base64 and binref encoding, and array defaults in the \texttt{abstract\_eval} schema.
+\resumeItemListEnd
+
+\resumeProject
   {Adaptive Loss Functions \& Documentation Improvements}
   {SciML / NeuralPDE.jl - GitHub \#1054, \#1055, \#1057}
   {{}[\href{https://github.com/SciML/NeuralPDE.jl/pulls?q=author:jitendravjh}{\textcolor{darkblue}{GitHub }{\faGithub}}]}
   {}
 \resumeItemListStart
   \item Implemented new adaptive loss functions (\texttt{SoftAdaptAdaptiveLoss} and \texttt{ReLOBRaLoAdaptiveLoss}).
-  \item Enhanced documentation by filling placeholder docstrings for \texttt{PINNRepresentation} and \texttt{PhysicsInformedNN}, and updated CI badges.
+  \item Filled the placeholder docstrings for \texttt{PINNRepresentation} and \texttt{PhysicsInformedNN}, and updated CI badges.
 \resumeItemListEnd
 
 \resumeProject
-  {Added Multiple Theme-Related Features}
-  {turinglang.org/docs/ - GitHub \#509, \#523, \#602}
-  {{}[\href{https://github.com/TuringLang/docs/pulls?q=author:jitendravjh}{\textcolor{darkblue}{GitHub }{\faGithub}}]}
+  {Theme System \& Dark Mode}
+  {TuringLang / docs - GitHub \#509, \#523, \#602 and turinglang.github.io - GitHub \#92, \#93, \#98}
+  {{}[\href{https://github.com/TuringLang/docs/pulls?q=author:jitendravjh}{\textcolor{darkblue}{Docs }{\faGithub}} $|$ \href{https://github.com/TuringLang/turinglang.github.io/pulls?q=author:jitendravjh}{\textcolor{darkblue}{Website }{\faGithub}}]}
   {}
 \resumeItemListStart
-  \item Enabled seamless theme switching with customizable options, optimizing performance for faster load times.
-\resumeItemListEnd
-
-\resumeProject
-  {Added Dark Theme}
-  {TuringLang / turinglang.github.io - GitHub \#92, \#93, \#98}
-  {{}[\href{https://github.com/TuringLang/turinglang.github.io/pulls?q=author:jitendravjh}{\textcolor{darkblue}{GitHub }{\faGithub}}]}
-  {}
-\resumeItemListStart
-  \item Implemented a user-friendly dark theme with auto theme support, enhancing readability and reducing eye strain.
+  \item Built theme switching for the documentation site and a dark theme with auto-detection for the main website.
 \resumeItemListEnd
 
 \resumeSubHeadingListEnd
@@ -365,10 +375,10 @@
 \resumeHeadingSkillStart
   \resumeSubItem{Mobile Development:}
     {Flutter, Dart, iOS (Swift)}
-  \resumeSubItem{Web Development:}
-    {React.js, Tailwind CSS, REST APIs, Quarto, Astro, JavaScript, HTML, CSS, MySQL}
+  \resumeSubItem{Web \& Backend:}
+    {React.js, Next.js, Node.js, FastAPI, Supabase, Postgres, MySQL, REST APIs, Tailwind CSS, Astro, Quarto, HTML, CSS}
   \resumeSubItem{Programming Languages:}
-    {JavaScript, Dart, Python, Julia, Rust}
+    {Python, TypeScript, JavaScript, Rust, Dart, Julia}
   \resumeSubItem{Design \& Creative Tools:}
     {Figma, Canva, Lightroom, DaVinci Resolve}
 \resumeHeadingSkillEnd
@@ -394,16 +404,7 @@
   {}
   {}
 \resumeItemListStart
-  \item Awarded merit-cum-need based scholarship by HDFC Bank under their CSR initiative, supporting academically meritorious undergraduate students.
-\resumeItemListEnd
-
-\resumeProject
-  {Workshop on Distributed Version Control using Git and GitHub}
-  {Asha M. Tarsadia Institute of Computer Science and Technology}
-  {}
-  {}
-\resumeItemListStart
-  \item Certificate of participation covering Git workflows, branching strategies, and collaborative development on GitHub.
+  \item Awarded a merit-cum-need scholarship by HDFC Bank under its CSR initiative for undergraduate students.
 \resumeItemListEnd
 \resumeSubHeadingListEnd
 % ------------------------------------------------------------------------------------
@@ -427,6 +428,6 @@
 
 \vfill
 \begin{center}
-    \footnotesize\textcolor{graytext}{Last Updated: September 22, 2026. The latest version can be found at \href{https://jitendravjh.in/resume/}{jitendravjh.in/resume}}
+    \footnotesize\textcolor{graytext}{Last Updated: October 21, 2026. The latest version can be found at \href{https://jitendravjh.in/resume/}{jitendravjh.in/resume}}
 \end{center}
 \end{document}
