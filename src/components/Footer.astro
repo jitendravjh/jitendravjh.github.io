@@ -16,7 +16,6 @@ const year = new Date().getFullYear();
 			<hr />
 			<p>Software developer building mobile and web apps with Flutter, Swift, and modern web tech.</p>
 			<p><a href={FOOTER_CREDIT.sourceUrl} target="_blank" rel="noopener noreferrer">Source on GitHub</a></p>
-			<p>Website design inspired by <a href="https://zed.dev" target="_blank" rel="noopener noreferrer">zed.dev</a></p>
 		</div>
 		<div class="footer-col">
 			<h3>Site</h3>
@@ -108,7 +107,7 @@ const year = new Date().getFullYear();
 	};
 
 	const fallback = (name: string) => {
-		const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#1348dc"/><text x="50%" y="50%" dominant-baseline="central" text-anchor="middle" font-family="Georgia, serif" font-size="80" fill="#fff">${initials(name)}</text></svg>`;
+		const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect width="200" height="200" fill="#08c225"/><text x="50%" y="50%" dominant-baseline="central" text-anchor="middle" font-family="Georgia, serif" font-size="80" fill="#fff">${initials(name)}</text></svg>`;
 		return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(svg)}`;
 	};
 

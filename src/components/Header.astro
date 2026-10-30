@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import Icon from './Icon.astro';
 import { CV_PDF, CV_URL, GITHUB_PROFILE, SITE_HANDLE } from '../consts';
 import { url } from '../utils/paths';
-import { profileImg } from '../utils/profileImage';
+import { profileImg, profileUrl } from '../utils/profileImage';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const section = Astro.url.pathname.replace(base, '').split('/').filter(Boolean)[0] ?? '';
@@ -12,10 +12,13 @@ const links = [
 	{ href: url('/projects'), label: 'Projects', section: 'projects' },
 	{ href: url('/blog'), label: 'Blog', section: 'blog' },
 ];
+// Blurred behind frosted glass, so it never needs full resolution.
+const auraSrc = await profileUrl(240);
 const current = (s: string) => (s === section || (s === 'blog' && (section === 'tags' || section === 'archive')) ? 'page' : undefined);
 ---
 
 <div class="header-wrap">
+	<div class="nav-aura" aria-hidden="true" style={`background-image: url(${auraSrc})`}></div>
 	<header class="band site-header">
 		<i class="node bl"></i><i class="node br"></i>
 		<span class="gutter"></span>
