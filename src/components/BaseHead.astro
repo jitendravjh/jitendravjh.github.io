@@ -76,8 +76,12 @@ const imageUrl = typeof image === 'string'
 <meta name="generator" content={Astro.generator} />
 <meta name="color-scheme" content="light dark" />
 <meta name="theme-color" content="#f5f4f3" />
-<link rel="preload" as="font" type="font/woff2" href={url('/fonts/writer-regular.woff2')} crossorigin />
-<link rel="preload" as="font" type="font/woff2" href={url('/fonts/plexserif-var.woff2')} crossorigin />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+	rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Fleur+De+Leah&family=Nunito:wght@400;500;600;700;800&display=swap"
+/>
 
 <link rel="canonical" href={canonicalURL} />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" />
