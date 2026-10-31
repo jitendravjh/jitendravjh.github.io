@@ -791,8 +791,9 @@ pre.block, .prose pre {
 .button.secondary:hover { border-color: var(--accent); color: var(--accent); }
 
 /* cards sit on the offset surface and lift on hover */
-.cards > .cell { background: var(--panel); transition: transform 0.2s ease, border-color 0.2s ease; }
-.cards > .cell:hover { transform: translateY(-4px); border-color: var(--accent); }
+.cards > .cell { background: var(--panel); transition: background 0.15s ease; }
+a.cell:hover { background: var(--hover); }
+a.cell:hover h3, .cell h3 a:hover { text-decoration: underline; text-underline-offset: 3px; }
 
 /* the hero name in the script face the old design used */
 .hero h1 { font-family: var(--font-display); font-style: normal; color: var(--accent); }
