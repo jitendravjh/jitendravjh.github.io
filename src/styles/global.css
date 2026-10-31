@@ -530,7 +530,14 @@ pre.block, .prose pre {
   border: 1px solid var(--border); background: var(--panel-soft);
   color: var(--text-faint); cursor: text;
 }
-.nav-search-field:focus-within { border-color: var(--accent); color: var(--text); }
+/* in the bar it is just the glyph until clicked, so the placeholder does not
+   sit there all day */
+.nav-right .nav-search-field {
+  width: 30px; padding: 0; justify-content: center;
+  border-color: transparent; background: none; color: var(--text);
+}
+.nav-right .nav-search-field:hover { background: var(--hover); color: var(--text-strong); }
+.nav-right .nav-search-input { width: 0; padding: 0; }
 .nav-search-field svg { width: 15px; height: 15px; flex: none; }
 .nav-search-input {
   width: 128px; min-width: 0; border: 0; background: none; outline: none;
