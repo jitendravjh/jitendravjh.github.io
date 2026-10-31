@@ -4,7 +4,7 @@
   color-scheme: light;
 
   --bg: #ffffff;
-  --nav-bg: rgba(255, 255, 255, 0.48);
+  --nav-bg: rgba(255, 255, 255, 0.3);
   --panel: #f7f7f4;
   --panel-soft: #ffffff;
   --text: #1f1f1f;
@@ -52,7 +52,7 @@
 :root[data-theme="dark"] {
   color-scheme: dark;
   --bg: #1a1a1a;
-  --nav-bg: rgba(26, 26, 26, 0.48);
+  --nav-bg: rgba(26, 26, 26, 0.3);
   --panel: #242424;
   --panel-soft: #242424;
   --text: #f1f1f1;
