@@ -16,6 +16,8 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const tex = join(root, 'resume', 'main.tex');
 const built = join(root, 'resume', 'main.pdf');
 const out = join(root, 'public', 'resume.pdf');
+// the deploy publishes a copy here too, for links shared before the path changed
+const legacy = join(root, 'public', 'resume', 'resume.pdf');
 
 const mtime = (p) => {
 	try {
@@ -44,4 +46,6 @@ execFileSync('latexmk', ['-pdf', '-interaction=nonstopmode', 'main.tex'], {
 });
 mkdirSync(dirname(out), { recursive: true });
 copyFileSync(built, out);
+mkdirSync(dirname(legacy), { recursive: true });
+copyFileSync(built, legacy);
 console.log('[resume] built public/resume.pdf');
