@@ -52,17 +52,17 @@ const ICON = {
 
 export type OgBadge = { label: string; icon: keyof typeof ICON };
 
-// Each cut matches the theme it is shown in: a white card with the green accent
-// in light mode, the dark card with the yellow one in dark mode.
+// Each cut matches the theme it is shown in: ink on white for light, white on
+// near-black for dark.
 const ACCENT = {
     light: {
-        solid: '#08c225', soft: 'rgba(8, 194, 37, 0.14)',
+        solid: '#000000', soft: 'rgba(0, 0, 0, 0.06)',
         bg: '#ffffff', title: '#000000', name: '#000000', muted: '#747474',
         chipBg: 'rgba(0, 0, 0, 0.04)', chipBorder: 'rgba(0, 0, 0, 0.18)', chipText: '#1f1f1f',
         tileText: '#ffffff',
     },
     dark: {
-        solid: '#ffd523', soft: 'rgba(255, 213, 35, 0.14)',
+        solid: '#ffffff', soft: 'rgba(255, 255, 255, 0.10)',
         bg: '#1a1a1a', title: '#ffffff', name: '#ffffff', muted: '#b3b3b3',
         chipBg: 'rgba(255, 255, 255, 0.08)', chipBorder: 'rgba(255, 255, 255, 0.28)', chipText: '#e8e8e8',
         tileText: '#000000',

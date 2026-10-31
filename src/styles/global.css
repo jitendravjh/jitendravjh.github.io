@@ -14,10 +14,13 @@
   --border: #e5e5e5;
   --border-dashed: #e5e5e5;
   --header-border: rgba(0, 0, 0, 0.08);
-  --accent: #08c225;
+  --accent: #000000;
   --link: var(--accent);
+  --select-bg: #000000;
+  --select-fg: #ffffff;
+  --btn-bg-hover: #333333;
   --accent-blue: var(--accent);
-  --accent-soft: rgba(8, 194, 37, 0.10);
+  --accent-soft: rgba(0, 0, 0, 0.08);
   --hover: rgba(0, 0, 0, 0.06);
   --kbd-fg: #747474;
   --kbd-border: rgba(0, 0, 0, 0.12);
@@ -28,7 +31,7 @@
   --btn-bg: #000000;
   --btn-text: #ffffff;
   --card-hover-border: var(--accent);
-  --card-hover-glow: rgba(8, 194, 37, 0.06);
+  --card-hover-glow: rgba(0, 0, 0, 0.06);
   --code-bg: #f7f7f4;
   --footer-bg: #000000;
   --footer-text: #ffffff;
@@ -62,19 +65,22 @@
   --border: #333333;
   --border-dashed: #333333;
   --header-border: rgba(255, 255, 255, 0.1);
-  --accent: #ffd523;
-  --accent-soft: rgba(255, 213, 35, 0.14);
+  --accent: #ffffff;
+  --accent-soft: rgba(255, 255, 255, 0.14);
   --hover: rgba(255, 255, 255, 0.08);
   --kbd-fg: #b3b3b3;
   --kbd-border: rgba(255, 255, 255, 0.14);
   --kbd-bg: rgba(255, 255, 255, 0.05);
-  --card-hover-glow: rgba(255, 213, 35, 0.08);
+  --card-hover-glow: rgba(255, 255, 255, 0.08);
   --code-bg: #242424;
   --btn-bg: #222222;
   --btn-text: #ffffff;
-  --footer-bg: #ffd523;
-  --footer-text: #000000;
-  --engrave-ink: #b38f00;
+  --footer-bg: #f1f1f1;
+  --footer-text: #111111;
+  --engrave-ink: #8a8a8a;
+  --select-bg: #ffffff;
+  --select-fg: #000000;
+  --btn-bg-hover: #3a3a3a;
 }
 
 
@@ -780,8 +786,7 @@ pre.block, .prose pre {
 .button.primary {
   background: var(--btn-bg); color: var(--btn-text); border-color: var(--btn-bg); font-weight: 700;
 }
-.button.primary:hover { background: var(--accent); border-color: var(--accent); color: #ffffff; }
-:root[data-theme="dark"] .button.primary:hover { color: #000000; }
+.button.primary:hover { background: var(--btn-bg-hover); border-color: var(--btn-bg-hover); }
 .button.secondary { border-color: var(--border); color: var(--text-strong); font-weight: 700; }
 .button.secondary:hover { border-color: var(--accent); color: var(--accent); }
 
