@@ -32,7 +32,7 @@
   --code-bg: #f7f7f4;
   --footer-bg: #000000;
   --footer-text: #ffffff;
-  --engrave-ink: #5a5a5a;
+  --engrave-ink: #6b6b6b;
 
   --node-vertical-offset: 3.5px;
   --node-horizontal-offset: 4.5px;
@@ -825,5 +825,5 @@ a.cell:hover h3, .cell h3 a:hover { text-decoration: underline; text-underline-o
 .engrave { border-top-color: color-mix(in srgb, var(--footer-text) 12%, transparent); }
 /* the lines run the width of the page, so the band must not clip them */
 .site-footer .inner { overflow: visible; }
-.engrave svg * { fill: var(--engrave-ink); fill-opacity: 1; stroke: var(--engrave-ink); stroke-opacity: 1; }
+.engrave svg * { fill: var(--engrave-ink); fill-opacity: 0.1; stroke: var(--engrave-ink); stroke-opacity: 0.9; }
 .engrave svg { opacity: 1; }
