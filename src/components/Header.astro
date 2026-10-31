@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import Icon from './Icon.astro';
+import Search from './Search.astro';
 import { CV_PDF, CV_URL, GITHUB_PROFILE, SITE_HANDLE } from '../consts';
 import { url } from '../utils/paths';
 import { profileImg, profileUrl } from '../utils/profileImage';
@@ -34,9 +35,7 @@ const current = (s: string) => (s === section || (s === 'blog' && (section === '
 					<div class="nav-links">
 						{links.map((l) => <a href={l.href} aria-current={current(l.section)}>{l.label}</a>)}
 					</div>
-					<button class="icon-btn search-toggle" type="button" aria-label="Search">
-						<Icon name="search" />
-					</button>
+					<Search id="nav-search-desktop" />
 					<a class="icon-btn nav-github" href={GITHUB_PROFILE} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
 						<Icon name="github" />
 					</a>
@@ -44,7 +43,7 @@ const current = (s: string) => (s === section || (s === 'blog' && (section === '
 						<Icon name="sun" class="sun-icon" />
 						<Icon name="moon" class="moon-icon" />
 					</button>
-					<a class="button primary nav-cta" href={url(CV_URL)} data-resume-pdf={url(CV_PDF)}>Resume<kbd aria-hidden="true">R</kbd></a>
+					<a class="button primary nav-cta" href={url(CV_URL)} data-resume-pdf={url(CV_PDF)}>Resume</a>
 					<button class="icon-btn menu-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="mobile-nav">
 						<Icon name="menu" />
 					</button>
@@ -56,6 +55,7 @@ const current = (s: string) => (s === section || (s === 'blog' && (section === '
 	</header>
 
 	<nav class="mobile-nav" id="mobile-nav" aria-label="Menu" hidden>
+		<Search id="nav-search-mobile" />
 		{links.map((l) => <a href={l.href} aria-current={current(l.section)}>{l.label}</a>)}
 		<a href={url(CV_URL)} data-resume-pdf={url(CV_PDF)}>Resume</a>
 		<a href={GITHUB_PROFILE} target="_blank" rel="noopener noreferrer">GitHub</a>
@@ -91,10 +91,6 @@ const current = (s: string) => (s === section || (s === 'blog' && (section === '
 			if (e.key === 'Escape' && !menu.hidden) setMenu(false);
 		});
 
-		for (const btn of document.querySelectorAll('.search-toggle')) {
-			btn.addEventListener('click', () => document.dispatchEvent(new CustomEvent('open-search')));
-		}
-
 		// the in-page pdf viewer is unreliable on phones and ipads, so resume links go straight to the pdf
 		// there. this runs while the header is still parsing, so wait for the rest of the page first.
 		const touch = window.matchMedia('(pointer: coarse)').matches || navigator.maxTouchPoints > 1;
@@ -110,18 +106,5 @@ const current = (s: string) => (s === section || (s === 'blog' && (section === '
 				pointAtPdf();
 			}
 		}
-
-		document.addEventListener('keydown', (e) => {
-			if (e.metaKey || e.ctrlKey || e.altKey || e.shiftKey || e.repeat) return;
-			if (e.target.closest?.('input, textarea, select, [contenteditable], dialog')) return;
-			// the search panel is a div, not a dialog, so check it by hand
-			if (document.getElementById('search-overlay')?.hidden === false) return;
-			const key = e.key.toUpperCase();
-			const hit = [...document.querySelectorAll('a kbd')].find((k) => k.textContent.trim() === key);
-			if (hit) {
-				e.preventDefault();
-				hit.closest('a').click();
-			}
-		});
 	})();
 </script>

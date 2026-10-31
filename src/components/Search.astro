@@ -1,73 +1,79 @@
 ---
 import '@pagefind/default-ui/css/ui.css';
+import Icon from './Icon.astro';
+
+interface Props {
+	id: string;
+	placeholder?: string;
+}
+
+const { id, placeholder = 'Search' } = Astro.props;
 ---
 
-<div id="search-overlay" class="search-overlay" hidden>
-	<div class="search-backdrop" data-search-close></div>
-	<div class="search-panel" role="dialog" aria-modal="true" aria-label="Search">
-		<div class="search-panel-header">
-			<span class="label">Search</span>
-			<button class="search-close" type="button" data-search-close aria-label="Close search"><kbd>Esc</kbd></button>
-		</div>
-		<div class="search-panel-content">
-			{
-				import.meta.env.DEV ? (
-					<p class="search-dev">Search only works in a production build. Run a build and preview it to try it out.</p>
-				) : (
-					<div id="pagefind__search" />
-				)
-			}
-		</div>
-	</div>
+<div class="nav-search" data-search-root>
+	<label class="nav-search-field" for={`${id}-input`}>
+		<Icon name="search" />
+		<input
+			id={`${id}-input`}
+			class="nav-search-input"
+			type="search"
+			autocomplete="off"
+			placeholder={placeholder}
+			data-search-stub
+		/>
+	</label>
+	<div class="nav-search-mount" id={id} hidden></div>
 </div>
 
 <script>
-	const overlay = document.getElementById('search-overlay');
+	// Pagefind ships its own input, so the stub above is what shows until someone
+	// reaches for it. Loading the bundle on first focus keeps it off every page load.
+	for (const root of document.querySelectorAll<HTMLElement>('[data-search-root]')) {
+		const stub = root.querySelector<HTMLInputElement>('[data-search-stub]');
+		const mount = root.querySelector<HTMLElement>('.nav-search-mount');
+		if (!stub || !mount) continue;
 
-	const focusInput = () => overlay?.querySelector<HTMLElement>('.pagefind-ui__search-input')?.focus();
-
-	const openSearch = () => {
-		if (!overlay) return;
-		overlay.hidden = false;
-		document.body.style.overflow = 'hidden';
-		const box = document.getElementById('pagefind__search');
-		if (box && !box.children.length && !import.meta.env.DEV) {
+		let started = false;
+		const start = () => {
+			if (started) return;
+			started = true;
+			if (import.meta.env.DEV) {
+				mount.hidden = false;
+				mount.innerHTML = '<p class="search-dev">Search needs a production build.</p>';
+				return;
+			}
 			import('@pagefind/default-ui').then(({ PagefindUI }) => {
 				new PagefindUI({
 					baseUrl: import.meta.env.BASE_URL,
 					bundlePath: import.meta.env.BASE_URL.replace(/\/$/, '') + '/pagefind/',
-					element: '#pagefind__search',
+					element: mount,
 					showImages: false,
 					showSubResults: true,
 				});
-				focusInput();
+				mount.hidden = false;
+				root.querySelector<HTMLElement>('.nav-search-field')?.setAttribute('hidden', '');
+				const real = mount.querySelector<HTMLInputElement>('.pagefind-ui__search-input');
+				if (!real) return;
+				real.placeholder = stub.placeholder;
+				if (stub.value) {
+					real.value = stub.value;
+					real.dispatchEvent(new Event('input', { bubbles: true }));
+				}
+				real.focus();
 			});
-		} else {
-			requestAnimationFrame(focusInput);
-		}
-	};
+		};
 
-	const closeSearch = () => {
-		if (!overlay) return;
-		overlay.hidden = true;
-		document.body.style.overflow = '';
-	};
+		stub.addEventListener('focus', start);
+		stub.addEventListener('input', start);
 
-	document.addEventListener('open-search', openSearch);
-	for (const el of document.querySelectorAll('[data-search-close]')) el.addEventListener('click', closeSearch);
-
-	window.addEventListener('keydown', (e) => {
-		if (!overlay) return;
-		if (e.key === 'Escape' && !overlay.hidden) {
-			e.preventDefault();
-			closeSearch();
-		}
-		if (e.key === '/' && overlay.hidden) {
-			const typing = (e.target as HTMLElement | null)?.closest?.('input, textarea, select, [contenteditable]');
-			if (!typing) {
-				e.preventDefault();
-				openSearch();
+		root.addEventListener('keydown', (e) => {
+			if ((e as KeyboardEvent).key !== 'Escape') return;
+			const input = root.querySelector<HTMLInputElement>('.pagefind-ui__search-input');
+			if (input?.value) {
+				input.value = '';
+				input.dispatchEvent(new Event('input', { bubbles: true }));
 			}
-		}
-	});
+			input?.blur();
+		});
+	}
 </script>

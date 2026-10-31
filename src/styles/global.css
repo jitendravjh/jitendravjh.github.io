@@ -537,35 +537,71 @@ pre.block, .prose pre {
 .prose .katex { color: var(--text-strong); }
 
 /* ── search ───────────────────────────────────────────────────── */
-.search-overlay { position: fixed; inset: 0; z-index: 200; display: flex; justify-content: center; padding: 72px 16px 16px; }
-.search-backdrop { position: absolute; inset: 0; background: rgba(12, 14, 18, 0.45); backdrop-filter: blur(3px); }
-.search-panel {
-  position: relative; width: min(680px, 100%); max-height: calc(100vh - 110px);
-  display: flex; flex-direction: column;
-  background: var(--nav-bg); border: 1px solid var(--border); border-radius: 3px;
-  box-shadow: 6px 6px 0 var(--card-hover-glow), -6px -6px 0 var(--card-hover-glow), 0 24px 60px rgba(0, 0, 0, 0.25);
+/* The field lives in the bar on desktop and in the menu on mobile, so the
+   results hang off whichever one is on screen rather than covering the page. */
+.nav-search { position: relative; min-width: 0; }
+.nav-search-field {
+  display: flex; align-items: center; gap: 7px;
+  height: 32px; padding: 0 12px; border-radius: 999px;
+  border: 1px solid var(--border); background: var(--panel-soft);
+  color: var(--text-faint); cursor: text;
 }
-.search-panel-header {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 10px 14px; border-bottom: 1px solid var(--border);
+.nav-search-field:focus-within { border-color: var(--accent); color: var(--text); }
+.nav-search-field svg { width: 15px; height: 15px; flex: none; }
+.nav-search-input {
+  width: 128px; min-width: 0; border: 0; background: none; outline: none;
+  font: inherit; font-size: 14px; color: var(--text-strong);
 }
-.search-close { cursor: pointer; }
-.search-panel-content { padding: 16px; overflow-y: auto; }
-.search-dev { font-size: 0.9rem; }
-#pagefind__search {
+.nav-search-input::placeholder { color: var(--text-faint); }
+.nav-search-input::-webkit-search-cancel-button { display: none; }
+
+.nav-search-mount {
   --pagefind-ui-scale: 0.8;
-  --pagefind-ui-primary: var(--link);
+  --pagefind-ui-primary: var(--text-strong);
   --pagefind-ui-text: var(--text-strong);
-  --pagefind-ui-background: var(--panel);
+  --pagefind-ui-background: var(--bg);
   --pagefind-ui-border: var(--border);
   --pagefind-ui-tag: var(--hover);
   --pagefind-ui-border-width: 1px;
-  --pagefind-ui-border-radius: 3px;
+  --pagefind-ui-border-radius: 999px;
   --pagefind-ui-font: var(--font-body);
 }
-#pagefind__search .pagefind-ui__result-title { font-family: var(--font-serif); font-weight: 400; }
-#pagefind__search .pagefind-ui__result-excerpt { color: var(--text); }
-#pagefind__search mark { background: var(--accent-soft); color: var(--text-strong); }
+.nav-search-mount .pagefind-ui__form { position: relative; }
+.nav-search-mount .pagefind-ui__search-input {
+  width: 168px; height: 32px; padding: 0 30px 0 14px; font-size: 14px;
+  background: var(--panel-soft); border-color: var(--border);
+}
+.nav-search-mount .pagefind-ui__search-input:focus { border-color: var(--accent); outline: none; }
+.nav-search-mount .pagefind-ui__search-clear {
+  right: 4px; top: 50%; transform: translateY(-50%); padding: 0 8px; height: 24px;
+  background: none; color: var(--text-faint); font-size: 12px;
+}
+/* the results sit under the bar as their own sheet */
+.nav-search-mount .pagefind-ui__drawer {
+  position: absolute; top: calc(100% + 10px); right: 0; z-index: 120;
+  width: min(420px, calc(100vw - 2rem));
+  max-height: min(60vh, 420px); overflow-y: auto;
+  padding: 6px 14px 10px;
+  background: var(--bg); border: 1px solid var(--border); border-radius: 18px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.14);
+}
+.nav-search-mount .pagefind-ui__drawer:empty,
+.nav-search-mount .pagefind-ui__drawer[hidden] { display: none; }
+.nav-search-mount .pagefind-ui__result { border-top: 1px solid var(--border); }
+.nav-search-mount .pagefind-ui__result-title { font-family: var(--font-body); font-weight: 700; font-size: 0.95rem; }
+.nav-search-mount .pagefind-ui__result-excerpt { color: var(--text); font-size: 0.85rem; }
+.nav-search-mount mark { background: var(--accent-soft); color: var(--text-strong); }
+.search-dev { font-size: 0.85rem; padding: 8px 0; }
+
+/* in the menu the field is a full-width row and the results flow under it */
+.mobile-nav .nav-search { padding: 4px 8px 10px; border-bottom: 1px dashed var(--border-dashed); }
+.mobile-nav .nav-search-field { height: 38px; }
+.mobile-nav .nav-search-input,
+.mobile-nav .nav-search-mount .pagefind-ui__search-input { width: 100%; }
+.mobile-nav .nav-search-mount .pagefind-ui__drawer {
+  position: static; width: auto; max-height: 50vh; margin-top: 8px;
+  border-radius: 14px; box-shadow: none;
+}
 
 /* ── author modal ─────────────────────────────────────────────── */
 .author-link { color: var(--link); text-decoration: underline; text-underline-offset: 2px; cursor: pointer; }
@@ -645,14 +681,14 @@ pre.block, .prose pre {
   -webkit-mask-image: linear-gradient(to bottom, #000, rgba(0, 0, 0, 0.7));
   mask-image: linear-gradient(to bottom, #000, rgba(0, 0, 0, 0.7));
 }
-.engrave-art { width: min(940px, 100%); aspect-ratio: 1026 / 147; overflow: hidden; }
+.engrave-art { width: min(940px, 100%); aspect-ratio: 1026 / 149; }
 .engrave svg { width: 100%; height: auto; opacity: 0.4; }
 .engrave svg * { fill: #fff; fill-opacity: 0.025; stroke: #fff; stroke-opacity: 0.2; stroke-width: 1.2; stroke-linejoin: round; }
 .engrave text { font-family: var(--font-serif); font-size: 160px; font-weight: 340; letter-spacing: -0.02em; }
 
 /* ── responsive ───────────────────────────────────────────────── */
 @media (max-width: 719px) {
-  .nav-links, .nav-cta, .nav-github { display: none; }
+  .nav-links, .nav-cta, .nav-github, .nav-right .nav-search { display: none; }
   .menu-toggle { display: inline-flex; }
   .nav { padding: 0 8px; gap: 6px; }
   .nav-right { gap: 2px; }
