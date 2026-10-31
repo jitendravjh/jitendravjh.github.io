@@ -1,7 +1,7 @@
 import { getImage } from 'astro:assets';
-import profileImg from '../assets/profile.jpg';
+import profileImg from '../assets/profile.png';
 
-// One source of truth for the profile photo: src/assets/profile.jpg.
+// One source of truth for the profile photo: src/assets/profile.png.
 // Replace that file to change the picture everywhere.
 export { profileImg };
 
