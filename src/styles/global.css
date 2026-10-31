@@ -18,14 +18,14 @@
   --link: var(--accent);
   --select-bg: #000000;
   --select-fg: #ffffff;
-  --btn-bg-hover: #333333;
+  --btn-bg-hover: #3d3d3d;
   --accent-blue: var(--accent);
   --accent-soft: rgba(0, 0, 0, 0.08);
   --hover: rgba(0, 0, 0, 0.06);
   --pattern: transparent;
   --grid-line: transparent;
   --btn-shadow: none;
-  --btn-bg: #000000;
+  --btn-bg: #262626;
   --btn-text: #ffffff;
   --card-hover-border: var(--accent);
   --card-hover-glow: rgba(0, 0, 0, 0.06);
@@ -67,14 +67,14 @@
   --hover: rgba(255, 255, 255, 0.08);
   --card-hover-glow: rgba(255, 255, 255, 0.08);
   --code-bg: #242424;
-  --btn-bg: #222222;
-  --btn-text: #ffffff;
+  --btn-bg: #e8e8e8;
+  --btn-text: #111111;
   --footer-bg: #f1f1f1;
   --footer-text: #111111;
   --engrave-ink: #8a8a8a;
   --select-bg: #ffffff;
   --select-fg: #000000;
-  --btn-bg-hover: #3a3a3a;
+  --btn-bg-hover: #f5f5f5;
 }
 
 
