@@ -104,7 +104,8 @@ body {
 a { color: inherit; }
 img, svg { display: block; max-width: 100%; }
 button { font: inherit; color: inherit; background: none; }
-::selection { background: var(--accent-soft); }
+::selection { background: var(--select-bg); color: var(--select-fg); }
+.site-footer::selection, .site-footer ::selection { background: var(--footer-text); color: var(--footer-bg); }
 [hidden] { display: none !important; }
 
 /* headings */
