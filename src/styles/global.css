@@ -540,14 +540,14 @@ pre.block, .prose pre {
 
 /* in the bar it is the glyph alone, sized like its neighbours, until clicked */
 .nav-right .nav-search-field {
-  width: 30px; height: 30px; padding: 0; justify-content: center;
+  width: 30px; height: 30px; padding: 0; gap: 0; justify-content: center;
   border-color: transparent; background: none; color: var(--text);
   transition: background 0.12s, border-color 0.12s;
 }
 .nav-right .nav-search-field:hover { background: var(--hover); color: var(--text-strong); }
 .nav-right .nav-search-input { width: 0; padding: 0; }
 .nav-right .nav-search[data-open] .nav-search-field {
-  width: auto; padding: 0 11px; justify-content: flex-start;
+  width: auto; padding: 0 11px; gap: 7px; justify-content: flex-start;
   border-color: var(--border); background: var(--panel-soft);
 }
 .nav-right .nav-search[data-open] .nav-search-input { width: 170px; }
