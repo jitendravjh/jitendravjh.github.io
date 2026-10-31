@@ -1,7 +1,6 @@
 ---
 import Band from './Band.astro';
 import Icon from './Icon.astro';
-import Search from './Search.astro';
 import { CV_PDF, CV_URL, FOOTER_CREDIT, SOCIAL_LINKS } from '../consts';
 import { url } from '../utils/paths';
 
@@ -51,14 +50,13 @@ const year = new Date().getFullYear();
 	</div>
 	<div class="engrave" aria-hidden="true">
 		<div class="engrave-art">
-			<svg viewBox="0 0 1026 190" fill="none">
+			<svg viewBox="0 30 1026 149" fill="none">
 				<text x="513" y="147" text-anchor="middle">@jitendravjh</text>
 			</svg>
 		</div>
 	</div>
 </Band>
 
-<Search />
 
 <dialog id="author-modal" class="author-modal" aria-labelledby="modal-name">
 	<button class="icon-btn close" type="button" data-close aria-label="Close"><Icon name="close" /></button>
