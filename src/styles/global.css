@@ -768,9 +768,9 @@ pre.block, .prose pre {
 :root[data-theme="dark"] .nav-aura { opacity: 0.38; filter: blur(6px) saturate(1.3) brightness(0.85); }
 @media (max-width: 720px) { .nav-aura { height: 3.1rem; } }
 .site-header .hold { max-width: none; }
-@media (min-width: 720px) { .nav { padding: 0 0.6rem 0 1.5rem; } }
+@media (min-width: 720px) { .nav { padding: 0 1rem; } }
 .brand { color: var(--accent); font-weight: 800; font-size: 1.3rem; letter-spacing: -0.02em; }
-.brand-avatar { width: 34px; height: 34px; box-shadow: none; border: 1px solid var(--header-border); }
+.brand-avatar { width: 32px; height: 32px; box-shadow: none; border: 1px solid var(--header-border); }
 .nav-links a, .icon-btn, .button, .chip { border-radius: 999px; }
 .mobile-nav {
   width: calc(100% - 2rem);
