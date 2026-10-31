@@ -823,5 +823,7 @@ a.cell:hover h3, .cell h3 a:hover { text-decoration: underline; text-underline-o
 .site-footer a:hover { text-decoration-color: var(--footer-text); }
 .footer-about hr { border-top-color: color-mix(in srgb, var(--footer-text) 20%, transparent); }
 .engrave { border-top-color: color-mix(in srgb, var(--footer-text) 12%, transparent); }
+/* the lines run the width of the page, so the band must not clip them */
+.site-footer .inner { overflow: visible; }
 .engrave svg * { fill: var(--engrave-ink); fill-opacity: 1; stroke: var(--engrave-ink); stroke-opacity: 1; }
 .engrave svg { opacity: 1; }
