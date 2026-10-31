@@ -645,7 +645,10 @@ pre.block, .prose pre {
   position: relative; isolation: isolate; display: flex; justify-content: center;
   padding: 24px 16px 0; border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
-.engrave::before, .engrave::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+.engrave::before, .engrave::after {
+  content: ""; position: absolute; top: 0; bottom: 0; z-index: -1; pointer-events: none;
+  left: 50%; width: 100vw; transform: translateX(-50%);
+}
 .engrave::before {
   background: repeating-linear-gradient(45deg, color-mix(in srgb, var(--footer-text) 20%, transparent) 0 1.5px, transparent 1.5px 4px);
   opacity: 0.35;
