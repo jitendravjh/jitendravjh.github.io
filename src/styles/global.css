@@ -286,8 +286,8 @@ a.more { text-decoration: underline; text-underline-offset: 2px; }
 .hero-buttons .button { width: 100%; max-width: 20rem; }
 
 .socials { display: flex; align-items: center; justify-content: center; gap: 4px; }
-.socials a { color: var(--text-strong); }
-.socials a:hover { background: var(--hover); }
+.socials a { color: var(--text-strong); border: 1px solid var(--border); }
+.socials a:hover { background: var(--hover); border-color: var(--accent); }
 /* a size up in the hero, the modal keeps the small ones */
 .hero .socials { gap: 6px; }
 .hero .socials .icon-btn { width: 36px; height: 36px; }
