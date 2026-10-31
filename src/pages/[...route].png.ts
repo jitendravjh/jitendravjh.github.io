@@ -1,7 +1,7 @@
 import type { APIRoute } from "astro";
 import { getCollection } from "astro:content";
 import { generateOgImage, type OgBadge, type OgTheme } from "../utils/generateOgImage";
-import { SITE_TITLE } from "../consts";
+import { SITE_HANDLE } from "../consts";
 import projectsData from "../data/projects.json";
 
 type OgPage = { route: string; title: string; subtitle: string; badge?: OgBadge | null };
@@ -11,9 +11,11 @@ export async function getStaticPaths() {
 
     // Base static pages
     const staticPages: OgPage[] = [
-        { route: 'og', title: SITE_TITLE, subtitle: 'Portfolio' },
-        { route: 'projects', title: 'Projects', subtitle: SITE_TITLE },
-        { route: 'blog', title: 'Blog', subtitle: SITE_TITLE },
+        // the card already signs off with "Portfolio / Jitendra Verma", so the
+        // headline and pill carry something else
+        { route: 'og', title: SITE_HANDLE, subtitle: 'Software Developer' },
+        { route: 'projects', title: 'Projects', subtitle: 'Selected Work' },
+        { route: 'blog', title: 'Blog', subtitle: 'Writing' },
     ];
 
     // Dynamic blog posts

@@ -7,7 +7,10 @@ import { html } from 'satori-html';
 const fontCache = new Map<string, Promise<ArrayBuffer>>();
 
 function loadGoogleFont(font: string, text: string) {
-    const API = `https://fonts.googleapis.com/css2?family=${font}&text=${encodeURIComponent(text)}`;
+    // Google keys the subset on the characters asked for, so ordering and
+    // repeats would split the cache between pages that need the same glyphs.
+    const charset = [...new Set(text)].sort().join('');
+    const API = `https://fonts.googleapis.com/css2?family=${font}&text=${encodeURIComponent(charset)}`;
     const cached = fontCache.get(API);
     if (cached) return cached;
 
@@ -68,6 +71,11 @@ const ACCENT = {
 
 export type OgTheme = keyof typeof ACCENT;
 
+// 1040px of width fits roughly 21 characters a line at 88px, and the block is
+// three lines tall, so longer titles step down instead of running past it.
+const titleSize = (title: string) =>
+    title.length <= 34 ? 88 : title.length <= 50 ? 76 : title.length <= 68 ? 64 : 54;
+
 export async function generateOgImage(
     title: string,
     subtitle: string,
@@ -80,8 +88,10 @@ export async function generateOgImage(
     const safeSubtitle = plain(subtitle);
     const safeLabel = badge ? plain(badge.label) : "";
     const textToLoad = safeTitle + safeSubtitle + safeLabel + "Jitendra Verma Portfolio ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@";
-    const fontDataRegular = await loadGoogleFont("Nunito", textToLoad);
-    const fontDataBold = await loadGoogleFont("Nunito:wght@700", textToLoad);
+    const [fontDataRegular, fontDataBold] = await Promise.all([
+        loadGoogleFont("Nunito", textToLoad),
+        loadGoogleFont("Nunito:wght@700", textToLoad),
+    ]);
 
     const markupString = `
         <div style="background-color: ${accent.bg}; width: 100%; height: 100%; display: flex; flex-direction: column; font-family: 'Nunito';">
@@ -103,7 +113,7 @@ export async function generateOgImage(
                     </div>` : ''}
                 </div>
 
-                <div style="display: flex; color: ${accent.title}; font-size: 88px; font-weight: 700; line-height: 1.12; letter-spacing: -0.02em; max-width: 1040px; max-height: 320px; overflow: hidden;">
+                <div style="display: flex; color: ${accent.title}; font-size: ${titleSize(safeTitle)}px; font-weight: 700; line-height: 1.14; letter-spacing: -0.02em; max-width: 1040px; max-height: 330px; overflow: hidden;">
                     ${safeTitle}
                 </div>
 

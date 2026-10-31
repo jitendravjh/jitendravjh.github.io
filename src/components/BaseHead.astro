@@ -59,7 +59,7 @@ const imageUrl = typeof image === 'string'
 		const theme = saved === 'dark' ? 'dark' : 'light';
 		document.documentElement.dataset.theme = theme;
 		document.addEventListener('DOMContentLoaded', () => {
-			document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#121316' : '#f5f4f3');
+			document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#1a1a1a' : '#ffffff');
 		});
 	})();
 </script>
@@ -75,12 +75,12 @@ const imageUrl = typeof image === 'string'
 />
 <meta name="generator" content={Astro.generator} />
 <meta name="color-scheme" content="light dark" />
-<meta name="theme-color" content="#f5f4f3" />
+<meta name="theme-color" content="#ffffff" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
 	rel="stylesheet"
-	href="https://fonts.googleapis.com/css2?family=Fleur+De+Leah&family=Nunito:wght@400;500;600;700;800&display=swap"
+	href="https://fonts.googleapis.com/css2?family=Fleur+De+Leah&family=Nunito:wght@400..800&display=swap"
 />
 
 <link rel="canonical" href={canonicalURL} />

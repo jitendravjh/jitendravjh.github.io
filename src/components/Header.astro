@@ -13,7 +13,7 @@ const links = [
 	{ href: url('/blog'), label: 'Blog', section: 'blog' },
 ];
 // Blurred behind frosted glass, so it never needs full resolution.
-const auraSrc = await profileUrl(240);
+const auraSrc = await profileUrl(48);
 const current = (s: string) => (s === section || (s === 'blog' && (section === 'tags' || section === 'archive')) ? 'page' : undefined);
 ---
 
@@ -68,7 +68,7 @@ const current = (s: string) => (s === section || (s === 'blog' && (section === '
 		document.querySelector('[data-theme-toggle]')?.addEventListener('click', () => {
 			const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
 			root.dataset.theme = next;
-			document.querySelector('meta[name="theme-color"]')?.setAttribute('content', next === 'dark' ? '#121316' : '#f5f4f3');
+			document.querySelector('meta[name="theme-color"]')?.setAttribute('content', next === 'dark' ? '#1a1a1a' : '#ffffff');
 			try {
 				localStorage.setItem('theme', next);
 			} catch {}
