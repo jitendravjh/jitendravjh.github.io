@@ -35,7 +35,7 @@
   --code-bg: #f7f7f4;
   --footer-bg: #000000;
   --footer-text: #ffffff;
-  --engrave-ink: #3d3d3d;
+  --engrave-ink: #5a5a5a;
 
   --node-vertical-offset: 3.5px;
   --node-horizontal-offset: 4.5px;
@@ -636,11 +636,11 @@ pre.block, .prose pre {
 }
 .engrave::before, .engrave::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; }
 .engrave::before {
-  background: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.2) 0 1.5px, transparent 1.5px 4px);
+  background: repeating-linear-gradient(45deg, color-mix(in srgb, var(--footer-text) 20%, transparent) 0 1.5px, transparent 1.5px 4px);
   opacity: 0.35;
 }
 .engrave::after {
-  background: repeating-linear-gradient(to bottom, var(--accent) 0 1px, transparent 1px 10px);
+  background: repeating-linear-gradient(to bottom, color-mix(in srgb, var(--footer-text) 55%, transparent) 0 1px, transparent 1px 10px);
   opacity: 0.2;
   -webkit-mask-image: linear-gradient(to bottom, #000, rgba(0, 0, 0, 0.7));
   mask-image: linear-gradient(to bottom, #000, rgba(0, 0, 0, 0.7));
@@ -809,6 +809,5 @@ a.cell:hover h3, .cell h3 a:hover { text-decoration: underline; text-underline-o
 .site-footer a:hover { text-decoration-color: var(--footer-text); }
 .footer-about hr { border-top-color: color-mix(in srgb, var(--footer-text) 20%, transparent); }
 .engrave { border-top-color: color-mix(in srgb, var(--footer-text) 12%, transparent); }
-.engrave::before, .engrave::after { display: none; }
 .engrave svg * { fill: var(--engrave-ink); fill-opacity: 1; stroke: var(--engrave-ink); stroke-opacity: 1; }
 .engrave svg { opacity: 1; }
