@@ -40,7 +40,6 @@
   --header-h: 64px;
   --header-pad: 0.75rem;
   --header-total: calc(var(--header-h) + var(--header-pad));
-  --radius: 8px;
 
   --font-body: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   --font-serif: var(--font-body);
@@ -229,8 +228,6 @@ button { font: inherit; color: inherit; background: none; }
   box-shadow: var(--btn-shadow);
 }
 .button.secondary:hover { background: var(--hover); box-shadow: none; }
-.button.ghost { color: var(--text-strong); border-color: transparent; background: none; }
-.button.ghost:hover { background: var(--hover); }
 .button.small { height: 30px; padding: 0 10px; font-size: 13px; }
 .button[aria-disabled="true"] { opacity: 0.45; pointer-events: none; }
 .button:focus-visible, a:focus-visible, button:focus-visible {
@@ -241,7 +238,6 @@ button { font: inherit; color: inherit; background: none; }
 .clamp { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 .flip { transform: scaleX(-1); }
 a.more { text-decoration: underline; text-underline-offset: 2px; }
-.text-link { color: var(--link); text-decoration: underline; text-underline-offset: 2px; }
 
 /* ── patterns ─────────────────────────────────────────────────── */
 .pat { pointer-events: none; position: absolute; inset: 0; z-index: -1; }
@@ -740,7 +736,7 @@ pre.block, .prose pre {
 .band + .band > .hold,
 .band + .band > .gutter,
 .band + .band > .rail { border-top: 0; }
-.framed, .frame-inner { border-style: solid; }
+.framed { border-style: solid; }
 
 /* floating frosted pill nav */
 .header-wrap { padding-top: var(--header-pad); background: transparent; }
