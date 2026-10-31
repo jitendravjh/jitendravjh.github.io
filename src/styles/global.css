@@ -769,7 +769,7 @@ pre.block, .prose pre {
 @media (max-width: 720px) { .nav-aura { height: 3.1rem; } }
 .site-header .hold { max-width: none; }
 @media (min-width: 720px) { .nav { padding: 0 1rem; } }
-.brand { color: var(--accent); font-weight: 800; font-size: 1.3rem; letter-spacing: -0.02em; }
+.brand { font-family: var(--font-body); color: var(--text-strong); font-weight: 700; font-size: 1.15rem; letter-spacing: 0; }
 .brand-avatar { width: 32px; height: 32px; box-shadow: none; border: 1px solid var(--header-border); }
 .nav-links a, .icon-btn, .button, .chip { border-radius: 999px; }
 .mobile-nav {
